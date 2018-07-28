@@ -1,7 +1,7 @@
 const router = require("express").Router();
-const managementRoutes = require("./management");
+const managementRoutes = require("./managements");
 
 // Management routes
-router.use("/management", managementRoutes);
+router.use("/managements", managementRoutes);
 
 module.exports = router;
