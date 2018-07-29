@@ -1,6 +1,6 @@
 const db = require("../models");
 
-// Defining methods for the managementController
+// Defining methods for the managementsController
 module.exports = {
   findAll: function(req, res) {
     db.Management
