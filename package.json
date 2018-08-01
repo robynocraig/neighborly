@@ -19,6 +19,7 @@
     "nodemon": "^1.11.0"
   },
   "dependencies": {
+    "auth0-js": "^9.7.3",
     "axios": "^0.16.2",
     "body-parser": "^1.17.2",
     "cors": "^2.8.4",
