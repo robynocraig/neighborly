@@ -65,8 +65,9 @@ class App extends Component {
             <Route exact path="/" component={hello} />
             <Route path="/dummy" component={Dummy} />
             <Route path="/callback" render={() => {
-              auth.handleAuthentication();
-              return <Callback postLogIn={this.postLogIn.bind(this)} />;
+              // auth.handleAuthentication();
+              return <Callback postLogIn={this.postLogIn.bind(this)}
+                                handleAuthentication={auth.handleAuthentication} />;
             }}
             />
           </div>
