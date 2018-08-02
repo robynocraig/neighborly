@@ -3,6 +3,7 @@ import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import Profile from "../../components/Profile";
 import Post from "../../components/Post";
+import Subnav from "../../components/Subnav";
 
 class Managements extends Component {
   state = {
@@ -56,6 +57,7 @@ class Managements extends Component {
           <Profile />
           </Col>
           <Col size="md-6 sm-12">
+            <Subnav />
             <Post />
           </Col>
         </Row>
