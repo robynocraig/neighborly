@@ -18,13 +18,6 @@ app.use(routes);
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/neighborly-database");
 
-<<<<<<< HEAD
 app.listen(PORT, () => {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
 });
-=======
-// Start the API server
-app.listen(PORT, function() {
-  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
-});
->>>>>>> 8ea55a5420f32eae8d3fb3183d067953c3c3d804
