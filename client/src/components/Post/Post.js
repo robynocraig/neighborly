@@ -7,7 +7,7 @@ const Post = () => (
             {/*  POSTER'S AVATAR */}
             <div class="row">
                 <div class="col-md-1">
-                    <img src="avatar_m2.png" width="50px" />
+                    <img src="https://i.imgur.com/brH81MS.png" width="50px" />
                 </div>
                 <div class="col-md-11 originalPostAvatar">
                     <h5 class="card-title m-0 p-0">ReAnimate Property Managment Inc.</h5>
@@ -34,7 +34,7 @@ const Post = () => (
                     {/* NEIGHBOR'S POST AVATAR */}
                     <div class="row">
                         <div class="col-md-1">
-                            <img src="avatar_f.png" width="25px" />
+                            <img src="https://i.imgur.com/LiqybQ4.png" width="25px" />
                         </div>
                         <div class="col-md-11 neighborAvatar">
                             <p class="card-text">Danika Campbells
