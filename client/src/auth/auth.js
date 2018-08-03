@@ -5,7 +5,7 @@ export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: 'mcale017.auth0.com',
     clientID: 'WW2TpRT8RPw00N1el1j6LhoeplTfS3Jt',
-    redirectUri: 'http://localhost:3000/callback' || 'https://mcale017-neighborly.herokuapp.com/callback',
+    redirectUri: `${window.location.origin}/callback`,
     audience: 'https://mcale017-neighborly.herokuapp.com/',
     responseType: 'token id_token',
     scope: 'openid fullAccess'
