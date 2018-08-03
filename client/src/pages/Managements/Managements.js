@@ -51,12 +51,12 @@ class Managements extends Component {
 
   render() {
     return (
-      <Container fluid>
+      <Container>
         <Row>
-          <Col size="md-6">
+          <Col size="md-3 sm-12">
           <Profile />
           </Col>
-          <Col size="md-6 sm-12">
+          <Col size="md-9 sm-12">
             <Subnav />
             <Post />
           </Col>
