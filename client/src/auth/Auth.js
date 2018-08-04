@@ -8,7 +8,7 @@ export default class Auth {
     redirectUri: `${window.location.origin}/callback`,
     audience: 'https://mcale017-neighborly.herokuapp.com/',
     responseType: 'token id_token',
-    scope: 'openid fullAccess'
+    scope: 'openid fullAccess',
   });
 
   login() {
@@ -59,4 +59,5 @@ export default class Auth {
     let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
     return new Date().getTime() < expiresAt;
   }
+  
 }
