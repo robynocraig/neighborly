@@ -18,7 +18,18 @@ export default {
     return axiosWithToken.delete("/api/tenants/" + id);
   },
   // Saves a management to the database
+  saveManagement: function(managementData) {
+    return axiosWithToken.post("/api/managements", managementData);
+  },
+  getProfile: function(id) {
+    return axiosWithToken.get("/api/users/" + id);
+  },
+  saveProfile: function(userData) {
+    return axiosWithToken.post("/api/users", userData);
+  },
   saveTenant: function(tenantsData) {
     return axiosWithToken.post("/api/tenants", tenantsData);
   }
+
+
 };
