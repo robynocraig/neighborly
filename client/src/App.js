@@ -2,9 +2,9 @@ import Auth from './auth/Auth';
 import Callback from "./auth/Callback";
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Nav from "./components/Nav";
+import MainNav from "./components/MainNav";
 import Splash from "./pages/Splash";
-// import Management from "./pages/Management";
+import Tenant from "./pages/Tenant";
 
 const auth = new Auth();
 
@@ -33,7 +33,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Nav
+        <MainNav
           auth={auth}
           isLoggedIn2={this.state.isLoggedIn}
           login={this.login.bind(this)}
@@ -43,12 +43,12 @@ class App extends Component {
         <Router>
           <div>
             <Route exact path="/" component={Splash} />
-            {/* <Route path="/managements" component={Management} /> */}
+            <Route path="/tenant" component={Tenant} />
             <Route path="/callback" render={() => {
               // auth.handleAuthentication();
-              return <Callback 
+              return <Callback
                 postLogIn={this.postLogIn.bind(this)}
-                handleAuthentication={auth.handleAuthentication} 
+                handleAuthentication={auth.handleAuthentication}
               />;
             }}
             />

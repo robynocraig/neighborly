@@ -13,16 +13,16 @@ const Subnav = () => (
       </div>
       <ul className="navbar-nav">
           <li className="nav-item">
-              <a className="nav-link" href="#">Management</a>
+              <a className="nav-link" href="">Management</a>
           </li>
           <li className="nav-item">
-              <a className="nav-link" href="#">Neighbors</a>
+              <a className="nav-link" href="">Neighbors</a>
           </li>
           <li className="nav-item">
-              <a className="nav-link" href="#">Events</a>
+              <a className="nav-link" href="">Events</a>
           </li>
           <li className="nav-item">
-              <a className="nav-link" href="#">All</a>
+              <a className="nav-link" href="">All</a>
           </li>
       </ul>
   </nav>
