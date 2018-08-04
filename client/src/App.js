@@ -3,10 +3,8 @@ import Callback from "./auth/Callback";
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Nav from "./components/Nav";
-import Profile from "./components/Profile";
-import Post from "./components/Post";
 import Splash from "./pages/Splash";
-import Dummy from "./components/Dummy";
+// import Management from "./pages/Management";
 
 const auth = new Auth();
 
@@ -45,7 +43,7 @@ class App extends Component {
         <Router>
           <div>
             <Route exact path="/" component={Splash} />
-            <Route path="/managements" component={Management} />
+            {/* <Route path="/managements" component={Management} /> */}
             <Route path="/callback" render={() => {
               // auth.handleAuthentication();
               return <Callback 
