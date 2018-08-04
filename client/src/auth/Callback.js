@@ -5,12 +5,12 @@ class Callback extends Component {
         this.props.postLogIn();
         this.props.handleAuthentication();
     }
-
+    
     render() {
         return (
-            <h2>hello world</h2>
+            <h2>hi</h2>
         )
     }
-}
+};
 
 export default Callback;
