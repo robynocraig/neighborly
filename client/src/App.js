@@ -3,22 +3,10 @@ import Callback from "./auth/Callback";
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import MainNav from "./components/MainNav";
-import Splash from "./pages/Splash";
+import Home from "./pages/Home";
 import Tenant from "./pages/Tenant";
 
 const auth = new Auth();
-
-// const AuthService = {
-//   isAuthenticated: false,
-//   authenticate(cb) {
-//     this.isAuthenticated = true
-//     setTimeout(cb, 100)
-//   },
-//   logout(cb) {
-//     this.isAuthenticated = false
-//     setTimeout(cb, 100)
-//   }
-// };
 
 const SecureRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={(props) => (
@@ -63,7 +51,7 @@ class App extends Component {
 
         <Router>
           <div>
-            <Route exact path="/" component={Splash} />
+            <Route exact path="/" component={Home} />
             <SecureRoute path="/tenant" component={Tenant} />
             <Route path="/callback" render={() => {
               // auth.handleAuthentication();
