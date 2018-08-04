@@ -1,23 +1,67 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Management from "./pages/Managements";
-import Nav from "./components/Nav";
-import Profile from "./components/Profile";
-import Post from "./components/Post";
+import Auth from './auth/Auth';
+import Callback from "./auth/Callback";
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import MainNav from "./components/MainNav";
 import Splash from "./pages/Splash";
 import EditProfile from "./pages/EditProfile";
+import Tenant from "./pages/Tenant";
 
-const App = () => (
-  <Router>
-    <div>
-      <Nav />
-      <Switch>
-        <Route exact path="/" component={Splash} />
-        <Route exact path="/managements" component={Management} />
-        <Route exact path="/editprofile" component={EditProfile} />
-      </Switch>
-    </div>
-  </Router>
-);
+const auth = new Auth();
+
+class App extends Component {
+  state = {
+    isLoggedIn: auth.isAuthenticated()
+  }
+
+  postLogIn() {
+    this.setState(
+      { isLoggedIn: true }
+    )
+  }
+
+  login() {
+    auth.login();
+  }
+
+  logout() {
+    auth.logout();
+    this.setState(
+      { isLoggedIn: false }
+    )
+  }
+
+  render() {
+    return (
+      <div>
+        <MainNav
+          auth={auth}
+          isLoggedIn2={this.state.isLoggedIn}
+          login={this.login.bind(this)}
+          logout={this.logout.bind(this)}
+        />
+
+        <Router>
+          <div>
+            <Route exact path="/" component={Splash} />
+            <Route path="/tenant" component={Tenant} />
+            <Route exact path="/editprofile" component={EditProfile} />
+            <Route path="/callback" render={() => {
+              // auth.handleAuthentication();
+              return <Callback
+                postLogIn={this.postLogIn.bind(this)}
+                handleAuthentication={auth.handleAuthentication}
+              />;
+            }}
+            />
+          </div>
+        </Router>
+      </div>
+    )
+  }
+
+};
+
+
 
 export default App;
