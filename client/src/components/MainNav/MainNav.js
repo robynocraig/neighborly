@@ -9,11 +9,15 @@ class MainNav extends Component {
             <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" id="navCustom">
                 <img src="https://i.imgur.com/uwqO6OC.png" className="ml-3" id="logoImg" alt="logo" />
                 <a className="navbar-brand ml-1" id="navLogo" href="/">Neighborly</a>
+
+                {/* Toggler/collapsible button */}
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                     aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse justify-content-end mr-3">
+
+                {/* Navbar links */}
+                <div className="collapse navbar-collapse justify-content-end mr-3" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item pr-1 pl-4">
                             <a className="nav-link topNavLink" href="/home">Home</a>
