@@ -1,6 +1,4 @@
-import React, { Component } from "react";
-import API from "../../utils/API";
-import { Col, Row, Container } from "../../components/Grid";
+import React from "react";
 import Hero from "../../components/Hero";
 
 
