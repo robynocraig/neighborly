@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import "./Nav.css";
+import "./MainNav.css";
 
-class Nav extends Component {
+class MainNav extends Component {
     render() {
         const isAuthenticated = this.props.isLoggedIn2;
 
         return (
             <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" id="navCustom">
                 <img src="https://i.imgur.com/uwqO6OC.png" className="ml-3" id="logoImg" alt="logo" />
-                <a className="navbar-brand ml-1" id="navLogo" href="managements">Neighborly</a>
+                <a className="navbar-brand ml-1" id="navLogo" href="/">Neighborly</a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                     aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
@@ -122,4 +122,4 @@ class Nav extends Component {
 //     }
 // }
 
-export default Nav;
+export default MainNav;

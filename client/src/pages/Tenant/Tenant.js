@@ -1,32 +1,32 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
-// import { Col, Row, Container } from "../../components/Grid";
+import { Col, Row, Container } from "../../components/Grid";
 import Profile from "../../components/Profile";
 import Post from "../../components/Post";
 import Subnav from "../../components/Subnav";
 
-class Management extends Component {
+class Tenant extends Component {
   state = {
-    managements: [],
+    tenants: [],
     title: "",
     mockString: ""
   };
 
   componentDidMount() {
-    this.loadManagements();
+    this.loadTenants();
   }
 
-  loadManagements = () => {
-    API.getManagements()
+  loadTenants = () => {
+    API.getTenants()
       .then(res =>
-        this.setState({ managements: res.data, title: "", mockString: "" })
+        this.setState({ tenants: res.data, title: "", mockString: "" })
       )
       .catch(err => console.log(err));
   };
 
-  deleteManagement = id => {
-    API.deleteManagement(id)
-      .then(res => this.loadManagements())
+  deleteTenant = id => {
+    API.deleteTenant(id)
+      .then(res => this.loadTenants())
       .catch(err => console.log(err));
   };
 
@@ -40,11 +40,11 @@ class Management extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.title && this.state.mockString) {
-      API.saveManagement({
+      API.saveTenant({
         title: this.state.title,
         mockString: this.state.mockString
       })
-        .then(res => this.loadManagements())
+        .then(res => this.loadTenants())
         .catch(err => console.log(err));
     }
   };
@@ -66,4 +66,4 @@ class Management extends Component {
   }
 }
 
-export default Management;
+export default Tenant;
