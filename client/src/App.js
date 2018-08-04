@@ -1,24 +1,9 @@
-// import React from "react";
-// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
-// const App = () => (
-//   <Router>
-//     <div>
-//       <Nav />
-//       <Switch>
-//         <Route exact path="/" component={Management} />
-//         <Route exact path="/managements" component={Management} />
-//       </Switch>
-//     </div>
-//   </Router>
-// );
-
-import Auth from './auth/auth';
+import Auth from './auth/Auth';
+import Callback from "./auth/Callback";
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Nav from "./components/Nav";
 import Dummy from "./components/Dummy";
-import Callback from "./callback/callback";
 
 const auth = new Auth();
 
@@ -66,8 +51,10 @@ class App extends Component {
             <Route path="/dummy" component={Dummy} />
             <Route path="/callback" render={() => {
               // auth.handleAuthentication();
-              return <Callback postLogIn={this.postLogIn.bind(this)}
-                                handleAuthentication={auth.handleAuthentication} />;
+              return <Callback 
+                postLogIn={this.postLogIn.bind(this)}
+                handleAuthentication={auth.handleAuthentication} 
+              />;
             }}
             />
           </div>

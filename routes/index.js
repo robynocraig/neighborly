@@ -16,7 +16,7 @@ const authCheck = jwt({
   algorithms: ['RS256']
 });
 
-// API Routes
+// API Routes which will require the user to be logged in
 router.use("/api", authCheck, apiRoutes);
 
 // If no API routes are hit, send the React app
