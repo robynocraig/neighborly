@@ -6,19 +6,19 @@ const axiosWithToken = axios.create({
 
 export default {
   // Gets all managements
-  getManagements: function() {
-    return axiosWithToken.get("/api/managements");
+  getTenants: function() {
+    return axiosWithToken.get("/api/tenants");
   },
   // Gets the management with the given id
-  getManagement: function(id) {
-    return axiosWithToken.get("/api/managements/" + id);
+  getTenant: function(id) {
+    return axiosWithToken.get("/api/tenants/" + id);
   },
   // Deletes the management with the given id
-  deleteManagement: function(id) {
-    return axiosWithToken.delete("/api/managements/" + id);
+  deleteTenant: function(id) {
+    return axiosWithToken.delete("/api/tenants/" + id);
   },
   // Saves a management to the database
-  saveManagement: function(managementData) {
-    return axiosWithToken.post("/api/managements", managementData);
+  saveTenant: function(tenantsData) {
+    return axiosWithToken.post("/api/tenants", tenantsData);
   }
 };

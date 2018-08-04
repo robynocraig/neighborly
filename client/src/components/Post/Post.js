@@ -7,7 +7,7 @@ const Post = () => (
             {/*  POSTER'S AVATAR */}
             <div class="row">
                 <div class="col-md-1">
-                    <img src="https://i.imgur.com/brH81MS.png" width="50px" />
+                    <img src="https://i.imgur.com/brH81MS.png" width="50px" alt="avatar"/>
                 </div>
                 <div class="col-md-11 originalPostAvatar">
                     <h5 class="card-title m-0 p-0">ReAnimate Property Managment Inc.</h5>
@@ -18,10 +18,10 @@ const Post = () => (
                 <br />5th Street will be closed off until further notice. We expect that the matter will be
                 resolved quickly and as many of you will be affeced, we will remain in contact to further
                 inform you. Please contact us for any other questions. Thank you
-                <a href="#" class=""> ...See More</a>
+                <a href="" class=""> ...See More</a>
             </p>
             <p class="card-text text-center mt-2">
-                <a href="#">Like</a>
+                <a href="">Like</a>
                 <strong>+0</strong>
             </p>
         </div>
@@ -34,7 +34,7 @@ const Post = () => (
                     {/* NEIGHBOR'S POST AVATAR */}
                     <div class="row">
                         <div class="col-md-1">
-                            <img src="https://i.imgur.com/LiqybQ4.png" width="25px" />
+                            <img src="https://i.imgur.com/LiqybQ4.png" width="25px" alt="avatar"/>
                         </div>
                         <div class="col-md-11 neighborAvatar">
                             <p class="card-text">Danika Campbells
@@ -47,7 +47,7 @@ const Post = () => (
 
                     <p class="card-text small m-0 p-0">What's the reason for this? I use that as a short-cut to work daily :(</p>
                     <p class="card-text small text-center mt-2">
-                        <a href="#">Like</a>
+                        <a href="">Like</a>
                         <strong>+19</strong>
                     </p>
                 </div>
