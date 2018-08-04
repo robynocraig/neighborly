@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
-import { Col, Row, Container } from "../../components/Grid";
+// import { Col, Row, Container } from "../../components/Grid";
 import Profile from "../../components/Profile";
 import Post from "../../components/Post";
 import Subnav from "../../components/Subnav";
 
-class Managements extends Component {
+class Management extends Component {
   state = {
     managements: [],
     title: "",
@@ -66,4 +66,4 @@ class Managements extends Component {
   }
 }
 
-export default Managements;
+export default Management;
