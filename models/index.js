@@ -1,3 +1,4 @@
 module.exports = {
-    Management: require("./management")
+    Management: require("./management"),
+    Profile: require("./profileSchema")
 };

@@ -16,5 +16,13 @@ export default {
   // Saves a management to the database
   saveManagement: function(managementData) {
     return axios.post("/api/managements", managementData);
+  },
+  getProfile: function(id) {
+    return axios.get("/api/profile/" + id);
+  },
+  saveProfile: function(userData) {
+    return axios.post("/api/profile", userData);
   }
+
+
 };

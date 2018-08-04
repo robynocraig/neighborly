@@ -6,6 +6,7 @@ import Nav from "./components/Nav";
 // import Post from "./components/Post";
 import EditProfile from "./pages/EditProfile";
 
+
 const App = () => (
   <Router>
     <div>

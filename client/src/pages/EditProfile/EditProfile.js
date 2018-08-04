@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Input, FormBtn } from "../../components/Form";
 import { Col, Row, Container } from "../../components/Grid";
 import Profile from "../../components/Profile";
-// import API from "../../utils/API";
-import { Link } from "react-router-dom";
+import API from "../../utils/API";
+// import { Link } from "react-router-dom";
 class EditProfile extends Component {
 
     state = {
@@ -20,19 +20,19 @@ class EditProfile extends Component {
             [name]: value
         });
     };
-
-    //   handleFormSubmit = event => {
-    //     event.preventDefault();
-    //     if (this.state.title && this.state.author) {
-    //       API.saveBook({
-    //         title: this.state.title,
-    //         author: this.state.author,
-    //         synopsis: this.state.synopsis
-    //       })
-    //         .then(res => this.loadBooks())
-    //         .catch(err => console.log(err));
-    //     }
-    //   };re-write once the schema is updated.
+//write this and schema together.
+      handleFormSubmit = event => {
+        event.preventDefault();
+        if (this.state.title && this.state.author) {
+          API.saveBook({
+            title: this.state.title,
+            author: this.state.author,
+            synopsis: this.state.synopsis
+          })
+            .then(res => this.loadBooks())
+            .catch(err => console.log(err));
+        }
+      };
 
     render() {
         return (
