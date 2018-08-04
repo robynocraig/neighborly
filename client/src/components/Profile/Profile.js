@@ -22,7 +22,7 @@ const Profile = () => (
               </li>
           </ul>
           <div className="card-body">
-              <a href="" className="card-link">Update Profile</a>
+              <a href="/editprofile" className="card-link">Update Profile</a>
           </div>
       </div>
 

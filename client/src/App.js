@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import MainNav from "./components/MainNav";
 import Splash from "./pages/Splash";
+import EditProfile from "./pages/EditProfile";
 import Tenant from "./pages/Tenant";
 
 const auth = new Auth();
@@ -64,7 +65,8 @@ class App extends Component {
         <Router>
           <div>
             <Route exact path="/" component={Splash} />
-            <SecureRoute path="/tenant" component={Tenant} />
+            <Route path="/tenant" component={Tenant} />
+            <Route exact path="/editprofile" component={EditProfile} />
             <Route path="/callback" render={() => {
               // auth.handleAuthentication();
               return <Callback
@@ -80,5 +82,7 @@ class App extends Component {
   }
 
 };
+
+
 
 export default App;
