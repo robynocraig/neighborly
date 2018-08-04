@@ -19,13 +19,13 @@ export default {
   },
   // Saves a management to the database
   saveManagement: function(managementData) {
-    return axios.post("/api/managements", managementData);
+    return axiosWithToken.post("/api/managements", managementData);
   },
   getProfile: function(id) {
-    return axios.get("/api/users/" + id);
+    return axiosWithToken.get("/api/users/" + id);
   },
   saveProfile: function(userData) {
-    return axios.post("/api/users", userData);
+    return axiosWithToken.post("/api/users", userData);
   },
   saveTenant: function(tenantsData) {
     return axiosWithToken.post("/api/tenants", tenantsData);
