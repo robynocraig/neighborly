@@ -5,6 +5,7 @@ import Nav from "./components/Nav";
 import Profile from "./components/Profile";
 import Post from "./components/Post";
 import Splash from "./pages/Splash";
+import EditProfile from "./pages/EditProfile";
 
 const App = () => (
   <Router>

@@ -18,10 +18,10 @@ export default {
     return axios.post("/api/managements", managementData);
   },
   getProfile: function(id) {
-    return axios.get("/api/profile/" + id);
+    return axios.get("/api/users/" + id);
   },
   saveProfile: function(userData) {
-    return axios.post("/api/profile", userData);
+    return axios.post("/api/users", userData);
   }
 
 

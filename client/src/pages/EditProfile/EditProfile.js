@@ -23,13 +23,13 @@ class EditProfile extends Component {
 //write this and schema together.
       handleFormSubmit = event => {
         event.preventDefault();
-        if (this.state.title && this.state.author) {
-          API.saveBook({
-            title: this.state.title,
-            author: this.state.author,
-            synopsis: this.state.synopsis
+        if (this.state.name && this.state.picture && this.state.residency) {
+          API.saveProfile({
+            name: this.state.name,
+            picture: this.state.picture,
+            residency: this.state.residency
           })
-            .then(res => this.loadBooks())
+            // .then(res => this.loadBooks())
             .catch(err => console.log(err));
         }
       };
