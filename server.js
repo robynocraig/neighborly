@@ -19,7 +19,9 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/neighborly-database");
+mongoose.connect(process.env.MONGODB_URI || 
+"mongodb://localhost/neighborly-database", );
+mongoose.Promise = Promise;
 
 app.listen(PORT, () => {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
