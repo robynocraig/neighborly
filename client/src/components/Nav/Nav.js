@@ -3,8 +3,8 @@ import "./Nav.css";
 
 const Nav = () => (
   <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" id="navCustom">
-  <img src="img/logo.png" className="ml-3" id="logoImg" alt="logo"/>
-  <a className="navbar-brand ml-1" id="navLogo" href="/">Neighborly
+  <img src="https://i.imgur.com/uwqO6OC.png" className="ml-3" id="logoImg" alt="logo"/>
+  <a className="navbar-brand ml-1" id="navLogo" href="managements">Neighborly
   </a>
   <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
       aria-label="Toggle navigation">
