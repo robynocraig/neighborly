@@ -3,7 +3,7 @@ import "./MainNav.css";
 
 class MainNav extends Component {
     render() {
-        const isAuthenticated = this.props.isLoggedIn2;
+        const isAuthenticated = this.props.isLoggedIn;
 
         return (
             <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" id="navCustom">

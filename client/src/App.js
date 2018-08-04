@@ -9,6 +9,27 @@ import Tenant from "./pages/Tenant";
 
 const auth = new Auth();
 
+// const AuthService = {
+//   isAuthenticated: false,
+//   authenticate(cb) {
+//     this.isAuthenticated = true
+//     setTimeout(cb, 100)
+//   },
+//   logout(cb) {
+//     this.isAuthenticated = false
+//     setTimeout(cb, 100)
+//   }
+// };
+
+const SecureRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={(props) => (
+    auth.isAuthenticated() === true
+      ? <Component {...props} />
+      // : <Redirect to="/login" />
+      : auth.login()
+  )} />
+);
+
 class App extends Component {
   state = {
     isLoggedIn: auth.isAuthenticated()
@@ -36,7 +57,7 @@ class App extends Component {
       <div>
         <MainNav
           auth={auth}
-          isLoggedIn2={this.state.isLoggedIn}
+          isLoggedIn={this.state.isLoggedIn}
           login={this.login.bind(this)}
           logout={this.logout.bind(this)}
         />
