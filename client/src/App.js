@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import MainNav from "./components/MainNav";
 import Home from "./pages/Home";
+import EditProfile from "./pages/EditProfile";
 import Tenant from "./pages/Tenant";
 
 const auth = new Auth();
@@ -51,10 +52,11 @@ class App extends Component {
 
         <Router>
           <div>
+
             <Route exact path="/" component={Home} />
             <SecureRoute path="/tenant" component={Tenant} />
+            <SecureRoute path="/editprofile" component={EditProfile} />
             <Route path="/callback" render={() => {
-              // auth.handleAuthentication();
               return <Callback
                 postLogIn={this.postLogIn.bind(this)}
                 handleAuthentication={auth.handleAuthentication}
