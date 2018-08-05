@@ -13,17 +13,19 @@ const SecureRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={(props) => (
     auth.isAuthenticated() === true
       ? <Component {...props} />
-      // : <Redirect to={{
-      //     pathname: '/callback',
-      //     state: { from: props.location }
-      // }} />
-      : <Route path="/callback" render={() => {
-        return <Callback
-          postLogIn={auth.isAuthenticated}
-          handleAuthentication={auth.handleAuthentication}
-        />;
-      }}
-      />
+
+      : <Redirect to={{
+          pathname: '/callback',
+          state: { from: props.location }
+      }} />
+
+      // : <Route path="/callback" render={() => {
+      //   return <Callback
+      //     postLogIn={auth.isAuthenticated}
+      //     handleAuthentication={auth.handleAuthentication}
+      //   />;
+      // }}
+      // />
   )} />
 );
 
@@ -66,6 +68,8 @@ class App extends Component {
             <SecureRoute path="/editprofile" component={EditProfile} />
             <Route path="/callback" render={() => {
               return <Callback
+                login={auth.login}
+                isAuthenticated={auth.isAuthenticated}
                 postLogIn={this.postLogIn.bind(this)}
                 handleAuthentication={auth.handleAuthentication}
               />;

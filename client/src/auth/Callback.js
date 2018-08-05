@@ -9,9 +9,17 @@ class Callback extends Component {
     }
 
     render() {
-        return(
-            <Route exact path="/" component={Home} />
-        )
+        const isAuthenticated = this.props.isAuthenticated;
+
+        if (isAuthenticated) {
+            return (
+                <Route exact path="/" component={Home} />
+            )
+        } else {
+            return (
+                this.props.login()
+            )
+        }        
     }
 }
 
