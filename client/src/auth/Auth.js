@@ -11,15 +11,15 @@ export default class Auth {
     scope: 'openid fullAccess'
   });
 
-  login() {
-    this.auth0.authorize();
-  }
-
   constructor() {
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.handleAuthentication = this.handleAuthentication.bind(this);
     this.isAuthenticated = this.isAuthenticated.bind(this);
+  }
+
+  login() {
+    this.auth0.authorize();
   }
 
   handleAuthentication() {
