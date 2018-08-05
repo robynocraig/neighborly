@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import Home from '../pages/Home';
 
 class Callback extends Component {
     componentDidMount() {
@@ -8,10 +9,10 @@ class Callback extends Component {
     }
 
     render() {
-        return (
-            <Redirect to="/" />
+        return(
+            <Route exact path="/" component={Home} />
         )
     }
-};
+}
 
 export default Callback;
