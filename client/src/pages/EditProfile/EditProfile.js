@@ -2,15 +2,33 @@ import React, { Component } from "react";
 import { Input, FormBtn } from "../../components/Form";
 import { Col, Row, Container } from "../../components/Grid";
 import Profile from "../../components/Profile";
+import ProfileName from "../../components/ProfileName";
 import API from "../../utils/API";
 // import { Link } from "react-router-dom";
 class EditProfile extends Component {
+    
 
     state = {
-        user: [],
+        users: [],
         name: "",
         picture: "",
         residency: ""
+       
+    };
+
+
+    componentDidMount() {
+        this.loadProfile();
+        
+   
+    }
+
+    loadProfile = () => {
+        API.getProfile()
+        .then(res =>     
+            this.setState({ user: res.data, name: "", picture: "", residency: "" })    
+          )  
+          .catch(err => console.log(err));
       };
 
     handleInputChange = event => {
@@ -19,27 +37,34 @@ class EditProfile extends Component {
             [name]: value
         });
     };
+   
 
-      handleFormSubmit = event => {
+    
+    handleFormSubmit = event => {
         event.preventDefault();
         if (this.state.name && this.state.picture && this.state.residency) {
-          API.saveProfile({
-            name: this.state.name,
-            picture: this.state.picture,
-            residency: this.state.residency
-          })
-            // .then(res => this.loadBooks())
-            .catch(err => console.log(err));
+            API.saveProfile({
+                name: this.state.name,
+                picture: this.state.picture,
+                residency: this.state.residency
+            })
+                .then(res => this.loadProfile())
+                .catch(err => console.log(err));
+                
         }
-      };
+        
+    };
 
+    
     render() {
+        
         return (
             <Container fluid>
                 <Row>
-                <Profile/>
+                  
+                    <Profile />
                     <Col size="md-4">
-                    
+
                         <form>
                             <Input
                                 value={this.state.name}
@@ -66,9 +91,15 @@ class EditProfile extends Component {
                                 Submit Updated Profile
               </FormBtn>
                         </form>
+                        
                     </Col>
+                    <ProfileName>
+                    <h5 className="card-title">CALL TO API NAME: {this.state.users.name}</h5>
+                    
+                    </ProfileName>
+
                 </Row>
-                
+            
             </Container>
 
         );
