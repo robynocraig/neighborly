@@ -13,14 +13,13 @@ class EditProfile extends Component {
         residency: ""
       };
 
-
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
             [name]: value
         });
     };
-//write this and schema together.
+
       handleFormSubmit = event => {
         event.preventDefault();
         if (this.state.name && this.state.picture && this.state.residency) {
