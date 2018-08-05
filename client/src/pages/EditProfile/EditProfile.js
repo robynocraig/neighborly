@@ -6,30 +6,30 @@ import ProfileName from "../../components/ProfileName";
 import API from "../../utils/API";
 // import { Link } from "react-router-dom";
 class EditProfile extends Component {
-    
+
 
     state = {
         users: [],
         name: "",
         picture: "",
         residency: ""
-       
+
     };
 
 
     componentDidMount() {
         this.loadProfile();
-        
-   
+
+
     }
 
     loadProfile = () => {
         API.getProfile()
-        .then(res =>     
-            this.setState({ user: res.data, name: "", picture: "", residency: "" })    
-          )  
-          .catch(err => console.log(err));
-      };
+            .then(res =>
+                this.setState({ users: res.data, name: "", picture: "", residency: "" })
+            )
+            .catch(err => console.log(err));
+    };
 
     handleInputChange = event => {
         const { name, value } = event.target;
@@ -37,9 +37,9 @@ class EditProfile extends Component {
             [name]: value
         });
     };
-   
 
-    
+
+
     handleFormSubmit = event => {
         event.preventDefault();
         if (this.state.name && this.state.picture && this.state.residency) {
@@ -50,19 +50,46 @@ class EditProfile extends Component {
             })
                 .then(res => this.loadProfile())
                 .catch(err => console.log(err));
-                
+
         }
-        
+
     };
 
-    
+
     render() {
-        
+
         return (
             <Container fluid>
                 <Row>
-                  
-                    <Profile />
+                    <ProfileName>
+                        {this.state.users.map(user => (
+
+                            // <h5 key={user._id}>
+                            //     {user.name}
+                            // </h5>
+
+
+
+                            <div className="card border-0">
+
+                                <img className="card-img-top" src={user.picture} alt="User Profile" />
+                                <div className="card-body">
+                                    <h5 className="card-title">{user.name}</h5>
+                                </div>
+                                <ul className="list-group list-group-flush">
+                                    <li className="list-group-item">Resident Of <br />
+                                        <small className="text-muted">{user.residency}</small>
+                                    </li>
+                                </ul>
+                                <div className="card-body">
+                                    <a href="/editprofile" className="card-link">Update Profile</a>
+                                </div>
+                            </div>
+                        ))}
+
+                    </ProfileName>
+
+
                     <Col size="md-4">
 
                         <form>
@@ -91,15 +118,16 @@ class EditProfile extends Component {
                                 Submit Updated Profile
               </FormBtn>
                         </form>
-                        
+
+
+
+
                     </Col>
-                    <ProfileName>
-                    <h5 className="card-title">CALL TO API NAME: {this.state.users.name}</h5>
-                    
-                    </ProfileName>
+
+
 
                 </Row>
-            
+
             </Container>
 
         );
