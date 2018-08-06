@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import Home from '../pages/Home';
 
 class Callback extends Component {
@@ -9,17 +8,9 @@ class Callback extends Component {
     }
 
     render() {
-        const isAuthenticated = this.props.isAuthenticated;
-
-        if (isAuthenticated) {
-            return (
-                <Route exact path="/" component={Home} />
-            )
-        } else {
-            return (
-                this.props.login()
-            )
-        }        
+        return (
+            <Home />
+        )
     }
 }
 
