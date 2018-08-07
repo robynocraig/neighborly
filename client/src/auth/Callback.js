@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 
 class Callback extends Component {
     componentDidMount() {
         this.props.postLogIn();
-        this.props.handleAuthentication();
+        this.props.handleAuthentication(this.props.history);
     }
-    
+
     render() {
         return (
-            <h2>hi</h2>
+            null
         )
     }
-};
+}
 
 export default Callback;
