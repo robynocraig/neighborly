@@ -4,6 +4,7 @@ import { Col, Row, Container } from "../../components/Grid";
 import Profile from "../../components/Profile";
 import Post from "../../components/Post";
 import Subnav from "../../components/Subnav";
+import Comment from "../../components/Comments";
 
 class Tenant extends Component {
   state = {
@@ -59,6 +60,7 @@ class Tenant extends Component {
           <Col size="md-9 sm-12">
             <Subnav />
             <Post />
+            <Comment />
           </Col>
         </Row>
       </Container>

@@ -30,9 +30,11 @@ export default {
   saveTenant: function(tenantsData) {
     return axiosWithToken.post("/api/tenants", tenantsData);
   },
+  // Retrieves comments from database
   getComments: function() {
     return axiosWithToken.get("/api/comments");
   },
+  // Save comments to database
   saveComment: function(commentData) {
     return axiosWithToken.post("/api/comments", commentData);
   }
