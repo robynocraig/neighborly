@@ -19,9 +19,6 @@ class EditProfile extends Component {
 
     componentDidMount() {
         this.loadProfile();
-
-
-
     }
 
     loadProfile = () => {
@@ -39,8 +36,6 @@ class EditProfile extends Component {
         });
     };
 
-
-
     handleFormSubmit = event => {
         event.preventDefault();
         if (this.state.name && this.state.picture && this.state.residency) {
@@ -51,17 +46,11 @@ class EditProfile extends Component {
             })
                 .then(res => this.loadProfile())
                 .catch(err => console.log(err));
-
         }
 
     };
 
-
-
     render() {
-
-
-
         return (
             <Container fluid>
                 <Row>
@@ -108,13 +97,7 @@ class EditProfile extends Component {
                                 Submit Updated Profile
                             </FormBtn>
                         </form>
-
-
-
-
                     </Col>
-
-
 
                 </Row>
 
