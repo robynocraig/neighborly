@@ -16,4 +16,5 @@
 
 .topNavLink:hover {
     color: yellow !important;
+    cursor: default;
 }
