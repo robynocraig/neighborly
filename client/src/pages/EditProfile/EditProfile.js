@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Input, FormBtn } from "../../components/Form";
+import { Input, FormBtn, TextArea, Drop } from "../../components/Form";
 import { Col, Row, Container } from "../../components/Grid";
 import Profile from "../../components/Profile";
 import ProfileName from "../../components/ProfileName";
@@ -59,7 +59,7 @@ class EditProfile extends Component {
                         {this.state.users.filter(user => {
                             console.log(user._id);
                             return (user._id === '5b65bb6f49a65230e4b129fb')
-                           
+
                         }).map(user => (
                             <ProfileName
                                 picture={user.picture}
@@ -73,25 +73,47 @@ class EditProfile extends Component {
 
                         <form>
                             <Input
-                                value={this.state.name}
-                                onChange={this.handleInputChange}
-                                name="name"
-                                placeholder="First and Last Name(required)"
-                            />
-                            <Input
                                 value={this.state.picture}
                                 onChange={this.handleInputChange}
                                 name="picture"
                                 placeholder="Weblink to a Photo(required)"
                             />
                             <Input
-                                value={this.state.residency}
+                                value={this.state.name}
                                 onChange={this.handleInputChange}
-                                name="residency"
-                                placeholder="Place of Residence"
+                                name="name"
+                                placeholder="First and Last Name(required)"
                             />
+                            <Input
+                                value={this.state.address}
+                                onChange={this.handleInputChange}
+                                name="address"
+                                placeholder="123 Main Street"
+                            />
+                            <Input
+                                value={this.state.city}
+                                onChange={this.handleInputChange}
+                                name="city"
+                                placeholder="City"
+                            />
+                            <Input
+                                value={this.state.zip}
+                                onChange={this.handleInputChange}
+                                name="zip"
+                                placeholder="Zip Code"
+                            //drop after this for states
+                            />
+                            <Drop/>
+
+                            <TextArea
+                                value={this.state.aboutMe}
+                                onChange = {this.handleInputChange}
+                                name="aboutMe"
+                                placeholder = "Say a little about yourself"
+                            />
+
                             <FormBtn
-                                disabled={!(this.state.name && this.state.picture && this.state.residency)}
+                                disabled={!(this.state.name && this.state.picture && this.state.zip && this.state.address && this.state.aboutMe &&this.state.drop&& this.state.city)}
                                 onClick={this.handleFormSubmit}
                             >
                                 Submit Updated Profile
