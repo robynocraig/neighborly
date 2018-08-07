@@ -21,6 +21,7 @@ class EditProfile extends Component {
         this.loadProfile();
 
 
+
     }
 
     loadProfile = () => {
@@ -56,39 +57,28 @@ class EditProfile extends Component {
     };
 
 
+
     render() {
+
+
 
         return (
             <Container fluid>
                 <Row>
-                    <ProfileName>
-                        {this.state.users.map(user => (
+                    <Col size="md-4">
 
-                            // <h5 key={user._id}>
-                            //     {user.name}
-                            // </h5>
-
-
-
-                            <div className="card border-0">
-
-                                <img className="card-img-top" src={user.picture} alt="User Profile" />
-                                <div className="card-body">
-                                    <h5 className="card-title">{user.name}</h5>
-                                </div>
-                                <ul className="list-group list-group-flush">
-                                    <li className="list-group-item">Resident Of <br />
-                                        <small className="text-muted">{user.residency}</small>
-                                    </li>
-                                </ul>
-                                <div className="card-body">
-                                    <a href="/editprofile" className="card-link">Update Profile</a>
-                                </div>
-                            </div>
+                        {this.state.users.filter(user => {
+                            console.log(user._id);
+                            return (user._id === '5b65bb6f49a65230e4b129fb')
+                           
+                        }).map(user => (
+                            <ProfileName
+                                picture={user.picture}
+                                profileName={user.name}
+                                residency={user.residency} />
                         ))}
 
-                    </ProfileName>
-
+                    </Col>
 
                     <Col size="md-4">
 
