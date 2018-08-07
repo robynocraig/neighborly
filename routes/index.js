@@ -17,7 +17,9 @@ const authCheck = jwt({
 });
 
 // API Routes which will require the user to be logged in
-router.use("/api", authCheck, apiRoutes);
+// router.use("/api", authCheck, apiRoutes);
+
+router.use("/api",  apiRoutes);
 
 // If no API routes are hit, send the React app
 router.use("/", function(req, res) {

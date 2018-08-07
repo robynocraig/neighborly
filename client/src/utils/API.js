@@ -21,8 +21,11 @@ export default {
   saveManagement: function(managementData) {
     return axiosWithToken.post("/api/managements", managementData);
   },
-  getProfile: function(id) {
+  getProfiles: function(id) {
     return axiosWithToken.get("/api/users/" + id);
+  },
+  getProfile: function(id) {
+    return axiosWithToken.get("/api/users/" );
   },
   saveProfile: function(userData) {
     return axiosWithToken.post("/api/users", userData);
