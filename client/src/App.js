@@ -9,15 +9,6 @@ import Tenant from "./pages/Tenant";
 
 const auth = new Auth();
 
-// const SecureRoute = ({ component: Component, ...rest }) => (
-//   <Route {...rest} render={(props) => (
-//     auth.isAuthenticated() === true
-//       ? <Component {...props} />
-
-//       : auth.login()
-//   )} />
-// );
-
 class App extends Component {
   state = {
     isLoggedIn: auth.isAuthenticated()
@@ -68,8 +59,9 @@ class App extends Component {
                 <EditProfile {...props} />
               )
             )} />
-            <Route path="/callback" render={() => {
+            <Route path="/callback" render={(props) => {
               return <Callback
+                {...props}
                 postLogIn={this.postLogIn.bind(this)}
                 handleAuthentication={auth.handleAuthentication}
               />;

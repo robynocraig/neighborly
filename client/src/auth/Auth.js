@@ -1,5 +1,4 @@
 import auth0 from 'auth0-js';
-import history from './History';
 
 export default class Auth {
   auth0 = new auth0.WebAuth({
@@ -22,10 +21,10 @@ export default class Auth {
     this.auth0.authorize();
   }
 
-  handleAuthentication() {
+  handleAuthentication(history) {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
-        this.setSession(authResult);
+        this.setSession(authResult, history);
         history.replace('/');
       } else if (err) {
         history.replace('/');
@@ -34,7 +33,7 @@ export default class Auth {
     });
   }
 
-  setSession(authResult) {
+  setSession(authResult, history) {
     // Set the time that the Access Token will expire at
     let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
     localStorage.setItem('access_token', authResult.accessToken);
@@ -49,8 +48,8 @@ export default class Auth {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
-    // navigate to the home route
-    history.replace('/');
+    
+    // history.replace('/') is not required since redirect is in App.js
   }
 
   isAuthenticated() {

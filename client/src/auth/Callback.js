@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
-import Home from '../pages/Home';
+import { Component } from 'react';
 
 class Callback extends Component {
     componentDidMount() {
         this.props.postLogIn();
-        this.props.handleAuthentication();
+        this.props.handleAuthentication(this.props.history);
     }
 
     render() {
         return (
-            <Home />
+            null
         )
     }
 }
