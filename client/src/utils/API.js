@@ -32,6 +32,12 @@ export default {
   },
   saveTenant: function(tenantsData) {
     return axiosWithToken.post("/api/tenants", tenantsData);
+  },
+  getComments: function() {
+    return axiosWithToken.get("/api/comments");
+  },
+  saveComment: function(commentData) {
+    return axiosWithToken.post("/api/comments", commentData);
   }
 
 
