@@ -1,0 +1,14 @@
+#signupLogin {
+    margin-top: 40%;
+}
+
+#loginLogoIcon {
+    width: 75px;
+}
+
+#loginLogoName {
+    font-family: 'Righteous', cursive;
+    font-size: 36px;
+    color: #F24030;
+    margin-top: -10px;
+}
