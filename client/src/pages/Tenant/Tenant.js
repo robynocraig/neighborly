@@ -7,54 +7,60 @@ import Subnav from "../../components/Subnav";
 
 class Tenant extends Component {
   state = {
-    tenants: [],
-    title: "",
-    mockString: ""
-  };
+    users: [],
+    picture: "",
+    name: "",
+    address: "",
+    city: "",
+    zip: "",
+    drop:"",
+    aboutMe: ""
 
-  componentDidMount() {
-    this.loadTenants();
-  }
+};
 
-  loadTenants = () => {
-    API.getTenants()
-      .then(res =>
-        this.setState({ tenants: res.data, title: "", mockString: "" })
-      )
-      .catch(err => console.log(err));
-  };
 
-  deleteTenant = id => {
-    API.deleteTenant(id)
-      .then(res => this.loadTenants())
-      .catch(err => console.log(err));
-  };
+componentDidMount() {
+    this.loadProfile();
+}
 
-  handleInputChange = event => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-  };
-
-  handleFormSubmit = event => {
-    event.preventDefault();
-    if (this.state.title && this.state.mockString) {
-      API.saveTenant({
-        title: this.state.title,
-        mockString: this.state.mockString
-      })
-        .then(res => this.loadTenants())
+loadProfile = () => {
+    API.getProfile()
+        .then(res =>
+            this.setState({
+                users: res.data, 
+                picture: "",
+                name: "",
+                address: "",
+                city: "",
+                zip: "",
+                drop:"",
+                aboutMe: ""
+            })
+        )
         .catch(err => console.log(err));
-    }
-  };
+};
 
   render() {
     return (
       <Container>
         <Row>
           <Col size="md-3 sm-12">
-          <Profile />
+          {this.state.users.filter(user => {
+                            console.log(user._id);
+                            return (user._id === '5b6b57772ed75d3e4c92e663')
+
+                        }).map(user => (
+                            <Profile
+                                picture={user.picture}
+                                name={user.name}
+                                aboutMe={user.aboutMe}
+                                address={user.address}
+                                city={user.city}
+                                drop={user.drop}
+                                zip={user.zip} />
+                        ))}
+
+        
           </Col>
           <Col size="md-9 sm-12">
             <Subnav />

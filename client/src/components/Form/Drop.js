@@ -1,9 +1,9 @@
 import React from "react";
-
+//drop down for states
 export const Drop = props => (
   <div className="form-group col-md-4">
     <label for="inputState">State</label>
-    <select id="inputState" class="form-control">
+    <select id="inputState" class="form-control"{...props}>
       <option selected>Choose...</option>
       <option value="AL">Alabama</option>
       <option value="AK">Alaska</option>
@@ -56,9 +56,6 @@ export const Drop = props => (
       <option value="WV">West Virginia</option>
       <option value="WI">Wisconsin</option>
       <option value="WY">Wyoming</option>
-
-      {/* {...props} */}
-
 
     </select>
   </div>

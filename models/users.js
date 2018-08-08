@@ -7,8 +7,8 @@ const profileSchema = new Schema({
   address: { type: String, required: true },
   city: { type: String, required: true },
   zip: { type: String, required: true },
-  // drop: { type: String, required: true },
-  aboutMe: { type: String, required: true }//add state drop down
+  drop: { type: String, required: true },
+  aboutMe: { type: String, required: true }//schema for profile
 });
 
 const User = mongoose.model("User", profileSchema);
