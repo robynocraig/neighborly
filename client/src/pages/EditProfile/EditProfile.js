@@ -10,9 +10,13 @@ class EditProfile extends Component {
 
     state = {
         users: [],
-        name: "",
         picture: "",
-        residency: ""
+        name: "",
+        address: "",
+        city: "",
+        zip: "",
+        // drop:"",
+        aboutMe: ""
 
     };
 
@@ -24,7 +28,16 @@ class EditProfile extends Component {
     loadProfile = () => {
         API.getProfile()
             .then(res =>
-                this.setState({ users: res.data, name: "", picture: "", residency: "" })
+                this.setState({
+                    users: res.data, 
+                    picture: "",
+                    name: "",
+                    address: "",
+                    city: "",
+                    zip: "",
+                    // drop:"",
+                    aboutMe: ""
+                })
             )
             .catch(err => console.log(err));
     };
@@ -37,16 +50,21 @@ class EditProfile extends Component {
     };
 
     handleFormSubmit = event => {
+        
         event.preventDefault();
-        if (this.state.name && this.state.picture && this.state.residency) {
+        // if (this.state.name && this.state.picture && this.state.zip && this.state.address && this.state.aboutMe &&this.state.city&&this.state.drop) {
             API.saveProfile({
-                name: this.state.name,
                 picture: this.state.picture,
-                residency: this.state.residency
+                name: this.state.name,
+                address: this.state.address,
+                city: this.state.city,
+                zip: this.state.zip,
+                // drop: this.state.drop,
+                aboutMe: this.state.aboutMe
             })
                 .then(res => this.loadProfile())
                 .catch(err => console.log(err));
-        }
+        // }
 
     };
 
@@ -103,18 +121,27 @@ class EditProfile extends Component {
                                 placeholder="Zip Code"
                             //drop after this for states
                             />
-                            <Drop/>
+                            {/* <Drop
+                            value={this.state.drop}
+                            onChange={this.handleInputChange}
+                            name="drop"
+                            /> */}
 
                             <TextArea
                                 value={this.state.aboutMe}
-                                onChange = {this.handleInputChange}
+                                onChange={this.handleInputChange}
                                 name="aboutMe"
-                                placeholder = "Say a little about yourself"
+                                placeholder="Say a little about yourself"
                             />
 
                             <FormBtn
-                                disabled={!(this.state.name && this.state.picture && this.state.zip && this.state.address && this.state.aboutMe &&this.state.drop&& this.state.city)}
+                                disabled={!(this.state.name && this.state.picture && this.state.zip && this.state.address && this.state.aboutMe &&
+
+                                    // this.state.drop&& 
+
+                                    this.state.city)}
                                 onClick={this.handleFormSubmit}
+                                
                             >
                                 Submit Updated Profile
                             </FormBtn>
