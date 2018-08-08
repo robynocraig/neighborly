@@ -6,13 +6,19 @@ import { AUTH_CONFIG } from './auth0-variables';
 class Lock extends Component {
     lock = new Auth0Lock(AUTH_CONFIG.clientId, AUTH_CONFIG.domain, {
         auth: {
-            redirect: false,
+            // redirect: false,
             responseType: 'token id_token',
+            redirectUri: `${window.location.origin}/login`,
+            audience: 'https://mcale017-neighborly.herokuapp.com/',
             sso: false,
         },
         container: AUTH_CONFIG.container,
+        languageDictionary: {
+            title: "Neighborly"
+        },
         theme: {
-            primaryColor: '#3a99d8'
+            logo: "https://i.imgur.com/uwqO6OC.png",
+            primaryColor: '#FCBF32'
         }
     });
 
