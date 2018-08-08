@@ -10,8 +10,31 @@ class Lock extends Component {
             responseType: 'token id_token',
             redirectUri: `${window.location.origin}/login`,
             audience: 'https://mcale017-neighborly.herokuapp.com/',
-            sso: false,
+            sso: true,
         },
+        additionalSignUpFields: [
+            {
+                name: "address",
+                placeholder: "enter your address",
+                // The following properties are optional
+                icon: "https://example.com/assests/address_icon.png",
+                prefill: "street 123",
+                validator: function (address) {
+                    return {
+                        valid: address.length >= 10,
+                        hint: "Must have 10 or more chars" // optional
+                    };
+                }
+            },
+            {
+                name: "first_name",
+                placeholder: "Enter your first name"
+            },
+            {
+                name: "last_name",
+                placeholder: "Enter your last name"
+            }
+        ],
         container: AUTH_CONFIG.container,
         languageDictionary: {
             title: "Neighborly"
