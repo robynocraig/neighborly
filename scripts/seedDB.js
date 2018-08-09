@@ -10,9 +10,13 @@ mongoose.connect(
 
 const userSeed = [
   {
-    name: "Ryan McAleese",
     picture: "https://media.licdn.com/dms/image/C4E03AQFPiSdg1UOjgQ/profile-displayphoto-shrink_800_800/0?e=1538611200&v=beta&t=pzLjjUKbN3FCFL9bWg4xjlSKrrtqMleEOFD4KEbfbws",
-    residency:"New Age Apartments"
+    name : "Ryan McAleese",
+    address : "123 Maine St",
+    city : "Minneapolis",
+    zip : "55406",
+    drop : "MN",
+    aboutMe : "Pure Genius!",
   }
   
 ];
