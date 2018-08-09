@@ -5,44 +5,24 @@ import { AUTH_CONFIG } from './auth0-variables';
 
 class Lock extends Component {
     lock = new Auth0Lock(AUTH_CONFIG.clientId, AUTH_CONFIG.domain, {
+        allowedConnections: ['facebook', 'google-oauth2', 'twitter', 'Username-Password-Authentication'],
         auth: {
-            // redirect: false,
             responseType: 'token id_token',
-            redirectUri: `${window.location.origin}/login`,
-            audience: 'https://mcale017-neighborly.herokuapp.com/',
+            // audience: 'https://mcale017-neighborly.herokuapp.com/',
+            audience: 'https://' + AUTH_CONFIG.domain + '/userinfo',
             sso: true,
         },
-        additionalSignUpFields: [
-            {
-                name: "address",
-                placeholder: "enter your address",
-                // The following properties are optional
-                icon: "https://example.com/assests/address_icon.png",
-                prefill: "street 123",
-                validator: function (address) {
-                    return {
-                        valid: address.length >= 10,
-                        hint: "Must have 10 or more chars" // optional
-                    };
-                }
-            },
-            {
-                name: "first_name",
-                placeholder: "Enter your first name"
-            },
-            {
-                name: "last_name",
-                placeholder: "Enter your last name"
-            }
-        ],
         container: AUTH_CONFIG.container,
         languageDictionary: {
-            title: "Neighborly"
+            title: "Neighborly",
+            signUpTitle: "Neighborly",
+            emailInputPlaceholder: "yours@neighborly.com"
         },
         theme: {
             logo: "https://i.imgur.com/uwqO6OC.png",
             primaryColor: '#FCBF32'
-        }
+        },
+        socialButtonStyle: 'small',
     });
 
     constructor(props) {
@@ -94,7 +74,7 @@ class Lock extends Component {
                 </div>
             ) : (
                     <Redirect to={{
-                        pathname: '/private',
+                        pathname: '/',
                         state: { from: this.props.location }
                     }} />
                 )

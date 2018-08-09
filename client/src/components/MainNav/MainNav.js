@@ -1,46 +1,63 @@
-import React, { Component } from 'react';
-import "./MainNav.css";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import "./MainNav.css"
+import isAuthenticated from '../../auth/isAuthenticated';
 
-class MainNav extends Component {
-    render() {
-        const isAuthenticated = this.props.isLoggedIn;
+const MainNav = () => (
+  // <header>
+  //   <h1>React Auth0 App</h1>
+  //   <nav>
+  //     <ul>
+  //       <li><Link to='/'>Top</Link></li>
+  //       <li><Link to='/private'>Private</Link></li>
+  //       {
+  //         !isAuthenticated() && (
+  //           <li><Link to='/login'>Login</Link></li>
+  //         )
+  //       }
+  //       {
+  //         isAuthenticated() && (
+  //           <li><Link to='/logout'>Logout</Link></li>
+  //         )
+  //       }
+  //     </ul>
+  //   </nav>
+  // </header>
 
-        return (
-            <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" id="navCustom">
-                <img src="https://i.imgur.com/uwqO6OC.png" className="ml-3" id="logoImg" alt="logo" />
-                <a className="navbar-brand ml-1" id="navLogo" href="/">Neighborly</a>
-
-                {/* Toggler/collapsible button */}
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-
-                {/* Navbar links */}
-                <div className="collapse navbar-collapse justify-content-end mr-3" id="navbarNav">
-                    <ul className="navbar-nav">
-                        <li className="nav-item pr-1 pl-4">
-                            <a className="nav-link topNavLink" href="/">Home</a>
-                        </li>
-                        {
-                            !isAuthenticated && (
-                                <li className="nav-item pr-1 pl-4">
-                                    <a className="nav-link topNavLink" onClick={this.props.login}>Log In</a>
-                                </li>
-                            )
-                        }
-                        {
-                            isAuthenticated && (
-                                <li className="nav-item pr-1 pl-4">
-                                    <a className="nav-link topNavLink" onClick={this.props.logout}>Log Out</a>
-                                </li>
-                            )
-                        }
-                    </ul>
-                </div>
-            </nav>
-        );
-    }
-}
+  <nav className="navbar stick-top navbar-expand-lg navbar-dark bg-dark" id="navCustom">
+    <Link className="navbar-brand ml-1" id="navBrand" to="/">
+      <img src="https://i.imgur.com/uwqO6OC.png" className="ml-3" id="navLogo" alt="logo" />
+      Neighborly
+    </Link>
+    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span className="navbar-toggler-icon"></span>
+    </button>
+    <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <ul className="navbar-nav ml-auto">
+      {/* mr-auto if we want buttons on the left */}
+        <li className="nav-item active">
+          <Link className="nav-link" to="/">Home<span className="sr-only">(current)</span></Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/private">Private</Link>
+        </li>
+        {
+          !isAuthenticated() && (
+            <li className="nav-item">
+              <Link className="nav-link" to="/login">Login</Link>
+            </li>
+          )
+        }
+        {
+          isAuthenticated() && (
+            <li className="nav-item">
+              <Link className="nav-link" to="/logout">Logout</Link>
+            </li>
+          )
+        }
+      </ul>
+    </div>
+  </nav>
+)
 
 export default MainNav;

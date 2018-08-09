@@ -1,0 +1,20 @@
+#navCustom {
+    background: #FCBF32 !important;
+}
+
+#logoImg {
+    width: 25px !important;
+}
+
+#navLogo {
+    font-family: 'Righteous', cursive;
+}
+
+.topNavLink {
+    color: white !important;
+}
+
+.topNavLink:hover {
+    color: yellow !important;
+    cursor: default;
+}
