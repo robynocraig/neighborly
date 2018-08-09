@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import isAuthenticated from '../../auth/isAuthenticated';
+import './Home.css';
 
 class Home extends Component {
     constructor(props) {

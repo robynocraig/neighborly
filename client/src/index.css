@@ -3,7 +3,10 @@
 }
 
 body {
-  background: #FCECD6 !important;
-  color: black;
+  background: url("https://i.imgur.com/6MwReSQ.jpg");
+  background-position: center bottom;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
   font-family: Arial, Helvetica, sans-serif;
 }

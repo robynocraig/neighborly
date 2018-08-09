@@ -64,12 +64,11 @@ class Lock extends Component {
     }
 
     render() {
-        const style = { marginTop: '32px' }
+        const style = { marginTop: '96px' }
 
         return (
             !this.state.loggedIn ? (
                 <div>
-                    <h2>Login Page</h2>
                     <div id={AUTH_CONFIG.container} style={style}></div>
                 </div>
             ) : (
