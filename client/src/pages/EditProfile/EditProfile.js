@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Input, FormBtn } from "../../components/Form";
+import { Input, FormBtn, TextArea, Drop } from "../../components/Form";
 import { Col, Row, Container } from "../../components/Grid";
 import Profile from "../../components/Profile";
 import ProfileName from "../../components/ProfileName";
@@ -10,27 +10,16 @@ class EditProfile extends Component {
 
     state = {
         users: [],
-        name: "",
         picture: "",
-        residency: ""
+        name: "",
+        address: "",
+        city: "",
+        zip: "",
+        drop:"",
+        aboutMe: ""
 
     };
 
-
-    componentDidMount() {
-        this.loadProfile();
-
-
-
-    }
-
-    loadProfile = () => {
-        API.getProfile()
-            .then(res =>
-                this.setState({ users: res.data, name: "", picture: "", residency: "" })
-            )
-            .catch(err => console.log(err));
-    };
 
     handleInputChange = event => {
         const { name, value } = event.target;
@@ -39,56 +28,33 @@ class EditProfile extends Component {
         });
     };
 
-
-
     handleFormSubmit = event => {
+        
         event.preventDefault();
-        if (this.state.name && this.state.picture && this.state.residency) {
+        if (this.state.name && this.state.picture && this.state.zip && this.state.address && this.state.aboutMe &&this.state.city&&this.state.drop) {//prevent form from refreshing on submission/ entry, also only allow for save profile function to run only if all of the entries are filled out.
             API.saveProfile({
-                name: this.state.name,
                 picture: this.state.picture,
-                residency: this.state.residency
+                name: this.state.name,
+                address: this.state.address,
+                city: this.state.city,
+                zip: this.state.zip,
+                drop: this.state.drop,
+                aboutMe: this.state.aboutMe
             })
-                .then(res => this.loadProfile())
+           
                 .catch(err => console.log(err));
-
         }
 
     };
 
-
-
     render() {
-
-
-
         return (
             <Container fluid>
                 <Row>
-                    <Col size="md-4">
 
-                        {this.state.users.filter(user => {
-                            console.log(user._id);
-                            return (user._id === '5b65bb6f49a65230e4b129fb')
-                           
-                        }).map(user => (
-                            <ProfileName
-                                picture={user.picture}
-                                profileName={user.name}
-                                residency={user.residency} />
-                        ))}
-
-                    </Col>
-
-                    <Col size="md-4">
+                    <Col size="md-8">
 
                         <form>
-                            <Input
-                                value={this.state.name}
-                                onChange={this.handleInputChange}
-                                name="name"
-                                placeholder="First and Last Name(required)"
-                            />
                             <Input
                                 value={this.state.picture}
                                 onChange={this.handleInputChange}
@@ -96,25 +62,57 @@ class EditProfile extends Component {
                                 placeholder="Weblink to a Photo(required)"
                             />
                             <Input
-                                value={this.state.residency}
+                                value={this.state.name}
                                 onChange={this.handleInputChange}
-                                name="residency"
-                                placeholder="Place of Residence"
+                                name="name"
+                                placeholder="First and Last Name(required)"
                             />
+                            <Input
+                                value={this.state.address}
+                                onChange={this.handleInputChange}
+                                name="address"
+                                placeholder="123 Main Street"
+                            />
+                            <Input
+                                value={this.state.city}
+                                onChange={this.handleInputChange}
+                                name="city"
+                                placeholder="City"
+                            />
+                            <Input
+                                value={this.state.zip}
+                                onChange={this.handleInputChange}
+                                name="zip"
+                                placeholder="Zip Code"
+                           
+                            />
+                            <Drop
+                            value={this.state.drop}
+                            onChange={this.handleInputChange}
+                            name="drop"
+                            />
+
+                            <TextArea
+                                value={this.state.aboutMe}
+                                onChange={this.handleInputChange}
+                                name="aboutMe"
+                                placeholder="Say a little about yourself"
+                            />
+
                             <FormBtn
-                                disabled={!(this.state.name && this.state.picture && this.state.residency)}
+                                disabled={!(this.state.name && this.state.picture && this.state.zip && this.state.address && this.state.aboutMe &&
+
+                                    this.state.drop&& 
+
+                                    this.state.city)}
                                 onClick={this.handleFormSubmit}
+                                //form button wont appear until all fields are filled out
                             >
                                 Submit Updated Profile
                             </FormBtn>
+                            
                         </form>
-
-
-
-
                     </Col>
-
-
 
                 </Row>
 

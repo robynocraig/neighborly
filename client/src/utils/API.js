@@ -41,6 +41,4 @@ export default {
   saveComment: function(commentData) {
     return axiosWithToken.post("/api/comments", commentData);
   }
-
-
 };

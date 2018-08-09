@@ -1,24 +1,24 @@
-import React from "react";
+import React from "react"
 import "./Profile.css";
 
-const Profile = () => (
+const Profile = props => (
 
       <div className="card border-0">
       {/*Example Profile!!!
       User needs to be able to upload pictures and information*/}
-          <img className="card-img-top" src="https://i.imgur.com/ovACRPz.jpg" alt="User Profile" />
+          <img className="card-img-top" src={props.picture} alt="User Profile Photo" />
           <div className="card-body">
-              <h5 className="card-title">John Doe</h5>
+              <h5 className="card-title">{props.name}</h5>
               <p className="card-text">
-                  <small>A longtime resident and former council member of Racoon City.</small>
+                  <small>{props.aboutMe}</small>
               </p>
           </div>
           <ul className="list-group list-group-flush">
               <li className="list-group-item">Resident Of <br/>
-                  <small className="text-muted">1234 Capcom Lane</small>
+                  <small className="text-muted">{props.address}</small>
               </li>
-              <li className="list-group-item">Neighboring<br/>
-                  <small className="text-muted">1998 people</small>
+              <li className="list-group-item">{props.city}<br/>
+                  <small className="text-muted">{props.drop}|{props.zip}</small>
               </li>
           </ul>
           <div className="card-body">
