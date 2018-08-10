@@ -28,14 +28,15 @@ class Lock extends Component {
     constructor(props) {
         super(props);
         this.state = { loggedIn: false };
-        this.onAuthenticated = this.onAuthenticated.bind(this);
-        this.getUserInfo = this.getUserInfo.bind(this);
+        // this.onAuthenticated = this.onAuthenticated.bind(this);
+        // this.getUserInfo = this.getUserInfo.bind(this);
 
         this.onAuthenticated();
         this.getUserInfo();
     }
 
-    onAuthenticated() {
+    // onAuthenticated() {
+    onAuthenticated = () => {
         this.lock.on('authenticated', (authResult) => {
             let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
             localStorage.setItem('access_token', authResult.accessToken);
@@ -46,7 +47,7 @@ class Lock extends Component {
         });
     }
 
-    getUserInfo() {
+    getUserInfo = () => {
         this.lock.on('authenticated', (authResult) => {
             this.lock.getUserInfo(authResult.accessToken, function (error, profile) {
                 if (!error) {

@@ -1,4 +1,3 @@
 module.exports = {
-    Management: require("./management"),
-    User: require("./users")
+    User: require("./user")
 };
