@@ -4,6 +4,7 @@ import MainNav from './components/MainNav';
 import Home from './pages/Home';
 import Login from './auth/Login';
 import Logout from './auth/Logout';
+import EditProfile from './components/EditProfile';
 
 const App = () => (
   <div>
@@ -11,6 +12,7 @@ const App = () => (
     <main>
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/editprofile" component={EditProfile} />
         {/* <Route path="/private" component={Private} /> */}
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />
