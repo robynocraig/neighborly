@@ -4,6 +4,7 @@ import MainNav from './components/MainNav';
 import Home from './pages/Home';
 import Login from './auth/Login';
 import Logout from './auth/Logout';
+import Testing from './pages/Testing';
 
 const App = () => (
   <div>
@@ -12,6 +13,7 @@ const App = () => (
       <Switch>
         <Route exact path="/" component={Home} />
         {/* <Route path="/private" component={Private} /> */}
+        <Route exact path="/Test" component={Testing} />
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />
       </Switch>
