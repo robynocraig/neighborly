@@ -6,7 +6,7 @@ import isAuthenticated from './isAuthenticated';
 const Login = (props) => (
   isAuthenticated() ? (
     <Redirect to={{
-      pathname: '/private',
+      pathname: '/',
       state: { from: props.location }
     }} />
   ) : (

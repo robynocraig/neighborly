@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import { Input, FormBtn, TextArea, Drop } from "../../components/Form";
 import { Col, Row, Container } from "../../components/Grid";
-import Profile from "../../components/Profile";
-import ProfileName from "../../components/ProfileName";
 import API from "../../utils/API";
+import axios from 'axios';
+var CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/neighborlyprofiles/image/upload';
+var CLOUDINARY_UPLOAD_PRESET='xztqhhek'
 // import { Link } from "react-router-dom";
+
+
+
 class EditProfile extends Component {
-
-
     state = {
         users: [],
         picture: "",
@@ -16,9 +18,39 @@ class EditProfile extends Component {
         city: "",
         zip: "",
         drop:"",
-        aboutMe: ""
+        aboutMe: "",
+        selectedFile:null
+        
 
     };
+
+    
+
+    fileSelectedHandler=event=>{
+        this.setState({selectedFile:event.target.files[0]})
+    }
+
+    fileUploadHandler=()=>{
+        const fd= new FormData();
+        fd.append('file', this.state.selectedFile);
+        fd.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+;        axios.post(CLOUDINARY_URL, fd)
+        .then(res=>{
+            var cloudinaryImage= res.data.public_id
+            console.log(res);
+            console.log(res.data);
+            console.log(res.data.public_id);//this is the unique ID for the picture
+
+            // http://res.cloudinary.com/neighborlyprofiles/image/upload
+            //above is the URL to get from
+            // var responseURL='http://res.cloudinary.com/neighborlyprofiles/image/upload'
+        });
+
+        // axios.get(responseURL.cloudinaryImage)
+        // .then(console.log(res));
+
+    }
 
 
     handleInputChange = event => {
@@ -39,7 +71,8 @@ class EditProfile extends Component {
                 city: this.state.city,
                 zip: this.state.zip,
                 drop: this.state.drop,
-                aboutMe: this.state.aboutMe
+                aboutMe: this.state.aboutMe,
+                selectedFile:this.state.selectedFile
             })
            
                 .catch(err => console.log(err));
@@ -50,6 +83,11 @@ class EditProfile extends Component {
     render() {
         return (
             <Container fluid>
+            <div className="upload">
+            <input type="file" onChange={this.fileSelectedHandler}/>
+            <button onClick={this.fileUploadHandler}>Upload</button>
+
+            </div>
                 <Row>
 
                     <Col size="md-8">
