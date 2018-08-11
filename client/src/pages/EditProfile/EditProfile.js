@@ -72,7 +72,7 @@ class EditProfile extends Component {
                 zip: this.state.zip,
                 drop: this.state.drop,
                 aboutMe: this.state.aboutMe,
-                // selectedFile:this
+                selectedFile:this.state.selectedFile
             })
            
                 .catch(err => console.log(err));

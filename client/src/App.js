@@ -4,7 +4,7 @@ import MainNav from './components/MainNav';
 import Home from './pages/Home';
 import Login from './auth/Login';
 import Logout from './auth/Logout';
-import EditProfile from './components/EditProfile';
+import EditProfile from './pages/EditProfile';
 
 const App = () => (
   <div>
