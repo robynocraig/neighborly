@@ -50,6 +50,10 @@ class EditProfile extends Component {
     render() {
         return (
             <Container fluid>
+            <div className="upload">
+            WORDS HERE!
+
+            </div>
                 <Row>
 
                     <Col size="md-8">
