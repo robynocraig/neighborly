@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import { Input, FormBtn, TextArea, Drop } from "../../components/Form";
 import { Col, Row, Container } from "../../components/Grid";
-import Profile from "../../components/Profile";
-import ProfileName from "../../components/ProfileName";
 import API from "../../utils/API";
+import axios from 'axios';
+var CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/neighborlyprofiles/image/upload';
+var CLOUDINARY_UPLOAD_PRESET='xztqhhek'
 // import { Link } from "react-router-dom";
+
+
+
 class EditProfile extends Component {
 
 
@@ -16,9 +20,32 @@ class EditProfile extends Component {
         city: "",
         zip: "",
         drop:"",
-        aboutMe: ""
+        aboutMe: "",
+        selectedFile:null
+        
 
     };
+
+    
+
+    fileSelectedHandler=event=>{
+        this.setState({selectedFile:event.target.files[0]})
+    }
+
+    fileUploadHandler=()=>{
+        const fd= new FormData();
+        fd.append('file', this.state.selectedFile);
+        fd.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+        // fd.append()
+      
+
+        console.log(fd)
+;        axios.post(CLOUDINARY_URL, fd)
+        .then(res=>{
+            console.log(res);
+        });
+
+    }
 
 
     handleInputChange = event => {
@@ -51,7 +78,8 @@ class EditProfile extends Component {
         return (
             <Container fluid>
             <div className="upload">
-            WORDS HERE!
+            <input type="file" onChange={this.fileSelectedHandler}/>
+            <button onClick={this.fileUploadHandler}>Upload</button>
 
             </div>
                 <Row>
