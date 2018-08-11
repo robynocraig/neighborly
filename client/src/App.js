@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import MainNav from './components/MainNav';
-import Home from './components/Home';
+import Home from './pages/Home';
 import Login from './auth/Login';
 import Logout from './auth/Logout';
 
