@@ -2,19 +2,10 @@
     background: #FCBF32 !important;
 }
 
-#logoImg {
+#navLogo {
     width: 25px !important;
 }
 
-#navLogo {
+#navBrand {
     font-family: 'Righteous', cursive;
-}
-
-.topNavLink {
-    color: white !important;
-}
-
-.topNavLink:hover {
-    color: yellow !important;
-    cursor: default;
 }

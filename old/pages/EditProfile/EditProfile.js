@@ -10,8 +10,6 @@ var CLOUDINARY_UPLOAD_PRESET='xztqhhek'
 
 
 class EditProfile extends Component {
-
-
     state = {
         users: [],
         picture: "",

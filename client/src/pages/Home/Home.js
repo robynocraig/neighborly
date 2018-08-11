@@ -1,14 +1,101 @@
-import React from "react";
-import Hero from "../../components/Hero";
-import Card from "../../components/Card";
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import isAuthenticated from '../../auth/isAuthenticated';
+import './Home.css';
+import API from '../../utils/API';
 
+class Home extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            user: {},
+            email: "",
+            name: "",
+            picture: "",
+            address: "",
+            city: "",
+            state: "",
+            zip: "",
+            about: ""
+        }
+    }
 
-const Home = () => (
-  <div>
-    <Card />
-    <Hero backgroundImage="https://i.imgur.com/6MwReSQ.jpg">
-    </Hero>
-  </div>
-);
+    componentDidMount() {
+        const userInfo = JSON.parse(localStorage.getItem('profile'));
+
+        // console.log(userInfo);
+
+        this.setState({ user: userInfo });
+    }
+
+    // loadUser = () => {
+    //     API.getUser()
+    //         .then(res =>
+    //             this.setState({ user: res.data, email: "", name: "", picture: "", address: "", city: "", state: "", zip: "", about: ""})    
+    //         )
+    //         .catch(err => console.log(err));
+    // }
+
+    checkUser = email => {
+        API.getUser(email)
+            .then(res => res)
+            .catch(err => console.log(err));
+    }
+
+    handleInputChange = event => {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value
+        });
+    };
+
+    render() {
+        // return (
+        //     isAuthenticated() ? (
+        //         <div>
+        //             <h2>Home Page</h2>
+        //             <p>Hey, you’re logged in!</p>
+        //         </div>
+        //     ) : (
+        //             <Redirect to={{
+        //                 pathname: '/login',
+        //                 state: { from: this.props.location }
+        //             }} />
+        //         )
+        // )
+
+        console.log(this.state.user);
+
+        return (
+            <div>
+                {
+                    isAuthenticated() &&
+                    <div>
+                        {/* {
+                            this.checkUser(userArray.email) &&
+                            <div>
+                                I'M PRESENT
+                        </div>
+                        },
+                        {
+                            !(this.checkUser(userArray.email)) &&
+                            <div>
+                                I'M NOT PRESENT
+                        </div>
+                        } */}
+                        hi
+                    </div>
+                },
+                {
+                    !isAuthenticated() &&
+                    <Redirect to={{
+                        pathname: '/login',
+                        state: { from: this.props.location }
+                    }} />
+                }
+            </div>
+        )
+    }
+}
 
 export default Home;
