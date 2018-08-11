@@ -36,14 +36,21 @@ class EditProfile extends Component {
         const fd= new FormData();
         fd.append('file', this.state.selectedFile);
         fd.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-        // fd.append()
-      
 
-        console.log(fd)
 ;        axios.post(CLOUDINARY_URL, fd)
         .then(res=>{
+            var cloudinaryImage= res.data.public_id
             console.log(res);
+            console.log(res.data);
+            console.log(res.data.public_id);//this is the unique ID for the picture
+
+            // http://res.cloudinary.com/neighborlyprofiles/image/upload
+            //above is the URL to get from
+            // var responseURL='http://res.cloudinary.com/neighborlyprofiles/image/upload'
         });
+
+        // axios.get(responseURL.cloudinaryImage)
+        // .then(console.log(res));
 
     }
 
@@ -66,7 +73,8 @@ class EditProfile extends Component {
                 city: this.state.city,
                 zip: this.state.zip,
                 drop: this.state.drop,
-                aboutMe: this.state.aboutMe
+                aboutMe: this.state.aboutMe,
+                // selectedFile:this
             })
            
                 .catch(err => console.log(err));
