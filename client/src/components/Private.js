@@ -9,11 +9,11 @@ const Private = (props) => (
       <p>Hey, you’re logged in!</p>
     </div>
   ) : (
-    <Redirect to={{
-      pathname: '/login',
-      state: { from: props.location }
-    }} />
-  )
+      <Redirect to={{
+        pathname: '/login',
+        state: { from: props.location }
+      }} />
+    )
 )
 
 export default Private;

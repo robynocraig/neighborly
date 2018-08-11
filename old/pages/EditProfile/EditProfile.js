@@ -6,8 +6,6 @@ import ProfileName from "../../components/ProfileName";
 import API from "../../utils/API";
 // import { Link } from "react-router-dom";
 class EditProfile extends Component {
-
-
     state = {
         users: [],
         picture: "",
@@ -19,7 +17,6 @@ class EditProfile extends Component {
         aboutMe: ""
 
     };
-
 
     handleInputChange = event => {
         const { name, value } = event.target;

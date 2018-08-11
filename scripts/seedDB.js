@@ -10,15 +10,15 @@ mongoose.connect(
 
 const userSeed = [
   {
-    picture: "https://media.licdn.com/dms/image/C4E03AQFPiSdg1UOjgQ/profile-displayphoto-shrink_800_800/0?e=1538611200&v=beta&t=pzLjjUKbN3FCFL9bWg4xjlSKrrtqMleEOFD4KEbfbws",
+    email: "mcale017@gmail.com",
     name : "Ryan McAleese",
-    address : "123 Maine St",
+    picture: "https://media.licdn.com/dms/image/C4E03AQFPiSdg1UOjgQ/profile-displayphoto-shrink_800_800/0?e=1538611200&v=beta&t=pzLjjUKbN3FCFL9bWg4xjlSKrrtqMleEOFD4KEbfbws",
+    address : "Whatever",
     city : "Minneapolis",
+    state: "MN",
     zip : "55406",
-    drop : "MN",
-    aboutMe : "Pure Genius!",
+    about: "PLEASE WORK",
   }
-  
 ];
 
 db.User
