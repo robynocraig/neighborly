@@ -15,13 +15,22 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  findByEmail: function(req, res, email) {
+  findByEmail: function(req, res) {
     db.User
-      .findOne({ email: email}, function(err, user) {
+      .update(
+        { email: req.body.email },
+        { $set : { email: req.body.email, name: req.body.name, picture: req.body.picture, address: req.body.address, city: req.body.city, state: req.body.state, zip: req.body.zip, about: req.body.about } },
+        { upsert: true, multi: true },
+        function(err, inserted) {
           if (err) {
-            // insert the new email into database
+            console.log(err);
+          } else {
+            console.log(inserted);
           }
-      })
+        }
+      )
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
     db.User

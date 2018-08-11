@@ -21,9 +21,9 @@ class Home extends Component {
         about: ""
     }
 
-    // componentDidMount() {
-    //     this.loadUser();
-    // }
+    componentDidMount() {
+        
+    }
 
     // loadUser = () => {
     //     API.getUser()
@@ -41,6 +41,10 @@ class Home extends Component {
     };
 
     render() {
+        const userArray = JSON.parse(localStorage.getItem('profile'));
+
+        // console.log(userArray.email);
+
         return (
             isAuthenticated() ? (
                 <div>
