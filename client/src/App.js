@@ -6,6 +6,7 @@ import Login from './auth/Login';
 import Logout from './auth/Logout';
 import Testing from './pages/Testing';
 import EditProfile from './pages/EditProfile';
+import Management from './pages/Management';
 
 const App = () => (
   <div>
@@ -18,6 +19,7 @@ const App = () => (
         <Route exact path="/Test" component={Testing} />
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />
+        <Route exact path="/management" component={Management} />
       </Switch>
     </main>
   </div>
