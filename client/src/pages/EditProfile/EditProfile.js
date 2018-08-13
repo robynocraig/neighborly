@@ -4,10 +4,8 @@ import { Col, Row, Container } from "../../components/Grid";
 import API from "../../utils/API";
 import axios from 'axios';
 var CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/neighborlyprofiles/image/upload';
-var CLOUDINARY_UPLOAD_PRESET='xztqhhek'
+var CLOUDINARY_UPLOAD_PRESET = 'xztqhhek'
 // import { Link } from "react-router-dom";
-
-
 
 class EditProfile extends Component {
     state = {
@@ -17,37 +15,41 @@ class EditProfile extends Component {
         address: "",
         city: "",
         zip: "",
-        state:"",
+        state: "",
         about: "",
-        // selectedFile:null
-        
-
+        selectedFile: null
     };
+
+    fileSelectedHandler = event => {
+        this.setState({ selectedFile: event.target.files[0] })
+    }
+
+    fileUploadHandler = () => {
+        // const fd = new FormData();
+        // fd.append('file', this.state.selectedFile);
+        // fd.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
 
     
 
-    fileSelectedHandler=event=>{
-        this.setState({selectedFile:event.target.files[0]})
+        // ; axios.post(CLOUDINARY_URL, fd)
+        //     .then(res => {
+        //         const cloudinaryImage = res.data.public_id
+        //         const responseURL = 'http://res.cloudinary.com/neighborlyprofiles/image/upload/' + cloudinaryImage
+
+             
+            
+                
+           
+        //         //   API.saveUser({
+        //         //       selectedFile:responseURL
+        //         //     )}
+
+        //         //   console.log(res);
+        //         //   console.log(res.data);
+        //         //   console.log(res.data.public_id);
+
+        //     });
     }
-
-    fileUploadHandler=()=>{
-        const fd= new FormData();
-        fd.append('file', this.state.selectedFile);
-        fd.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-
-;        axios.post(CLOUDINARY_URL, fd)
-        .then(res=>{
-            const cloudinaryImage= res.data.public_id
-            console.log(res);
-            console.log(res.data);
-            console.log(res.data.public_id);
-    //   const responseURL='http://res.cloudinary.com/neighborlyprofiles/image/upload'
-
-
-        });
-
-    }
-
 
     handleInputChange = event => {
         const { name, value } = event.target;
@@ -57,10 +59,18 @@ class EditProfile extends Component {
     };
 
     handleFormSubmit = event => {
-        
+     
         event.preventDefault();
-        if (this.state.name && this.state.picture && this.state.zip && this.state.address && this.state.about &&this.state.city&&this.state.state) {//prevent form from refreshing on submission/ entry, also only allow for save profile function to run only if all of the entries are filled out.
-            API.saveUser({//was saveProfile
+        if (this.state.name && this.state.picture && this.state.zip && this.state.address && this.state.about && this.state.city && this.state.state) {
+            const fd = new FormData();
+            fd.append('file', this.state.selectedFile);
+            fd.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+            ; axios.post(CLOUDINARY_URL, fd)
+                .then(res => {
+                    const cloudinaryImage = res.data.public_id
+                    const responseURL = 'http://res.cloudinary.com/neighborlyprofiles/image/upload/' + cloudinaryImage
+    
+            API.saveUser({
                 picture: this.state.picture,
                 name: this.state.name,
                 address: this.state.address,
@@ -68,22 +78,24 @@ class EditProfile extends Component {
                 zip: this.state.zip,
                 state: this.state.state,
                 about: this.state.about,
-                // selectedFile:'http://res.cloudinary.com/neighborlyprofiles/image/upload'
+                selectedFile:responseURL
+                
             })
-           
-                .catch(err => console.log(err));
-        }
 
+                .catch(err => console.log(err));
+            });
+        }
+        
     };
 
     render() {
         return (
             <Container fluid>
-            <div className="upload">
-            <input type="file" onChange={this.fileSelectedHandler}/>
-            <button onClick={this.fileUploadHandler}>Upload</button>
+                <div className="upload">
+                    <input type="file" onChange={this.fileSelectedHandler} />
+                    <button onClick={this.fileUploadHandler}>Upload</button>
 
-            </div>
+                </div>
                 <Row>
 
                     <Col size="md-8">
@@ -118,12 +130,12 @@ class EditProfile extends Component {
                                 onChange={this.handleInputChange}
                                 name="zip"
                                 placeholder="Zip Code"
-                           
+
                             />
                             <State
-                            value={this.state.state}
-                            onChange={this.handleInputChange}
-                            name="state"
+                                value={this.state.state}
+                                onChange={this.handleInputChange}
+                                name="state"
                             />
 
                             <TextArea
@@ -136,15 +148,15 @@ class EditProfile extends Component {
                             <FormBtn
                                 disabled={!(this.state.name && this.state.picture && this.state.zip && this.state.address && this.state.about &&
 
-                                    this.state.state&& 
+                                    this.state.state &&
 
                                     this.state.city)}
                                 onClick={this.handleFormSubmit}
-                                //form button wont appear until all fields are filled out
+                            //form button wont appear until all fields are filled out
                             >
                                 Submit Updated Profile
                             </FormBtn>
-                            
+
                         </form>
                     </Col>
 

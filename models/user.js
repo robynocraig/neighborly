@@ -10,7 +10,7 @@ const userSchema = new Schema({
   state: { type: String, required: true },//drop from edit profile js and components
   zip: { type: String, required: true },
   about: { type: String, required: true },
-  // selectedFile:{ type:String, required:true}
+  selectedFile:{ type:String, required:true}
 });
 
 const User = mongoose.model("User", userSchema);
