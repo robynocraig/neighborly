@@ -7,8 +7,12 @@ import API from '../../utils/API';
 class Home extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
-            user: {},
+            user: (this.props.location && this.props.location.state)
+                    ? this.props.location.state.profile
+                    : {}
+            ,
             email: "",
             name: "",
             picture: "",
@@ -20,14 +24,6 @@ class Home extends Component {
         }
     }
 
-    componentDidMount() {
-        const userInfo = JSON.parse(localStorage.getItem('profile'));
-
-        // console.log(userInfo);
-
-        this.setState({ user: userInfo });
-    }
-
     // loadUser = () => {
     //     API.getUser()
     //         .then(res =>
@@ -36,11 +32,10 @@ class Home extends Component {
     //         .catch(err => console.log(err));
     // }
 
-    checkUser = email => {
-        API.getUser(email)
-            .then(res => res)
-            .catch(err => console.log(err));
-    }
+    // checkUser = email => {
+    //     API.getUser(email)
+    //         .catch(err => console.log(err));
+    // }
 
     handleInputChange = event => {
         const { name, value } = event.target;
@@ -50,20 +45,6 @@ class Home extends Component {
     };
 
     render() {
-        // return (
-        //     isAuthenticated() ? (
-        //         <div>
-        //             <h2>Home Page</h2>
-        //             <p>Hey, you’re logged in!</p>
-        //         </div>
-        //     ) : (
-        //             <Redirect to={{
-        //                 pathname: '/login',
-        //                 state: { from: this.props.location }
-        //             }} />
-        //         )
-        // )
-
         console.log(this.state.user);
 
         return (
@@ -72,13 +53,14 @@ class Home extends Component {
                     isAuthenticated() &&
                     <div>
                         {/* {
-                            this.checkUser(userArray.email) &&
+                            this.checkUser(this.state.user.email) &&
+                            (this.state.exists) &&
                             <div>
                                 I'M PRESENT
-                        </div>
+                            </div>
                         },
                         {
-                            !(this.checkUser(userArray.email)) &&
+                            !(this.checkUser(this.state.user.email)) &&
                             <div>
                                 I'M NOT PRESENT
                         </div>

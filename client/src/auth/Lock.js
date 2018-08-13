@@ -32,10 +32,9 @@ class Lock extends Component {
         super(props);
         this.state = { loggedIn: false };
         this.onAuthenticated = this.onAuthenticated.bind(this);
-        // this.getUserInfo = this.getUserInfo.bind(this);
 
         this.onAuthenticated();
-        this.getUserInfo();
+        // this.getUserInfo();
     }
 
     // onAuthenticated() {
@@ -46,36 +45,36 @@ class Lock extends Component {
             localStorage.setItem('id_token', authResult.idToken);
             localStorage.setItem('expires_at', expiresAt);
 
-            this.lock.getUserInfo(authResult.accessToken, function (error, profile) {
+            this.lock.getUserInfo(authResult.accessToken, (error, profile) => {
                 if (!error) {
                     localStorage.setItem("profile", JSON.stringify(profile));
 
-                    // this.setState({
-                    //     loggedIn: true,
-                    //     profile: JSON.stringify(profile)
-                    // })
+                    this.setState({
+                        loggedIn: true,
+                        profile: JSON.stringify(profile)
+                    })
                 };
             });
 
-            this.setState({ 
-                loggedIn: true 
-            });
+            // this.setState({ 
+            //     loggedIn: true 
+            // });
         });
     }
 
-    getUserInfo = () => {
-        this.lock.on('authenticated', (authResult) => {
-            this.lock.getUserInfo(authResult.accessToken, function (error, profile) {
-                if (!error) {
-                    localStorage.setItem("profile", JSON.stringify(profile));
-                };
+    // getUserInfo = () => {
+    //     this.lock.on('authenticated', (authResult) => {
+    //         this.lock.getUserInfo(authResult.accessToken, function (error, profile) {
+    //             if (!error) {
+    //                 localStorage.setItem("profile", JSON.stringify(profile));
+    //             };
 
-                this.setState({
-                    profile: JSON.stringify(profile)
-                })
-            });
-        });
-    }
+    //             this.setState({
+    //                 profile: JSON.stringify(profile)
+    //             })
+    //         });
+    //     });
+    // }
 
     componentDidMount() {
         // Avoid showing Lock when hash is parsed.
