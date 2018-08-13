@@ -35,7 +35,7 @@ class Lock extends Component {
         // this.getUserInfo = this.getUserInfo.bind(this);
 
         this.onAuthenticated();
-        this.getUserInfo();
+        //this.getUserInfo();
     }
 
     // onAuthenticated() {
@@ -46,20 +46,20 @@ class Lock extends Component {
             localStorage.setItem('id_token', authResult.idToken);
             localStorage.setItem('expires_at', expiresAt);
 
-            this.lock.getUserInfo(authResult.accessToken, function (error, profile) {
+            this.lock.getUserInfo(authResult.accessToken, (error, profile) => {
                 if (!error) {
                     localStorage.setItem("profile", JSON.stringify(profile));
 
-                    // this.setState({
-                    //     loggedIn: true,
-                    //     profile: JSON.stringify(profile)
-                    // })
+                    this.setState({
+                        loggedIn: true,
+                        profile: JSON.stringify(profile)
+                    })
                 };
             });
 
-            this.setState({ 
-                loggedIn: true 
-            });
+            // this.setState({ 
+            //     loggedIn: true 
+            // });
         });
     }
 
