@@ -52,6 +52,7 @@ class EditProfile extends Component {
     }
 
     handleInputChange = event => {
+        console.log(event);
         const { name, value } = event.target;
         this.setState({
             [name]: value
@@ -140,6 +141,7 @@ class EditProfile extends Component {
 
                             <TextArea
                                 value={this.state.about}
+                                
                                 onChange={this.handleInputChange}
                                 name="about"
                                 placeholder="Say a little about yourself"
