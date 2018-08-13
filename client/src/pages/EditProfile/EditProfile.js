@@ -52,7 +52,7 @@ class EditProfile extends Component {
     }
 
     handleInputChange = event => {
-        console.log(event);
+        
         const { name, value } = event.target;
         this.setState({
             [name]: value
