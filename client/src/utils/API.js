@@ -21,3 +21,4 @@ export default {
     return axiosWithToken.post("/api/users", usersData);
   }
 };
+

@@ -13,8 +13,8 @@ class Tenant extends Component {
     address: "",
     city: "",
     zip: "",
-    drop:"",
-    aboutMe: ""
+    state:"",
+    about: ""
 
 };
 
@@ -33,8 +33,8 @@ loadProfile = () => {
                 address: "",
                 city: "",
                 zip: "",
-                drop:"",
-                aboutMe: ""
+                state:"",
+                about: ""
             })
         )
         .catch(err => console.log(err));
@@ -53,10 +53,10 @@ loadProfile = () => {
                             <Profile
                                 picture={user.picture}
                                 name={user.name}
-                                aboutMe={user.aboutMe}
+                                about={user.about}
                                 address={user.address}
                                 city={user.city}
-                                drop={user.drop}
+                                state={user.state}
                                 zip={user.zip} />
                         ))}
 
