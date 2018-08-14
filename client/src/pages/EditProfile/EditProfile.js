@@ -6,6 +6,14 @@ import axios from 'axios';
 var CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/neighborlyprofiles/image/upload';
 var CLOUDINARY_UPLOAD_PRESET = 'xztqhhek';
 
+const styles = {
+  body: {
+    background: "#FCECD6",
+    color: "black",
+    font:" Arial, Helvetica, sans-serif"
+  }
+};
+
 class EditProfile extends Component {
     state = {
         name: "",
@@ -20,9 +28,9 @@ class EditProfile extends Component {
     fileSelectedHandler = event => {
         this.setState({ selectedFile: event.target.files[0] })
     }
-
+    
     handleInputChange = event => {
-        
+
         const { name, value } = event.target;
         this.setState({
             [name]: value
@@ -40,13 +48,15 @@ class EditProfile extends Component {
                     const cloudinaryImage = res.data.public_id
                     const responseURL = 'http://res.cloudinary.com/neighborlyprofiles/image/upload/' + cloudinaryImage
     
-            API.saveUser({ 
+            API.saveUser({
+                
                 name: this.state.name,
                 address: this.state.address,
                 city: this.state.city,
                 zip: this.state.zip,
                 state: this.state.state,
                 about: this.state.about,
+
                 picture:responseURL
               
             })
@@ -54,11 +64,13 @@ class EditProfile extends Component {
                 .catch(err => console.log(err));
             });
         }
-        
+
     };
 
     render() {
         return (
+          <div style={styles.body}>
+
             <Container fluid>
                 <div className="upload">
                     <input type="file" onChange={this.fileSelectedHandler} />
@@ -104,7 +116,7 @@ class EditProfile extends Component {
 
                             <TextArea
                                 value={this.state.about}
-                                
+
                                 onChange={this.handleInputChange}
                                 name="about"
                                 placeholder="Say a little about yourself"
@@ -126,7 +138,7 @@ class EditProfile extends Component {
                 </Row>
 
             </Container>
-
+          </div>
         );
 
     };
@@ -134,4 +146,3 @@ class EditProfile extends Component {
 };
 
 export default EditProfile;
-
