@@ -4,8 +4,7 @@ import { Col, Row, Container } from "../../components/Grid";
 import API from "../../utils/API";
 import axios from 'axios';
 var CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/neighborlyprofiles/image/upload';
-var CLOUDINARY_UPLOAD_PRESET = 'xztqhhek'
-// import { Link } from "react-router-dom";
+var CLOUDINARY_UPLOAD_PRESET = 'xztqhhek';
 
 const styles = {
   body: {
@@ -17,48 +16,19 @@ const styles = {
 
 class EditProfile extends Component {
     state = {
-        users: [],
-        picture: "",
         name: "",
         address: "",
         city: "",
         zip: "",
         state: "",
         about: "",
-        selectedFile: null
+        picture:null
     };
 
     fileSelectedHandler = event => {
         this.setState({ selectedFile: event.target.files[0] })
     }
-
-    fileUploadHandler = () => {
-        // const fd = new FormData();
-        // fd.append('file', this.state.selectedFile);
-        // fd.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-
-
-
-        // ; axios.post(CLOUDINARY_URL, fd)
-        //     .then(res => {
-        //         const cloudinaryImage = res.data.public_id
-        //         const responseURL = 'http://res.cloudinary.com/neighborlyprofiles/image/upload/' + cloudinaryImage
-
-
-
-
-
-        //         //   API.saveUser({
-        //         //       selectedFile:responseURL
-        //         //     )}
-
-        //         //   console.log(res);
-        //         //   console.log(res.data);
-        //         //   console.log(res.data.public_id);
-
-        //     });
-    }
-
+    
     handleInputChange = event => {
 
         const { name, value } = event.target;
@@ -68,9 +38,8 @@ class EditProfile extends Component {
     };
 
     handleFormSubmit = event => {
-
         event.preventDefault();
-        if (this.state.name && this.state.picture && this.state.zip && this.state.address && this.state.about && this.state.city && this.state.state) {
+        if (this.state.name && this.state.zip && this.state.address && this.state.about && this.state.city && this.state.state) {
             const fd = new FormData();
             fd.append('file', this.state.selectedFile);
             fd.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
@@ -78,17 +47,18 @@ class EditProfile extends Component {
                 .then(res => {
                     const cloudinaryImage = res.data.public_id
                     const responseURL = 'http://res.cloudinary.com/neighborlyprofiles/image/upload/' + cloudinaryImage
-
+    
             API.saveUser({
-                picture: this.state.picture,
+                
                 name: this.state.name,
                 address: this.state.address,
                 city: this.state.city,
                 zip: this.state.zip,
                 state: this.state.state,
                 about: this.state.about,
-                selectedFile:responseURL
 
+                picture:responseURL
+              
             })
 
                 .catch(err => console.log(err));
@@ -104,7 +74,7 @@ class EditProfile extends Component {
             <Container fluid>
                 <div className="upload">
                     <input type="file" onChange={this.fileSelectedHandler} />
-                    <button onClick={this.fileUploadHandler}>Upload</button>
+             
 
                 </div>
                 <Row>
@@ -112,12 +82,7 @@ class EditProfile extends Component {
                     <Col size="md-8">
 
                         <form>
-                            <Input
-                                value={this.state.picture}
-                                onChange={this.handleInputChange}
-                                name="picture"
-                                placeholder="Weblink to a Photo(required)"
-                            />
+
                             <Input
                                 value={this.state.name}
                                 onChange={this.handleInputChange}
@@ -158,13 +123,11 @@ class EditProfile extends Component {
                             />
 
                             <FormBtn
-                                disabled={!(this.state.name && this.state.picture && this.state.zip && this.state.address && this.state.about &&
-
-                                    this.state.state &&
-
-                                    this.state.city)}
+                                disabled={!(this.state.name&& this.state.zip && this.state.address && this.state.about &&
+                                    //statepicture???
+                                this.state.state && this.state.city)}
                                 onClick={this.handleFormSubmit}
-                            //form button wont appear until all fields are filled out
+    
                             >
                                 Submit Updated Profile
                             </FormBtn>
