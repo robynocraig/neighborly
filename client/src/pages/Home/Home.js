@@ -34,12 +34,14 @@ class Home extends Component {
     // }
 
     componentDidMount() {
-        this.checkUser();
+        if(this.state.user) {
+            this.checkUser(this.state.user.email);
+        }
     }
 
     checkUser = email => {
         API.getUser(email)
-            .then(res => this.setState({ exists: res }))
+            .then(res => this.setState({ exists: res.data.exists }))
             .catch(err => console.log(err));
     }
 
