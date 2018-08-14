@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
-import { Col, Row, Container } from "../../components/Grid";
+import { Row, Container } from "../../components/Grid";
 import { Input, TextArea, FormBtn } from "../../components/Form";
+import { List } from "../../components/List";
+import DeleteBtn from "../../components/DeleteBtn";
+import { Postcard } from "../../components/Postcard";
 
 class Posts extends Component {
 
@@ -11,17 +14,17 @@ class Posts extends Component {
         comment: ""
     };
 
-    componentDidMount() {
-        this.loadComments();
-    }
+    // componentDidMount() {
+    //     this.loadComments();
+    // }
 
-    loadComments = () => {
-        API.getComments()
-            .then(res =>
-                this.setState({ posts: res.data, title: "", comment: ""})
-            )
-            .catch(err => console.log(err));
-    };
+    // loadComments = () => {
+    //     API.getComments()
+    //         .then(res =>
+    //             this.setState({ posts: res.data, title: "", comment: ""})
+    //         )
+    //         .catch(err => console.log(err));
+    // };
 
     deleteComment = id => {
         API.deleteComment(id)
@@ -43,7 +46,7 @@ class Posts extends Component {
                 title: this.state.title,
                 comment: this.state.comment
             })
-                .then(res => this.loadBooks())
+                // .then(res => this.loadComments())
                 .catch(err => console.log(err));
         }
     };
@@ -76,17 +79,17 @@ class Posts extends Component {
                         <List>
                             {this.state.posts.map(post => {
                                 return (
-                                    <ListItem key={post._id}>
-                                        <a href={"/books/" + post._id}>
+                                    <Postcard key={post._id}>
+                                        <a href={"/comments/" + post._id}>
                                             {post.title} by {post.comment}
                                         </a>
-                                        <DeleteBtn onClick={() => this.deleteBook(book._id)} />
-                                    </ListItem>
+                                        <DeleteBtn onClick={() => this.deleteComment(post._id)} />
+                                    </Postcard>
                                 );
                             })}
                         </List>
                     ) : (
-                        <h3>No Results to Display</h3>
+                        <h3></h3>
                     )}
                 </Row>
             </Container>
