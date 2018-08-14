@@ -31,7 +31,6 @@ class Lock extends Component {
     constructor(props) {
         super(props);
         this.state = { loggedIn: false };
-        this.onAuthenticated = this.onAuthenticated.bind(this);
 
         this.onAuthenticated();
     }

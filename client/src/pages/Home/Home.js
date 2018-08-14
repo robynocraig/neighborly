@@ -14,13 +14,6 @@ class Home extends Component {
                 : localStorage.getItem('email')
                     ? localStorage.getItem('email')
                     : "",
-            name: "",
-            picture: "",
-            address: "",
-            city: "",
-            state: "",
-            zip: "",
-            about: "",
             exists: null
         }
     }
@@ -66,10 +59,6 @@ class Home extends Component {
                         }
                         {
                             (this.state.exists === false) &&
-                            // <div>
-                            //     I'M NOT PRESENT
-                            // </div>
-
                             <Redirect to={{
                                 pathname: '/editprofile',
                                 state: {

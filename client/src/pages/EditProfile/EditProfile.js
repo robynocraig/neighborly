@@ -66,13 +66,12 @@ class EditProfile extends Component {
                         state: this.state.state,
                         about: this.state.about,
                         picture: responseURL
-                    }).catch(err => console.log(err));
+                    }).catch(err => console.log(err))
+                        .then(this.setState({
+                            referrer: '/'
+                        }));
                 });
         }
-
-        this.setState({
-            referrer: '/'
-        })
     };
 
     render() {
@@ -83,7 +82,7 @@ class EditProfile extends Component {
 
             return <Redirect to={{
                 pathname: '/',
-                state: { email: this.state.email } 
+                state: { email: this.state.email }
             }} />;
         }
         else {
