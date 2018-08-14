@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import { Input, FormBtn, TextArea, State } from "../../components/Form";
 import { Col, Row, Container } from "../../components/Grid";
 import API from "../../utils/API";
@@ -28,7 +29,7 @@ class EditProfile extends Component {
     fileSelectedHandler = event => {
         this.setState({ selectedFile: event.target.files[0] })
     }
-    
+
     handleInputChange = event => {
 
         const { name, value } = event.target;
@@ -38,6 +39,7 @@ class EditProfile extends Component {
     };
 
     handleFormSubmit = event => {
+
         event.preventDefault();
         if (this.state.name && this.state.zip && this.state.address && this.state.about && this.state.city && this.state.state) {
             const fd = new FormData();
@@ -64,7 +66,6 @@ class EditProfile extends Component {
                 .catch(err => console.log(err));
             });
         }
-
     };
 
     render() {
