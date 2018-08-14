@@ -11,8 +11,9 @@ class Home extends Component {
         this.state = {
             user: (this.props.location && this.props.location.state)
                 ? this.props.location.state.profile
-                : {}
-            ,
+                : localStorage.getItem('profile')
+                    ? JSON.parse(localStorage.getItem('profile'))
+                    : {},
             email: "",
             name: "",
             picture: "",
@@ -21,7 +22,7 @@ class Home extends Component {
             state: "",
             zip: "",
             about: "",
-            exists: false
+            exists: null
         }
     }
 
@@ -65,10 +66,17 @@ class Home extends Component {
                             </div>
                         }
                         {
-                            !(this.state.exists) &&
-                            <div>
-                                I'M NOT PRESENT
-                            </div>
+                            (this.state.exists === false) &&
+                            // <div>
+                            //     I'M NOT PRESENT
+                            // </div>
+                            <Redirect to={{
+                                pathname: '/editprofile',
+                                state: {
+                                    from: this.props.location,
+                                    email: this.state.user.email
+                                }
+                            }} />
                         }
                     </div>
                 }

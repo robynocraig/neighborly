@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import { Input, FormBtn, TextArea, State } from "../../components/Form";
 import { Col, Row, Container } from "../../components/Grid";
 import API from "../../utils/API";
@@ -9,7 +10,10 @@ var CLOUDINARY_UPLOAD_PRESET = 'xztqhhek'
 
 class EditProfile extends Component {
     state = {
-        users: [],
+        email: (this.props.location && this.props.location.state)
+            ? this.props.location.state.email
+            : ""
+        ,
         picture: "",
         name: "",
         address: "",
@@ -29,17 +33,17 @@ class EditProfile extends Component {
         // fd.append('file', this.state.selectedFile);
         // fd.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
 
-    
+
 
         // ; axios.post(CLOUDINARY_URL, fd)
         //     .then(res => {
         //         const cloudinaryImage = res.data.public_id
         //         const responseURL = 'http://res.cloudinary.com/neighborlyprofiles/image/upload/' + cloudinaryImage
 
-             
-            
-                
-           
+
+
+
+
         //         //   API.saveUser({
         //         //       selectedFile:responseURL
         //         //     )}
@@ -52,7 +56,7 @@ class EditProfile extends Component {
     }
 
     handleInputChange = event => {
-        
+
         const { name, value } = event.target;
         this.setState({
             [name]: value
@@ -60,7 +64,7 @@ class EditProfile extends Component {
     };
 
     handleFormSubmit = event => {
-     
+
         event.preventDefault();
         if (this.state.name && this.state.picture && this.state.zip && this.state.address && this.state.about && this.state.city && this.state.state) {
             const fd = new FormData();
@@ -70,23 +74,29 @@ class EditProfile extends Component {
                 .then(res => {
                     const cloudinaryImage = res.data.public_id
                     const responseURL = 'http://res.cloudinary.com/neighborlyprofiles/image/upload/' + cloudinaryImage
-    
-            API.saveUser({
-                picture: this.state.picture,
-                name: this.state.name,
-                address: this.state.address,
-                city: this.state.city,
-                zip: this.state.zip,
-                state: this.state.state,
-                about: this.state.about,
-                selectedFile:responseURL
-                
-            })
 
-                .catch(err => console.log(err));
-            });
+                    API.saveUser({
+                        picture: this.state.picture,
+                        name: this.state.name,
+                        address: this.state.address,
+                        city: this.state.city,
+                        zip: this.state.zip,
+                        state: this.state.state,
+                        about: this.state.about,
+                        selectedFile: responseURL
+
+                    })
+
+                        .catch(err => console.log(err));
+                });
         }
-        
+
+        <Redirect to={{
+            pathname: '/tenant',
+            state: {
+                from: this.props.location
+            }
+        }} />
     };
 
     render() {
@@ -141,7 +151,7 @@ class EditProfile extends Component {
 
                             <TextArea
                                 value={this.state.about}
-                                
+
                                 onChange={this.handleInputChange}
                                 name="about"
                                 placeholder="Say a little about yourself"
