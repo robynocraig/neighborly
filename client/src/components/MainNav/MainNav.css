@@ -4,8 +4,9 @@
 
 #navLogo {
     width: 25px !important;
+    margin-right: 10px;
 }
 
-#navBrand {
+#navBrand, a.nav-link {
     font-family: 'Righteous', cursive;
 }

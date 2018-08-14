@@ -5,6 +5,14 @@ import Profile from "../../components/Profile";
 import Post from "../../components/Post";
 import Subnav from "../../components/Subnav";
 
+const styles = {
+  body: {
+    background: "#FCECD6",
+    color: "black",
+    font:" Arial, Helvetica, sans-serif"
+  }
+};
+
 class Tenant extends Component {
   state = {
     users: [],
@@ -24,10 +32,10 @@ componentDidMount() {
 }
 
 loadProfile = () => {
-    API.getUser()
+    API.getUsers()
         .then(res =>
             this.setState({
-                users: res.data, 
+                users: res.data,
                 picture: "",
                 name: "",
                 address: "",
@@ -42,6 +50,8 @@ loadProfile = () => {
 
   render() {
     return (
+      <div style={styles.body}>
+
       <Container>
         <Row>
           <Col size="md-3 sm-12">
@@ -60,7 +70,7 @@ loadProfile = () => {
                                 zip={user.zip} />
                         ))}
 
-        
+
           </Col>
           <Col size="md-9 sm-12">
             <Subnav />
@@ -68,6 +78,8 @@ loadProfile = () => {
           </Col>
         </Row>
       </Container>
+
+      </div>
     );
   }
 }

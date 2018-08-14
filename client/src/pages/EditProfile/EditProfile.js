@@ -7,6 +7,14 @@ var CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/neighborlyprofiles/image/u
 var CLOUDINARY_UPLOAD_PRESET = 'xztqhhek'
 // import { Link } from "react-router-dom";
 
+const styles = {
+  body: {
+    background: "#FCECD6",
+    color: "black",
+    font:" Arial, Helvetica, sans-serif"
+  }
+};
+
 class EditProfile extends Component {
     state = {
         users: [],
@@ -29,17 +37,17 @@ class EditProfile extends Component {
         // fd.append('file', this.state.selectedFile);
         // fd.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
 
-    
+
 
         // ; axios.post(CLOUDINARY_URL, fd)
         //     .then(res => {
         //         const cloudinaryImage = res.data.public_id
         //         const responseURL = 'http://res.cloudinary.com/neighborlyprofiles/image/upload/' + cloudinaryImage
 
-             
-            
-                
-           
+
+
+
+
         //         //   API.saveUser({
         //         //       selectedFile:responseURL
         //         //     )}
@@ -52,7 +60,7 @@ class EditProfile extends Component {
     }
 
     handleInputChange = event => {
-        
+
         const { name, value } = event.target;
         this.setState({
             [name]: value
@@ -60,7 +68,7 @@ class EditProfile extends Component {
     };
 
     handleFormSubmit = event => {
-     
+
         event.preventDefault();
         if (this.state.name && this.state.picture && this.state.zip && this.state.address && this.state.about && this.state.city && this.state.state) {
             const fd = new FormData();
@@ -70,7 +78,7 @@ class EditProfile extends Component {
                 .then(res => {
                     const cloudinaryImage = res.data.public_id
                     const responseURL = 'http://res.cloudinary.com/neighborlyprofiles/image/upload/' + cloudinaryImage
-    
+
             API.saveUser({
                 picture: this.state.picture,
                 name: this.state.name,
@@ -80,17 +88,19 @@ class EditProfile extends Component {
                 state: this.state.state,
                 about: this.state.about,
                 selectedFile:responseURL
-                
+
             })
 
                 .catch(err => console.log(err));
             });
         }
-        
+
     };
 
     render() {
         return (
+          <div style={styles.body}>
+
             <Container fluid>
                 <div className="upload">
                     <input type="file" onChange={this.fileSelectedHandler} />
@@ -141,7 +151,7 @@ class EditProfile extends Component {
 
                             <TextArea
                                 value={this.state.about}
-                                
+
                                 onChange={this.handleInputChange}
                                 name="about"
                                 placeholder="Say a little about yourself"
@@ -165,7 +175,7 @@ class EditProfile extends Component {
                 </Row>
 
             </Container>
-
+          </div>
         );
 
     };
@@ -173,4 +183,3 @@ class EditProfile extends Component {
 };
 
 export default EditProfile;
-
