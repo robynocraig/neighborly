@@ -1,13 +1,11 @@
 import React, { Component } from "react";
-import { Input, FormBtn, TextArea, Drop } from "../../components/Form";
+import { Input, FormBtn, TextArea, State } from "../../components/Form";
 import { Col, Row, Container } from "../../components/Grid";
 import API from "../../utils/API";
 import axios from 'axios';
 var CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/neighborlyprofiles/image/upload';
-var CLOUDINARY_UPLOAD_PRESET='xztqhhek'
+var CLOUDINARY_UPLOAD_PRESET = 'xztqhhek'
 // import { Link } from "react-router-dom";
-
-
 
 class EditProfile extends Component {
     state = {
@@ -17,43 +15,44 @@ class EditProfile extends Component {
         address: "",
         city: "",
         zip: "",
-        drop:"",
-        aboutMe: "",
-        selectedFile:null
-        
-
+        state: "",
+        about: "",
+        selectedFile: null
     };
+
+    fileSelectedHandler = event => {
+        this.setState({ selectedFile: event.target.files[0] })
+    }
+
+    fileUploadHandler = () => {
+        // const fd = new FormData();
+        // fd.append('file', this.state.selectedFile);
+        // fd.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
 
     
 
-    fileSelectedHandler=event=>{
-        this.setState({selectedFile:event.target.files[0]})
+        // ; axios.post(CLOUDINARY_URL, fd)
+        //     .then(res => {
+        //         const cloudinaryImage = res.data.public_id
+        //         const responseURL = 'http://res.cloudinary.com/neighborlyprofiles/image/upload/' + cloudinaryImage
+
+             
+            
+                
+           
+        //         //   API.saveUser({
+        //         //       selectedFile:responseURL
+        //         //     )}
+
+        //         //   console.log(res);
+        //         //   console.log(res.data);
+        //         //   console.log(res.data.public_id);
+
+        //     });
     }
-
-    fileUploadHandler=()=>{
-        const fd= new FormData();
-        fd.append('file', this.state.selectedFile);
-        fd.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-
-;        axios.post(CLOUDINARY_URL, fd)
-        .then(res=>{
-            var cloudinaryImage= res.data.public_id
-            console.log(res);
-            console.log(res.data);
-            console.log(res.data.public_id);//this is the unique ID for the picture
-
-            // http://res.cloudinary.com/neighborlyprofiles/image/upload
-            //above is the URL to get from
-            // var responseURL='http://res.cloudinary.com/neighborlyprofiles/image/upload'
-        });
-
-        // axios.get(responseURL.cloudinaryImage)
-        // .then(console.log(res));
-
-    }
-
 
     handleInputChange = event => {
+        
         const { name, value } = event.target;
         this.setState({
             [name]: value
@@ -61,33 +60,43 @@ class EditProfile extends Component {
     };
 
     handleFormSubmit = event => {
-        
+     
         event.preventDefault();
-        if (this.state.name && this.state.picture && this.state.zip && this.state.address && this.state.aboutMe &&this.state.city&&this.state.drop) {//prevent form from refreshing on submission/ entry, also only allow for save profile function to run only if all of the entries are filled out.
-            API.saveProfile({
+        if (this.state.name && this.state.picture && this.state.zip && this.state.address && this.state.about && this.state.city && this.state.state) {
+            const fd = new FormData();
+            fd.append('file', this.state.selectedFile);
+            fd.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+            ; axios.post(CLOUDINARY_URL, fd)
+                .then(res => {
+                    const cloudinaryImage = res.data.public_id
+                    const responseURL = 'http://res.cloudinary.com/neighborlyprofiles/image/upload/' + cloudinaryImage
+    
+            API.saveUser({
                 picture: this.state.picture,
                 name: this.state.name,
                 address: this.state.address,
                 city: this.state.city,
                 zip: this.state.zip,
-                drop: this.state.drop,
-                aboutMe: this.state.aboutMe,
-                selectedFile:this.state.selectedFile
+                state: this.state.state,
+                about: this.state.about,
+                selectedFile:responseURL
+                
             })
-           
-                .catch(err => console.log(err));
-        }
 
+                .catch(err => console.log(err));
+            });
+        }
+        
     };
 
     render() {
         return (
             <Container fluid>
-            <div className="upload">
-            <input type="file" onChange={this.fileSelectedHandler}/>
-            <button onClick={this.fileUploadHandler}>Upload</button>
+                <div className="upload">
+                    <input type="file" onChange={this.fileSelectedHandler} />
+                    <button onClick={this.fileUploadHandler}>Upload</button>
 
-            </div>
+                </div>
                 <Row>
 
                     <Col size="md-8">
@@ -122,33 +131,34 @@ class EditProfile extends Component {
                                 onChange={this.handleInputChange}
                                 name="zip"
                                 placeholder="Zip Code"
-                           
+
                             />
-                            <Drop
-                            value={this.state.drop}
-                            onChange={this.handleInputChange}
-                            name="drop"
+                            <State
+                                value={this.state.state}
+                                onChange={this.handleInputChange}
+                                name="state"
                             />
 
                             <TextArea
-                                value={this.state.aboutMe}
+                                value={this.state.about}
+                                
                                 onChange={this.handleInputChange}
-                                name="aboutMe"
+                                name="about"
                                 placeholder="Say a little about yourself"
                             />
 
                             <FormBtn
-                                disabled={!(this.state.name && this.state.picture && this.state.zip && this.state.address && this.state.aboutMe &&
+                                disabled={!(this.state.name && this.state.picture && this.state.zip && this.state.address && this.state.about &&
 
-                                    this.state.drop&& 
+                                    this.state.state &&
 
                                     this.state.city)}
                                 onClick={this.handleFormSubmit}
-                                //form button wont appear until all fields are filled out
+                            //form button wont appear until all fields are filled out
                             >
                                 Submit Updated Profile
                             </FormBtn>
-                            
+
                         </form>
                     </Col>
 

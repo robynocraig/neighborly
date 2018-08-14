@@ -24,7 +24,7 @@ componentDidMount() {
 }
 
 loadProfile = () => {
-    API.getUsers()
+    API.getUser()
         .then(res =>
             this.setState({
                 users: res.data, 
@@ -47,7 +47,7 @@ loadProfile = () => {
           <Col size="md-3 sm-12">
           {this.state.users.filter(user => {
                             console.log(user._id);
-                            return (user._id === '5b721f3c4fb9a23260aa6fed')
+                            return (user._id === '5b6b57772ed75d3e4c92e663')
 
                         }).map(user => (
                             <Profile

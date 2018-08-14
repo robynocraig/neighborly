@@ -1,6 +1,6 @@
 import React from "react";
 //drop down for states
-export const Drop = props => (
+export const State = props => (
   <div className="form-group col-md-4">
     <label for="inputState">State</label>
     <select id="inputState" class="form-control"{...props}>
