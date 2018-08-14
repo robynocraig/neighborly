@@ -34,7 +34,6 @@ class Lock extends Component {
         this.onAuthenticated = this.onAuthenticated.bind(this);
 
         this.onAuthenticated();
-        // this.getUserInfo();
     }
 
     // onAuthenticated() {

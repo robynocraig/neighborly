@@ -4,7 +4,7 @@ import { Row, Container } from "../../components/Grid";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import { List } from "../../components/List";
 import DeleteBtn from "../../components/DeleteBtn";
-import { Postcard } from "../../components/Postcard"
+import { Postcard } from "../../components/Postcard";
 
 class Posts extends Component {
 
@@ -14,17 +14,17 @@ class Posts extends Component {
         comment: ""
     };
 
-    componentDidMount() {
-        this.loadComments();
-    }
+    // componentDidMount() {
+    //     this.loadComments();
+    // }
 
-    loadComments = () => {
-        API.getComments()
-            .then(res =>
-                this.setState({ posts: res.data, title: "", comment: ""})
-            )
-            .catch(err => console.log(err));
-    };
+    // loadComments = () => {
+    //     API.getComments()
+    //         .then(res =>
+    //             this.setState({ posts: res.data, title: "", comment: ""})
+    //         )
+    //         .catch(err => console.log(err));
+    // };
 
     deleteComment = id => {
         API.deleteComment(id)
@@ -46,7 +46,7 @@ class Posts extends Component {
                 title: this.state.title,
                 comment: this.state.comment
             })
-                .then(res => this.loadComments())
+                // .then(res => this.loadComments())
                 .catch(err => console.log(err));
         }
     };
@@ -89,7 +89,7 @@ class Posts extends Component {
                             })}
                         </List>
                     ) : (
-                        <h3>No Results to Display</h3>
+                        <h3></h3>
                     )}
                 </Row>
             </Container>
