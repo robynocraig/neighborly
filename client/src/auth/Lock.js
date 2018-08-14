@@ -11,6 +11,9 @@ class Lock extends Component {
             // audience: 'https://mcale017-neighborly.herokuapp.com/',
             audience: 'https://' + AUTH_CONFIG.domain + '/userinfo',
             sso: true,
+            params: {
+                scope: 'openid profile email'
+            }
         },
         container: AUTH_CONFIG.container,
         languageDictionary: {
@@ -28,11 +31,9 @@ class Lock extends Component {
     constructor(props) {
         super(props);
         this.state = { loggedIn: false };
-        // this.onAuthenticated = this.onAuthenticated.bind(this);
-        // this.getUserInfo = this.getUserInfo.bind(this);
+        this.onAuthenticated = this.onAuthenticated.bind(this);
 
         this.onAuthenticated();
-        this.getUserInfo();
     }
 
     // onAuthenticated() {
@@ -43,15 +44,14 @@ class Lock extends Component {
             localStorage.setItem('id_token', authResult.idToken);
             localStorage.setItem('expires_at', expiresAt);
 
-            this.setState({ loggedIn: true });
-        });
-    }
-
-    getUserInfo = () => {
-        this.lock.on('authenticated', (authResult) => {
-            this.lock.getUserInfo(authResult.accessToken, function (error, profile) {
+            this.lock.getUserInfo(authResult.accessToken, (error, profile) => {
                 if (!error) {
                     localStorage.setItem("profile", JSON.stringify(profile));
+
+                    this.setState({
+                        loggedIn: true,
+                        profile: JSON.stringify(profile)
+                    })
                 };
             });
         });
@@ -75,7 +75,7 @@ class Lock extends Component {
             ) : (
                     <Redirect to={{
                         pathname: '/',
-                        state: { from: this.props.location }
+                        state: { from: this.props.location, profile: this.state.profile }
                     }} />
                 )
         );
