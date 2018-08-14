@@ -49,10 +49,12 @@ class Lock extends Component {
                 if (!error) {
                     localStorage.setItem("profile", JSON.stringify(profile));
 
-                    this.setState({
-                        loggedIn: true,
-                        profile: JSON.stringify(profile)
-                    })
+                    if (profile) {
+                        this.setState({
+                            loggedIn: true,
+                            profile: JSON.stringify(profile)
+                        })
+                    }
                 };
             });
         });
@@ -76,7 +78,7 @@ class Lock extends Component {
             ) : (
                     <Redirect to={{
                         pathname: '/',
-                        state: { from: this.props.location, profile: this.state.profile }
+                        state: { from: this.props.location, profile: JSON.parse(this.state.profile) }
                     }} />
                 )
         );
