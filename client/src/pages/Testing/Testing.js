@@ -51,11 +51,15 @@ class Posts extends Component {
         }
     };
 
+    emptyField = () => {
+        document.getElementById("comment-form").reset();
+    }
+
     render() {
         return (
             <Container fluid>
                 <Row>
-                    <form>
+                    <form id="comment-form">
                         <Input
                         value={this.state.title}
                         onChange={this.handleInputChange}
@@ -71,6 +75,7 @@ class Posts extends Component {
                         <FormBtn
                         disabled={!(this.state.title && this.state.comment)}
                         onClick={this.handleFormSubmit}
+                        onClick={this.emptyField}
                         >
                         Comment
                         </FormBtn>
