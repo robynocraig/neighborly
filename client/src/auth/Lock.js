@@ -55,26 +55,8 @@ class Lock extends Component {
                     })
                 };
             });
-
-            // this.setState({ 
-            //     loggedIn: true 
-            // });
         });
     }
-
-    // getUserInfo = () => {
-    //     this.lock.on('authenticated', (authResult) => {
-    //         this.lock.getUserInfo(authResult.accessToken, function (error, profile) {
-    //             if (!error) {
-    //                 localStorage.setItem("profile", JSON.stringify(profile));
-    //             };
-
-    //             this.setState({
-    //                 profile: JSON.stringify(profile)
-    //             })
-    //         });
-    //     });
-    // }
 
     componentDidMount() {
         // Avoid showing Lock when hash is parsed.

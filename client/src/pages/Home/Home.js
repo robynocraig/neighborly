@@ -10,8 +10,8 @@ class Home extends Component {
 
         this.state = {
             user: (this.props.location && this.props.location.state)
-                    ? this.props.location.state.profile
-                    : {}
+                ? this.props.location.state.profile
+                : {}
             ,
             email: "",
             name: "",
@@ -20,7 +20,8 @@ class Home extends Component {
             city: "",
             state: "",
             zip: "",
-            about: ""
+            about: "",
+            exists: false
         }
     }
 
@@ -32,10 +33,15 @@ class Home extends Component {
     //         .catch(err => console.log(err));
     // }
 
-    // checkUser = email => {
-    //     API.getUser(email)
-    //         .catch(err => console.log(err));
-    // }
+    componentDidMount() {
+        this.checkUser();
+    }
+
+    checkUser = email => {
+        API.getUser(email)
+            .then(res => this.setState({ exists: res }))
+            .catch(err => console.log(err));
+    }
 
     handleInputChange = event => {
         const { name, value } = event.target;
@@ -45,29 +51,25 @@ class Home extends Component {
     };
 
     render() {
-        console.log(this.state.user);
-
         return (
             <div>
                 {
                     isAuthenticated() &&
                     <div>
-                        {/* {
-                            this.checkUser(this.state.user.email) &&
+                        {
                             (this.state.exists) &&
                             <div>
                                 I'M PRESENT
                             </div>
-                        },
+                        }
                         {
-                            !(this.checkUser(this.state.user.email)) &&
+                            !(this.state.exists) &&
                             <div>
                                 I'M NOT PRESENT
-                        </div>
-                        } */}
-                        hi
+                            </div>
+                        }
                     </div>
-                },
+                }
                 {
                     !isAuthenticated() &&
                     <Redirect to={{
