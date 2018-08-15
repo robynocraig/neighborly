@@ -34,7 +34,7 @@ class Home extends Component {
     // loadUser = () => {
     //     API.getUser()
     //         .then(res =>
-    //             this.setState({ user: res.data, email: "", name: "", picture: "", address: "", city: "", state: "", zip: "", about: ""})    
+    //             this.setState({ user: res.data, email: "", name: "", picture: "", address: "", city: "", state: "", zip: "", about: ""})
     //         )
     //         .catch(err => console.log(err));
     // }
@@ -86,12 +86,12 @@ class Home extends Component {
                                             address={this.state.user.address}
                                             city={this.state.user.city}
                                             state={this.state.user.state}
-                                            zip={this.state.user.zip} 
+                                            zip={this.state.user.zip}
                                         />
                                     </Col>
                                     <Col size="md-9 sm-12">
                                         <Subnav />
-                                        {/* <Post /> */}
+                                        <Post />
                                     </Col>
                                 </Row>
                             </Container>

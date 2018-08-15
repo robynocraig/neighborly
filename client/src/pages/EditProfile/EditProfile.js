@@ -12,6 +12,17 @@ const styles = {
         background: "#FCECD6",
         color: "black",
         font: " Arial, Helvetica, sans-serif"
+    },
+    img: {
+        margin: 10,
+        fontSize: 30
+    },
+    upload: {
+        margin: 10
+    },
+    container: {
+        width: "100%",
+        margin: "auto"
     }
 };
 
@@ -89,19 +100,22 @@ class EditProfile extends Component {
             return (
                 <div style={styles.body}>
 
-                    <Container fluid>
-                        <div className="upload">
+                    <Container style={styles.container}>
+                        <i className="fas fa-image" style={styles.img}></i>
+                        <div className="upload" style={styles.upload}>
                             <input type="file" onChange={this.fileSelectedHandler} />
                         </div>
                         <Row>
                             <Col size="md-8">
                                 <form>
+                                  <i className="fas fa-user-circle" style={styles.img}></i>
                                     <Input
                                         value={this.state.name}
                                         onChange={this.handleInputChange}
                                         name="name"
                                         placeholder="First and Last Name(required)"
                                     />
+                                    <i className="fas fa-home" style={styles.img}></i>
                                     <Input
                                         value={this.state.address}
                                         onChange={this.handleInputChange}
@@ -126,6 +140,8 @@ class EditProfile extends Component {
                                         onChange={this.handleInputChange}
                                         name="state"
                                     />
+                                    <i className="fas fa-keyboard" style={styles.img}></i>
+
                                     <TextArea
                                         value={this.state.about}
                                         onChange={this.handleInputChange}

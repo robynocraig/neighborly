@@ -8,6 +8,7 @@ import Testing from './pages/Testing';
 import EditProfile from './pages/EditProfile';
 import Tenant from '../src/pages/Tenant';
 import Management from './pages/Management';
+import Footer from './components/Footer';
 
 const App = () => (
   <div>
@@ -24,6 +25,7 @@ const App = () => (
         <Route exact path="/management" component={Management} />
       </Switch>
     </main>
+    <Footer />
   </div>
 )
 
