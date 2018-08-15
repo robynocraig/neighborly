@@ -6,7 +6,7 @@ const Profile = props => (
       <div className="card border-0">
       {/*Example Profile!!!
       User needs to be able to upload pictures and information*/}
-          <img className="card-img-top" src={props.picture} alt="User Profile Photo" />
+          <img className="card-img-top" src={props.picture} alt="User Profile" />
           <div className="card-body">
               <h5 className="card-title">{props.name}</h5>
               <p className="card-text">

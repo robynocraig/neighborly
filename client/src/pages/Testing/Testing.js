@@ -14,17 +14,17 @@ class Posts extends Component {
         comment: ""
     };
 
-    // componentDidMount() {
-    //     this.loadComments();
-    // }
+    componentDidMount() {
+        this.loadComments();
+    }
 
-    // loadComments = () => {
-    //     API.getComments()
-    //         .then(res =>
-    //             this.setState({ posts: res.data, title: "", comment: ""})
-    //         )
-    //         .catch(err => console.log(err));
-    // };
+    loadComments = () => {
+        API.getComments()
+            .then(res =>
+                this.setState({ posts: res.data, title: "", comment: ""})
+            )
+            .catch(err => console.log(err));
+    };
 
     deleteComment = id => {
         API.deleteComment(id)
@@ -42,24 +42,21 @@ class Posts extends Component {
     handleFormSubmit = event => {
         event.preventDefault();
         if (this.state.title && this.state.comment) {
+            console.log('Calling /api/comments')
             API.saveComment({
                 title: this.state.title,
                 comment: this.state.comment
             })
-                // .then(res => this.loadComments())
+                .then(res => this.loadComments())
                 .catch(err => console.log(err));
         }
     };
-
-    emptyField = () => {
-        document.getElementById("comment-form").reset();
-    }
 
     render() {
         return (
             <Container fluid>
                 <Row>
-                    <form id="comment-form">
+                    <form>
                         <Input
                         value={this.state.title}
                         onChange={this.handleInputChange}
@@ -75,7 +72,6 @@ class Posts extends Component {
                         <FormBtn
                         disabled={!(this.state.title && this.state.comment)}
                         onClick={this.handleFormSubmit}
-                        onClick={this.emptyField}
                         >
                         Comment
                         </FormBtn>
@@ -94,7 +90,7 @@ class Posts extends Component {
                             })}
                         </List>
                     ) : (
-                        <h3></h3>
+                        <h3>Here</h3>
                     )}
                 </Row>
             </Container>

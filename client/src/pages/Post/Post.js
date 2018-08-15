@@ -43,7 +43,7 @@ class Posts extends Component {
                 title: this.state.title,
                 comment: this.state.comment
             })
-                .then(res => this.loadBooks())
+                .then(res => this.loadComments())
                 .catch(err => console.log(err));
         }
     };
@@ -77,10 +77,10 @@ class Posts extends Component {
                             {this.state.posts.map(post => {
                                 return (
                                     <ListItem key={post._id}>
-                                        <a href={"/books/" + post._id}>
+                                        <a href={"/comments/" + post._id}>
                                             {post.title} by {post.comment}
                                         </a>
-                                        <DeleteBtn onClick={() => this.deleteBook(book._id)} />
+                                        <DeleteBtn onClick={() => this.deleteComment(post._id)} />
                                     </ListItem>
                                 );
                             })}
