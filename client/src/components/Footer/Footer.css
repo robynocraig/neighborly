@@ -4,7 +4,8 @@ footer {
   border-top: 4px solid #fff;
   bottom: 0;
   height: 15px;
-  position: absolute;
+  position: relative;
+  
   width: 100%;
 }
 
