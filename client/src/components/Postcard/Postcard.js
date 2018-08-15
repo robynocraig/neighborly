@@ -20,7 +20,7 @@ export const Postcard = props => (
 
   <Container>
     <Row>
-      <Col size="md-9 sm-12">
+      <Col size="md-12 sm-12">
         <div className="card mt-3 border-dark">
           <div className="card-body">
               <div className="row">
