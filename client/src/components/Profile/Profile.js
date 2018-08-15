@@ -21,9 +21,6 @@ const Profile = props => (
                   <small className="text-muted">{props.state}|{props.zip}</small>
               </li>
           </ul>
-          <div className="card-body">
-              <a href="/editprofile" className="card-link">Update Profile</a>
-          </div>
       </div>
 
 );

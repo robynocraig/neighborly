@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import { Input, TextArea, FormBtn } from "../../components/Form";
-import { List, ListItem } from "../../components/List";
-import DeleteBtn from "../../components/DeleteBtn";
+import { List } from "../../components/List";
 import { Postcard } from "../../components/Postcard";
 
 class Post extends Component {
@@ -55,7 +54,27 @@ class Post extends Component {
       return (
           <Container>
               <Row>
-                <Col size="md-3 sm-12">
+
+              <div className="card mt-3 border-danger">
+                <div className="card-body">
+                    <div className="row">
+                        <div className="col-md-1">
+                            <img src="https://i.imgur.com/brH81MS.png" width="50px" alt="avatar"/>
+                        </div>
+                        <div className="col-md-11 originalPostAvatar">
+                            <h5 className="card-title m-0 p-0">Craig Property Managment Inc.</h5>
+                            <p className="small">1 day ago</p>
+                        </div>
+                    </div>
+                    <p className="card-text">***AVOID 5th STREET***
+                        <br />5th Street will be closed off until further notice. We expect that the matter will be
+                        resolved quickly and as many of you will be affeced, we will remain in contact to further
+                        inform you. Please contact us for any other questions. Thank you!
+                    </p>
+                </div>
+              </div>
+
+                <Col size="md-12 sm-12">
                   <form>
                       <Input
                       value={this.state.title}
@@ -77,7 +96,7 @@ class Post extends Component {
                       </FormBtn>
                   </form>
                   </Col>
-                  <Col size="md-9 sm-12">
+                  <Col size="md-12 sm-12">
                   {this.state.posts.length ? (
                       <List>
                           {this.state.posts.map(post => {
@@ -87,7 +106,6 @@ class Post extends Component {
                                     <p>{post.title}</p>
                                   </strong>
                                     <p>{post.comment}</p>
-                                  <DeleteBtn onClick={() => this.deleteComment(post._id)} />
                                   </Postcard>
                               );
                           })}
