@@ -9,19 +9,12 @@ class Home extends Component {
         super(props);
 
         this.state = {
-            user: (this.props.location && this.props.location.state)
-                ? this.props.location.state.profile
-                : {}
-            ,
-            email: "",
-            name: "",
-            picture: "",
-            address: "",
-            city: "",
-            state: "",
-            zip: "",
-            about: "",
-            exists: false
+            email: (this.props.location && this.props.location.state)
+                ? this.props.location.state.email
+                : localStorage.getItem('email')
+                    ? localStorage.getItem('email')
+                    : "",
+            exists: null
         }
     }
 
@@ -34,8 +27,8 @@ class Home extends Component {
     // }
 
     componentDidMount() {
-        if(this.state.user) {
-            this.checkUser(this.state.user.email);
+        if(this.state.email) {
+            this.checkUser(this.state.email);
         }
     }
 
@@ -65,10 +58,14 @@ class Home extends Component {
                             </div>
                         }
                         {
-                            !(this.state.exists) &&
-                            <div>
-                                I'M NOT PRESENT
-                            </div>
+                            (this.state.exists === false) &&
+                            <Redirect to={{
+                                pathname: '/editprofile',
+                                state: {
+                                    from: this.props.location,
+                                    email: this.state.email
+                                }
+                            }} />
                         }
                     </div>
                 }

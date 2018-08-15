@@ -50,6 +50,19 @@ export default class Management extends Component {
                   <a href="/editprofile" className="card-link">Update Profile</a>
               </div>
           </div>
+          <br/>
+          <div className="card border-0">
+              <div className="card-body">
+                  <h5 className="card-title">Add a New Tenant</h5>
+                  <p className="card-text">
+                      <small>Start the process below and send a new tenant an invitation to join Neighborly.</small>
+                  </p>
+              </div>
+              <div className="card-body">
+                  <a href="/" className="card-link">Add a Tenant</a>
+              </div>
+          </div>
+
         </Col>
 
         <Col size="md-9 sm-12">
