@@ -22,13 +22,13 @@ export default {
   },
     // Retrieves comments from database
   getComments: function(id) {
-      return axiosWithToken.get("/api/comments" + id);
+      return axiosWithToken.get("/api/comments", + id);
   },
     // Save comments to database
   saveComment: function(commentData) {
     return axiosWithToken.post("/api/comments", commentData);
   },
   deleteComment: function(id) {
-    return axios.delete("api/comments" + id);
+    return axios.delete("api/comments", + id);
   }
 };
