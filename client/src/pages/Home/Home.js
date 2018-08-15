@@ -6,7 +6,6 @@ import API from '../../utils/API';
 import { Col, Row, Container } from "../../components/Grid";
 import Profile from "../../components/Profile";
 import Post from "../../components/Post";
-import Subnav from "../../components/Subnav";
 
 const styles = {
     body: {
@@ -82,7 +81,6 @@ class Home extends Component {
                                         />
                                     </Col>
                                     <Col size="md-9 sm-12">
-                                        <Subnav />
                                         <Post />
                                     </Col>
                                 </Row>
