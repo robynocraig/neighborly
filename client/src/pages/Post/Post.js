@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
-import { Col, Row, Container } from "../../components/Grid";
+import { Row, Container } from "../../components/Grid";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 
 class Posts extends Component {

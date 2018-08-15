@@ -37,7 +37,7 @@ module.exports = {
       .findOne({ email: req.params.email }, function (err, user) {
         if (!err) {
           if (user) {
-            res.json({ exists: true });
+            res.json({ exists: true, user: user });
           } else {
             res.json({ exists: false });
           }

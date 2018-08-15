@@ -16,8 +16,6 @@ const styles = {
     }
   };
 
-
-
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -28,6 +26,7 @@ class Home extends Component {
                 : localStorage.getItem('email')
                     ? localStorage.getItem('email')
                     : "",
+            user: {},
             exists: null
         }
     }
@@ -43,31 +42,16 @@ class Home extends Component {
     componentDidMount() {
         if(this.state.email) {
             this.checkUser(this.state.email);
+
+            this.loadProfile(this.state.email);
         }
     }
 
-    componentDidMount() {
-        this.loadProfile();
-    }
-
-
-    loadProfile = () => {
-        API.getUsers()
-            .then(res =>
-                this.setState({
-                    users: res.data,
-                    picture: "",
-                    name: "",
-                    address: "",
-                    city: "",
-                    zip: "",
-                    state:"",
-                    about: ""
-                })
-            )
+    loadProfile = email => {
+        API.getUser(email)
+            .then(res => this.setState({ user: res.data.user }))
             .catch(err => console.log(err));
     };
-
 
     checkUser = email => {
         API.getUser(email)
@@ -92,37 +76,26 @@ class Home extends Component {
                             (this.state.exists) &&
                             <div style={styles.body}>
 
-<Container>
-  <Row>
-    <Col size="md-3 sm-12">
-    {this.state.users.filter(user => {
-                      console.log(user._id);
-                      return (user.email ==="mbarbotiko@gmail.com")
-
-                      // console.log(user._id);
-                      // return (user.email ===localStorage.email)
-
-                  }).map(user => (
-                      <Profile
-                          picture={user.picture}
-                          name={user.name}
-                          about={user.about}
-                          address={user.address}
-                          city={user.city}
-                          state={user.state}
-                          zip={user.zip} />
-                  ))}
-
-
-    </Col>
-    <Col size="md-9 sm-12">
-      <Subnav />
-      <Post />
-    </Col>
-  </Row>
-</Container>
-
-</div>
+                            <Container>
+                                <Row>
+                                    <Col size="md-3 sm-12">
+                                        <Profile
+                                            picture={this.state.user.picture}
+                                            name={this.state.user.name}
+                                            about={this.state.user.about}
+                                            address={this.state.user.address}
+                                            city={this.state.user.city}
+                                            state={this.state.user.state}
+                                            zip={this.state.user.zip} 
+                                        />
+                                    </Col>
+                                    <Col size="md-9 sm-12">
+                                        <Subnav />
+                                        {/* <Post /> */}
+                                    </Col>
+                                </Row>
+                            </Container>
+                            </div>
                         }
                         {
                             (this.state.exists === false) &&
