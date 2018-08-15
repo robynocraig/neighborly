@@ -41,21 +41,13 @@ class Home extends Component {
 
     componentDidMount() {
         if(this.state.email) {
-            this.checkUser(this.state.email);
-
-            this.loadProfile(this.state.email);
+            this.loadUser(this.state.email);
         }
     }
 
-    loadProfile = email => {
+    loadUser = email => {
         API.getUser(email)
-            .then(res => this.setState({ user: res.data.user }))
-            .catch(err => console.log(err));
-    };
-
-    checkUser = email => {
-        API.getUser(email)
-            .then(res => this.setState({ exists: res.data.exists }))
+            .then(res => this.setState({ user: res.data.user, exists: res.data.exists }))
             .catch(err => console.log(err));
     }
 
@@ -64,7 +56,7 @@ class Home extends Component {
         this.setState({
             [name]: value
         });
-    };
+    }
 
     render() {
         return (
