@@ -4,15 +4,6 @@ import { Col, Row, Container } from "../../components/Grid";
 import Profile from "../../components/Profile";
 import Post from "../../components/Post";
 import Subnav from "../../components/Subnav";
-import Comment from "../../components/Comments";
-
-const styles = {
-  body: {
-    background: "#FCECD6",
-    color: "black",
-    font:" Arial, Helvetica, sans-serif"
-  }
-};
 
 class Tenant extends Component {
   state = {
@@ -36,7 +27,7 @@ loadProfile = () => {
     API.getUsers()
         .then(res =>
             this.setState({
-                users: res.data,
+                users: res.data, 
                 picture: "",
                 name: "",
                 address: "",
@@ -51,17 +42,12 @@ loadProfile = () => {
 
   render() {
     return (
-      <div style={styles.body}>
-
       <Container>
         <Row>
           <Col size="md-3 sm-12">
           {this.state.users.filter(user => {
                             console.log(user._id);
-                            return (user.email ==="mbarbotiko@gmail.com")
-
-                            // console.log(user._id);
-                            // return (user.email ===localStorage.email)
+                            return (user._id === '5b721f3c4fb9a23260aa6fed')
 
                         }).map(user => (
                             <Profile
@@ -74,17 +60,14 @@ loadProfile = () => {
                                 zip={user.zip} />
                         ))}
 
-
+        
           </Col>
           <Col size="md-9 sm-12">
             <Subnav />
             <Post />
-            <Comment />
           </Col>
         </Row>
       </Container>
-
-      </div>
     );
   }
 }

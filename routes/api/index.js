@@ -1,8 +1,8 @@
 const router = require("express").Router();
-const managementRoutes = require("./managements");
 const userRoutes = require("./users");
-// Management routes
-router.use("/managements", managementRoutes);
+const postRoutes = require("./commentsPost");
+
 router.use("/users", userRoutes);
+router.use("/comments", postRoutes);
 
 module.exports = router;

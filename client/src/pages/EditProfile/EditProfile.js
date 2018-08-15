@@ -1,27 +1,54 @@
 import React, { Component } from "react";
-import { Input, FormBtn, TextArea, Drop } from "../../components/Form";
+import { Redirect } from "react-router-dom";
+import { Input, FormBtn, TextArea, State } from "../../components/Form";
 import { Col, Row, Container } from "../../components/Grid";
-import Profile from "../../components/Profile";
-import ProfileName from "../../components/ProfileName";
 import API from "../../utils/API";
-// import { Link } from "react-router-dom";
+import axios from 'axios';
+var CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/neighborlyprofiles/image/upload';
+var CLOUDINARY_UPLOAD_PRESET = 'xztqhhek';
+
+const styles = {
+    body: {
+        background: "#FCECD6",
+        color: "black",
+        font: " Arial, Helvetica, sans-serif"
+    },
+    img: {
+        margin: 10,
+        fontSize: 30
+    },
+    upload: {
+        margin: 10
+    },
+    container: {
+        width: "100%",
+        margin: "auto"
+    }
+};
+
 class EditProfile extends Component {
-
-
     state = {
-        users: [],
-        picture: "",
+        email: (this.props.location && this.props.location.state)
+            ? this.props.location.state.email
+            : localStorage.getItem('email')
+                ? localStorage.getItem('email')
+                : "",
         name: "",
         address: "",
         city: "",
         zip: "",
-        drop:"",
-        aboutMe: ""
-
+        state: "",
+        about: "",
+        picture: null,
+        referrer: null
     };
 
+    fileSelectedHandler = event => {
+        this.setState({ selectedFile: event.target.files[0] })
+    }
 
     handleInputChange = event => {
+
         const { name, value } = event.target;
         this.setState({
             [name]: value
@@ -29,100 +56,114 @@ class EditProfile extends Component {
     };
 
     handleFormSubmit = event => {
-        
-        event.preventDefault();
-        if (this.state.name && this.state.picture && this.state.zip && this.state.address && this.state.aboutMe &&this.state.city&&this.state.drop) {//prevent form from refreshing on submission/ entry, also only allow for save profile function to run only if all of the entries are filled out.
-            API.saveProfile({
-                picture: this.state.picture,
-                name: this.state.name,
-                address: this.state.address,
-                city: this.state.city,
-                zip: this.state.zip,
-                drop: this.state.drop,
-                aboutMe: this.state.aboutMe
-            })
-           
-                .catch(err => console.log(err));
-        }
 
+        event.preventDefault();
+        if (this.state.name && this.state.zip && this.state.address && this.state.about && this.state.city && this.state.state) {
+            const fd = new FormData();
+            fd.append('file', this.state.selectedFile);
+            fd.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+            axios.post(CLOUDINARY_URL, fd)
+                .then(res => {
+                    const cloudinaryImage = res.data.public_id
+                    const responseURL = 'http://res.cloudinary.com/neighborlyprofiles/image/upload/' + cloudinaryImage
+
+                    API.saveUser({
+                        email: this.state.email,
+                        name: this.state.name,
+                        address: this.state.address,
+                        city: this.state.city,
+                        zip: this.state.zip,
+                        state: this.state.state,
+                        about: this.state.about,
+                        picture: responseURL
+                    }).catch(err => console.log(err))
+                        .then(this.setState({
+                            referrer: '/'
+                        }));
+                });
+        }
     };
 
     render() {
-        return (
-            <Container fluid>
-                <Row>
+        const { referrer } = this.state;
 
-                    <Col size="md-8">
+        if (referrer) {
+            console.log(this.state);
 
-                        <form>
-                            <Input
-                                value={this.state.picture}
-                                onChange={this.handleInputChange}
-                                name="picture"
-                                placeholder="Weblink to a Photo(required)"
-                            />
-                            <Input
-                                value={this.state.name}
-                                onChange={this.handleInputChange}
-                                name="name"
-                                placeholder="First and Last Name(required)"
-                            />
-                            <Input
-                                value={this.state.address}
-                                onChange={this.handleInputChange}
-                                name="address"
-                                placeholder="123 Main Street"
-                            />
-                            <Input
-                                value={this.state.city}
-                                onChange={this.handleInputChange}
-                                name="city"
-                                placeholder="City"
-                            />
-                            <Input
-                                value={this.state.zip}
-                                onChange={this.handleInputChange}
-                                name="zip"
-                                placeholder="Zip Code"
-                           
-                            />
-                            <Drop
-                            value={this.state.drop}
-                            onChange={this.handleInputChange}
-                            name="drop"
-                            />
+            return <Redirect to={{
+                pathname: '/',
+                state: { email: this.state.email }
+            }} />;
+        }
+        else {
+            return (
+                <div style={styles.body}>
 
-                            <TextArea
-                                value={this.state.aboutMe}
-                                onChange={this.handleInputChange}
-                                name="aboutMe"
-                                placeholder="Say a little about yourself"
-                            />
+                    <Container style={styles.container}>
+                        <i className="fas fa-image" style={styles.img}></i>
+                        <div className="upload" style={styles.upload}>
+                            <input type="file" onChange={this.fileSelectedHandler} />
+                        </div>
+                        <Row>
+                            <Col size="md-8">
+                                <form>
+                                  <i className="fas fa-user-circle" style={styles.img}></i>
+                                    <Input
+                                        value={this.state.name}
+                                        onChange={this.handleInputChange}
+                                        name="name"
+                                        placeholder="First and Last Name(required)"
+                                    />
+                                    <i className="fas fa-home" style={styles.img}></i>
+                                    <Input
+                                        value={this.state.address}
+                                        onChange={this.handleInputChange}
+                                        name="address"
+                                        placeholder="123 Main Street"
+                                    />
+                                    <Input
+                                        value={this.state.city}
+                                        onChange={this.handleInputChange}
+                                        name="city"
+                                        placeholder="City"
+                                    />
+                                    <Input
+                                        value={this.state.zip}
+                                        onChange={this.handleInputChange}
+                                        name="zip"
+                                        placeholder="Zip Code"
 
-                            <FormBtn
-                                disabled={!(this.state.name && this.state.picture && this.state.zip && this.state.address && this.state.aboutMe &&
+                                    />
+                                    <State
+                                        value={this.state.state}
+                                        onChange={this.handleInputChange}
+                                        name="state"
+                                    />
+                                    <i className="fas fa-keyboard" style={styles.img}></i>
 
-                                    this.state.drop&& 
-
-                                    this.state.city)}
-                                onClick={this.handleFormSubmit}
-                                //form button wont appear until all fields are filled out
-                            >
-                                Submit Updated Profile
-                            </FormBtn>
-                            
-                        </form>
-                    </Col>
-
-                </Row>
-
-            </Container>
-
-        );
-
+                                    <TextArea
+                                        value={this.state.about}
+                                        onChange={this.handleInputChange}
+                                        name="about"
+                                        placeholder="Say a little about yourself"
+                                    />
+                                    <FormBtn
+                                        disabled={!(this.state.name && this.state.zip && this.state.address && this.state.about &&
+                                            //statepicture???
+                                            this.state.state && this.state.city)}
+                                        onClick={this.handleFormSubmit}
+                                    >
+                                        Submit Updated Profile
+                                </FormBtn>
+                                </form>
+                            </Col>
+                        </Row>
+                    </Container>
+                </div>
+            );
+        }
     };
-
 };
 
 export default EditProfile;
-

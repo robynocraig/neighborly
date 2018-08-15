@@ -5,72 +5,54 @@ import { AUTH_CONFIG } from './auth0-variables';
 
 class Lock extends Component {
     lock = new Auth0Lock(AUTH_CONFIG.clientId, AUTH_CONFIG.domain, {
+        allowedConnections: ['facebook', 'google-oauth2', 'twitter', 'Username-Password-Authentication'],
         auth: {
-            // redirect: false,
             responseType: 'token id_token',
-            redirectUri: `${window.location.origin}/login`,
-            audience: 'https://mcale017-neighborly.herokuapp.com/',
+            // audience: 'https://mcale017-neighborly.herokuapp.com/',
+            audience: 'https://' + AUTH_CONFIG.domain + '/userinfo',
             sso: true,
-        },
-        additionalSignUpFields: [
-            {
-                name: "address",
-                placeholder: "enter your address",
-                // The following properties are optional
-                icon: "https://example.com/assests/address_icon.png",
-                prefill: "street 123",
-                validator: function (address) {
-                    return {
-                        valid: address.length >= 10,
-                        hint: "Must have 10 or more chars" // optional
-                    };
-                }
-            },
-            {
-                name: "first_name",
-                placeholder: "Enter your first name"
-            },
-            {
-                name: "last_name",
-                placeholder: "Enter your last name"
+            params: {
+                scope: 'openid profile email'
             }
-        ],
+        },
         container: AUTH_CONFIG.container,
         languageDictionary: {
-            title: "Neighborly"
+            title: "Neighborly",
+            signUpTitle: "Neighborly",
+            emailInputPlaceholder: "yours@neighborly.com"
         },
         theme: {
             logo: "https://i.imgur.com/uwqO6OC.png",
             primaryColor: '#FCBF32'
-        }
+        },
+        socialButtonStyle: 'small',
     });
 
     constructor(props) {
         super(props);
         this.state = { loggedIn: false };
-        this.onAuthenticated = this.onAuthenticated.bind(this);
-        this.getUserInfo = this.getUserInfo.bind(this);
 
         this.onAuthenticated();
-        this.getUserInfo();
     }
 
-    onAuthenticated() {
+    // onAuthenticated() {
+    onAuthenticated = () => {
         this.lock.on('authenticated', (authResult) => {
             let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
             localStorage.setItem('access_token', authResult.accessToken);
             localStorage.setItem('id_token', authResult.idToken);
             localStorage.setItem('expires_at', expiresAt);
 
-            this.setState({ loggedIn: true });
-        });
-    }
-
-    getUserInfo() {
-        this.lock.on('authenticated', (authResult) => {
-            this.lock.getUserInfo(authResult.accessToken, function (error, profile) {
+            this.lock.getUserInfo(authResult.accessToken, (error, profile) => {
                 if (!error) {
-                    localStorage.setItem("profile", JSON.stringify(profile));
+                    localStorage.setItem("email", profile.email);
+
+                    if (profile) {
+                        this.setState({
+                            loggedIn: true,
+                            email: profile.email
+                        })
+                    }
                 };
             });
         });
@@ -84,18 +66,17 @@ class Lock extends Component {
     }
 
     render() {
-        const style = { marginTop: '32px' }
+        const style = { marginTop: '96px' }
 
         return (
             !this.state.loggedIn ? (
                 <div>
-                    <h2>Login Page</h2>
                     <div id={AUTH_CONFIG.container} style={style}></div>
                 </div>
             ) : (
                     <Redirect to={{
-                        pathname: '/private',
-                        state: { from: this.props.location }
+                        pathname: '/',
+                        state: { from: this.props.location, email: this.state.email }
                     }} />
                 )
         );
