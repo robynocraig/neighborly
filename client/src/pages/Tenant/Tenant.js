@@ -57,7 +57,10 @@ loadProfile = () => {
           <Col size="md-3 sm-12">
           {this.state.users.filter(user => {
                             console.log(user._id);
-                            return (user._id === '5b7223028381fb1c8c41cea5')
+                            return (user.email ==="mbarbotiko@gmail.com")
+
+                            // console.log(user._id);
+                            // return (user.email ===localStorage.email)
 
                         }).map(user => (
                             <Profile
