@@ -105,6 +105,9 @@ class Post extends Component {
                                   <strong>
                                     <p>{post.title}</p>
                                   </strong>
+
+                                  <hr />
+                                  
                                     <p>{post.comment}</p>
                                   </Postcard>
                               );
