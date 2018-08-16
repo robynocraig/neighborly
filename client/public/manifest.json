@@ -3,7 +3,7 @@
   "name": "Neighborly",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "neighborly.ico",
       "sizes": "192x192",
       "type": "image/png"
     }

@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
-import { Col, Row, Container } from "../../components/Grid";
+import { Row, Container } from "../../components/Grid";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 
 class Posts extends Component {
 
     state = {
+        posts: [],
         title: "",
         comment: ""
     };
@@ -17,7 +18,7 @@ class Posts extends Component {
     loadComments = () => {
         API.getComments()
             .then(res =>
-                this.setState({ title: "", comment: ""})
+                this.setState({ limit: this.state.limit +5, posts: res.data, title: "", comment: ""})
             )
             .catch(err => console.log(err));
     };
@@ -47,12 +48,50 @@ class Posts extends Component {
         }
     };
 
-    // render() {
-    //     return (
-
-    //     )
-    // }
-
+    render() {
+        return (
+            <Container fluid>
+                <Row>
+                    <form>
+                        <Input
+                        value={this.state.title}
+                        onChange={this.handleInputChange}
+                        name="title"
+                        placeholder="Title (required)"
+                        />
+                        <TextArea
+                        value={this.state.comment}
+                        onChange={this.handleInputChange}
+                        name="comment"
+                        placeholder="Comment (required)"
+                        />
+                        <FormBtn
+                        disabled={!(this.state.title && this.state.comment)}
+                        onClick={this.handleFormSubmit}
+                        >
+                        Comment
+                        </FormBtn>
+                    </form>
+                    {this.state.posts.length ? (
+                        <List>
+                            {this.state.posts.map(post => {
+                                return (
+                                    <ListItem key={post._id}>
+                                        <a href={"/books/" + post._id}>
+                                            {post.title} by {post.comment}
+                                        </a>
+                                        <DeleteBtn onClick={() => this.deleteBook(book._id)} />
+                                    </ListItem>
+                                );
+                            })}
+                        </List>
+                    ) : (
+                        <h3>No Results to Display</h3>
+                    )}
+                </Row>
+            </Container>
+        )
+    }
 }
 
 export default Posts;
