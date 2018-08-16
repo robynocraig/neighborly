@@ -1,9 +1,15 @@
 import React from "react"
 import "./Profile.css";
 
+const styles = {
+    body: {
+        marginBottom: "25px"
+    }
+}
+
 const Profile = props => (
 
-      <div className="card border-0">
+      <div style={styles.body} className="card border-0">
       {/*Example Profile!!!
       User needs to be able to upload pictures and information*/}
           <img className="card-img-top" src={props.picture} alt="User Profile Photo" />
