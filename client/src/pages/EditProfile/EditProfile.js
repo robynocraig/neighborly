@@ -11,7 +11,8 @@ const styles = {
     body: {
         background: "#FCECD6",
         color: "black",
-        font: " Arial, Helvetica, sans-serif"
+        font: " Arial, Helvetica, sans-serif",
+        minHeight: "100vh"
     },
     img: {
         margin: 10,
