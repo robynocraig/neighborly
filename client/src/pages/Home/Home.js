@@ -81,7 +81,11 @@ class Home extends Component {
                                         />
                                     </Col>
                                     <Col size="md-9 sm-12">
-                                        <Post />
+                                        <Post 
+                                            posterEmail={this.state.user.email}
+                                            posterName={this.state.user.name}
+                                            posterPicture={this.state.user.picture}
+                                        />
                                     </Col>
                                 </Row>
                             </Container>
