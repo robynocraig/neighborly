@@ -113,7 +113,7 @@ class Post extends Component {
                                   <Postcard key={post._id}>
                                   <img src={post.posterPicture} />
                                   <strong>
-                                    <p>{post.title} by {post.posterName}</p> 
+                                    <p>{post.title} by {post.posterName} on {post.date}</p> 
                                   </strong>
                                     <p>{post.comment}</p>
                                   </Postcard>
