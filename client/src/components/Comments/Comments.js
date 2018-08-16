@@ -44,7 +44,7 @@ class Comments extends Component {
                 title: this.state.title,
                 comment: this.state.comment
             })
-                .then(res => this.loadBooks())
+                .then(res => this.loadComments())
                 .catch(err => console.log(err));
         }
     };
