@@ -5,6 +5,7 @@ import { Input, TextArea, FormBtn } from "../../components/Form";
 import { List } from "../../components/List";
 import { Postcard } from "../../components/Postcard";
 import moment from "moment/moment.js";
+import "./Post.css"
 
 class Post extends Component {
     constructor(props) {
@@ -66,56 +67,55 @@ class Post extends Component {
 
     render() {
         return (
-            <Container>
                 <Row>
-
-                    <div className="card mt-3 border-danger">
-                        <div className="card-body">
-                            <div className="row">
-                                <div className="col-md-1">
-                                    <img src="https://i.imgur.com/brH81MS.png" width="50px" alt="avatar" />
-                                </div>
-                                <div className="col-md-11 originalPostAvatar">
-                                    <h5 className="card-title m-0 p-0">Craig Property Managment Inc.</h5>
-                                    <p className="small">1 day ago</p>
-                                </div>
-                            </div>
-                            <p className="card-text">***AVOID 5th STREET***
-                        <br />5th Street will be closed off until further notice. We expect that the matter will be
-                                        resolved quickly and as many of you will be affeced, we will remain in contact to further
-                                        inform you. Please contact us for any other questions. Thank you!
-                    </p>
-                        </div>
-                    </div>
-
                     <Col size="md-12 sm-12">
-                      <div className="card mt-3 border-secondary">
-                        <div className="card-body">
-                        <form>
-                            <Input
-                                value={this.state.title}
-                                onChange={this.handleInputChange}
-                                name="title"
-                                placeholder="Title (required)"
-                                className="form-control bg-light"
-                            />
-                            <TextArea
-                                value={this.state.comment}
-                                onChange={this.handleInputChange}
-                                name="comment"
-                                placeholder="Comment (required)"
-                                className="form-control bg-light"
-                            />
-                            <FormBtn
-                                disabled={!(this.state.title && this.state.comment)}
-                                onClick={this.handleFormSubmit}
-                            >
-                                Add Post
-                      </FormBtn>
-
-                        </form>
-                      </div>
-                      </div>
+                        <div className="card border-danger">
+                            <div className="card-body">
+                                <div className="row">
+                                    <div className="col-md-1">
+                                        <img src="https://i.imgur.com/brH81MS.png" width="50px" alt="avatar" />
+                                    </div>
+                                    <div className="col-md-10 offset-md-1 originalPostAvatar">
+                                        <h5 className="card-title m-0 p-0">Craig Property Managment Inc.</h5>
+                                        <p className="small">1 day ago</p>
+                                    </div>
+                                </div>
+                                <p className="card-text">***AVOID 5th STREET***
+                                <br />
+                                5th Street will be closed off until further notice. We expect that the matter will be
+                                resolved quickly and as many of you will be affeced, we will remain in contact to further
+                                inform you. Please contact us for any other questions. Thank you!
+                                </p>
+                            </div>
+                        </div>
+                    </Col>
+                    <Col size="md-12 sm-12">
+                        <div className="card mt-3 border-secondary">
+                            <div className="card-body">
+                                <form>
+                                    <Input
+                                        value={this.state.title}
+                                        onChange={this.handleInputChange}
+                                        name="title"
+                                        placeholder="Title (required)"
+                                        className="form-control bg-light"
+                                    />
+                                    <TextArea
+                                        value={this.state.comment}
+                                        onChange={this.handleInputChange}
+                                        name="comment"
+                                        placeholder="Comment (required)"
+                                        className="form-control bg-light"
+                                    />
+                                    <FormBtn
+                                        disabled={!(this.state.title && this.state.comment)}
+                                        onClick={this.handleFormSubmit}
+                                    >
+                                        Add Post
+                                    </FormBtn>
+                                </form>
+                            </div>
+                        </div>
                     </Col>
 
                     <Col size="md-12 sm-12" >
@@ -140,7 +140,7 @@ class Post extends Component {
                     </Col>
 
                 </Row>
-            </Container>
+
         )
     }
 
