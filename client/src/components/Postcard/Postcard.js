@@ -26,8 +26,6 @@ export class Postcard extends Component {
     console.log(isExpanded);
   }
 
-
-
   render() {
     return (
       <Container>
