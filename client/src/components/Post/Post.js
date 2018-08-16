@@ -45,24 +45,24 @@ class Post extends Component {
         });
     };
 
-  handleFormSubmit = event => {
-      event.preventDefault();
+    handleFormSubmit = event => {
+        event.preventDefault();
 
-      const time = moment().format();
+        const time = moment().format();
 
-      if (this.state.title && this.state.comment) {
-          API.saveComment({
-              title: this.state.title,
-              comment: this.state.comment,
-              posterEmail: this.state.posterEmail,
-              posterName: this.state.posterName,
-              posterPicture: this.state.posterPicture,
-              date: time
-          })
-              .then(res => this.loadComments())
-              .catch(err => console.log(err));
-      }
-  };
+        if (this.state.title && this.state.comment) {
+            API.saveComment({
+                title: this.state.title,
+                comment: this.state.comment,
+                posterEmail: this.state.posterEmail,
+                posterName: this.state.posterName,
+                posterPicture: this.state.posterPicture,
+                date: time
+            })
+                .then(res => this.loadComments())
+                .catch(err => console.log(err));
+        }
+    };
 
     render() {
         return (
@@ -82,8 +82,8 @@ class Post extends Component {
                             </div>
                             <p className="card-text">***AVOID 5th STREET***
                         <br />5th Street will be closed off until further notice. We expect that the matter will be
-                                resolved quickly and as many of you will be affeced, we will remain in contact to further
-                                inform you. Please contact us for any other questions. Thank you!
+                                        resolved quickly and as many of you will be affeced, we will remain in contact to further
+                                        inform you. Please contact us for any other questions. Thank you!
                     </p>
                         </div>
                     </div>
@@ -109,31 +109,32 @@ class Post extends Component {
                                 Comment
                       </FormBtn>
 
-                  </form>
-                  </Col>
-                  <Col size="md-12 sm-12">
-                  {this.state.posts.length ? (
-                      <List>
-                          {this.state.posts.map(post => {
-                              return (
-                                  <Postcard key={post._id}>
-                                  <img src={post.posterPicture} />
-                                  <strong>
-                                    <p>{post.title} by {post.posterName} {moment(post.date).fromNow()}</p> 
-                                  </strong>
-                                    <p>{post.comment}</p>
-                                  </Postcard>
-                              );
-                          })}
-                      </List>
-                  ) : (
-                      <h3></h3>
-                  )}
-                  </Col>
-              </Row>
-          </Container>
-      )
-  }
+                        </form>
+                    </Col>
+                    <Col size="md-12 sm-12">
+                        {this.state.posts.length ? (
+                            <List>
+                                {this.state.posts.map(post => {
+                                    return (
+                                        <Postcard
+                                            key={post._id}
+                                            title={post.title}
+                                            comment={post.comment}
+                                            posterName={post.posterName}
+                                            posterPicture={post.posterPicture}
+                                            date={moment(post.date).fromNow()}
+                                        />
+                                    );
+                                })}
+                            </List>
+                        ) : (
+                                <h3></h3>
+                            )}
+                    </Col>
+                </Row>
+            </Container>
+        )
+    }
 
 }
 
