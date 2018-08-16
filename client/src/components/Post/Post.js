@@ -4,6 +4,7 @@ import { Col, Row, Container } from "../../components/Grid";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import { List } from "../../components/List";
 import { Postcard } from "../../components/Postcard";
+import moment from "moment/moment.js";
 
 class Post extends Component {
     constructor(props) {
@@ -44,20 +45,24 @@ class Post extends Component {
         });
     };
 
-    handleFormSubmit = event => {
-        event.preventDefault();
-        if (this.state.title && this.state.comment) {
-            API.saveComment({
-                title: this.state.title,
-                comment: this.state.comment,
-                posterEmail: this.state.posterEmail,
-                posterName: this.state.posterName,
-                posterPicture: this.state.posterPicture
-            })
-                .then(res => this.loadComments())
-                .catch(err => console.log(err));
-        }
-    };
+  handleFormSubmit = event => {
+      event.preventDefault();
+
+      const time = moment().format();
+
+      if (this.state.title && this.state.comment) {
+          API.saveComment({
+              title: this.state.title,
+              comment: this.state.comment,
+              posterEmail: this.state.posterEmail,
+              posterName: this.state.posterName,
+              posterPicture: this.state.posterPicture,
+              date: time
+          })
+              .then(res => this.loadComments())
+              .catch(err => console.log(err));
+      }
+  };
 
     render() {
         return (
@@ -103,33 +108,33 @@ class Post extends Component {
                             >
                                 Comment
                       </FormBtn>
-                        </form>
-                    </Col>
-                    <Col size="md-12 sm-12">
-                        {this.state.posts.length ? (
-                            <List>
-                                {this.state.posts.map(post => {
-                                    return (
-                                        <Postcard key={post._id}
-                                            posterPicture={post.posterPicture}
-                                            title={post.title}
-                                            posterName={post.posterName}
-                                            date={post.date}
-                                            comment={post.comment}
-                                        >
 
-                                        </Postcard>
-                                    );
-                                })}
-                            </List>
-                        ) : (
-                                <h3></h3>
-                            )}
-                    </Col>
-                </Row>
-            </Container>
-        )
-    }
+                  </form>
+                  </Col>
+                  <Col size="md-12 sm-12">
+                  {this.state.posts.length ? (
+                      <List>
+                          {this.state.posts.map(post => {
+                              return (
+                                  <Postcard key={post._id}>
+                                  <img src={post.posterPicture} />
+                                  <strong>
+                                    <p>{post.title} by {post.posterName} {moment(post.date).fromNow()}</p> 
+                                  </strong>
+                                    <p>{post.comment}</p>
+                                  </Postcard>
+                              );
+                          })}
+                      </List>
+                  ) : (
+                      <h3></h3>
+                  )}
+                  </Col>
+              </Row>
+          </Container>
+      )
+  }
+
 }
 
 export default Post;
