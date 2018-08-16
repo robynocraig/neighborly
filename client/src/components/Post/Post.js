@@ -89,29 +89,36 @@ class Post extends Component {
                     </div>
 
                     <Col size="md-12 sm-12">
+                      <div className="card mt-3 border-secondary">
+                        <div className="card-body">
                         <form>
                             <Input
                                 value={this.state.title}
                                 onChange={this.handleInputChange}
                                 name="title"
                                 placeholder="Title (required)"
+                                className="form-control bg-light"
                             />
                             <TextArea
                                 value={this.state.comment}
                                 onChange={this.handleInputChange}
                                 name="comment"
                                 placeholder="Comment (required)"
+                                className="form-control bg-light"
                             />
                             <FormBtn
                                 disabled={!(this.state.title && this.state.comment)}
                                 onClick={this.handleFormSubmit}
                             >
-                                Comment
+                                Add Post
                       </FormBtn>
 
                         </form>
+                      </div>
+                      </div>
                     </Col>
-                    <Col size="md-12 sm-12">
+
+                    <Col size="md-12 sm-12" >
                         {this.state.posts.length ? (
                             <List>
                                 {this.state.posts.map(post => {
@@ -131,6 +138,7 @@ class Post extends Component {
                                 <h3></h3>
                             )}
                     </Col>
+
                 </Row>
             </Container>
         )

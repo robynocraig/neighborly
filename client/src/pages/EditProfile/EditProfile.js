@@ -99,8 +99,8 @@ class EditProfile extends Component {
         else {
             return (
                 <div style={styles.body}>
-
                     <Container style={styles.container}>
+                      <p>Thank you for joining Neighborly! Please fill in the details below and get started connecting with your neighbors.</p>
                         <i className="fas fa-image" style={styles.img}></i>
                         <div className="upload" style={styles.upload}>
                             <input type="file" onChange={this.fileSelectedHandler} />

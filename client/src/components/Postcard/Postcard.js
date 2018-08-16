@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Col, Row, Container } from "../../components/Grid";
 import ShowMoreText from 'react-show-more-text';
+import './Postcard.css';
 
 // export const Postcard = ({ title, comments }) => {
 //     return (
@@ -31,20 +32,23 @@ export class Postcard extends Component {
       <Container>
         <Row>
           <Col size="md-12 sm-12">
-            <div className="card mt-3 border-dark">
+            <div className="card mt-3 border-secondary">
               <div className="card-body">
                 <div className="row">
-                  <div className="col-md-9">
-                    <img src={"https://i.imgur.com/uwqO6OC.png"} width="50px" alt="avatar" />
-                  </div>
-                  <div className="col-md-11 originalPostAvatar">
-                    <img src={this.props.posterPicture} />
-                    <strong>
-                      <p>{this.props.title} by {this.props.posterName} on {this.props.date}</p>
-                    </strong>
+                  <div className="col-md-12">
+                    <Row>
+                    <img src={this.props.posterPicture} alt="avatar" className="profile-img"/>
+                    <div className="post-details">
+                      <strong>
+                        <p className="post-title">{this.props.title}</p>
+                        <p className="post-name">By {this.props.posterName}</p>
+                        <p className="post-date">{this.props.date}</p>
+                      </strong>
+                    </div>
+                    </Row>
                     <ShowMoreText
 
-                      lines={2}
+                      lines={5}
                       more='Show more'
                       less='Show less'
                       anchorClass=''
@@ -63,6 +67,3 @@ export class Postcard extends Component {
     )
   }
 }
-
-
-

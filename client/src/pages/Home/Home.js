@@ -11,7 +11,7 @@ const styles = {
     body: {
       background: "#FCECD6",
       color: "black",
-      font:" Arial, Helvetica, sans-serif"
+      font: "Arial, Helvetica, sans-serif"
     }
   };
 
@@ -81,7 +81,7 @@ class Home extends Component {
                                         />
                                     </Col>
                                     <Col size="md-9 sm-12">
-                                        <Post 
+                                        <Post
                                             posterEmail={this.state.user.email}
                                             posterName={this.state.user.name}
                                             posterPicture={this.state.user.picture}

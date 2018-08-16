@@ -6,7 +6,6 @@ import Login from './auth/Login';
 import Logout from './auth/Logout';
 import EditProfile from './pages/EditProfile';
 import Management from './pages/Management';
-import Footer from './components/Footer';
 
 const App = () => (
   <div>
@@ -20,7 +19,6 @@ const App = () => (
         <Route exact path="/management" component={Management} />
       </Switch>
     </main>
-    <Footer />
   </div>
 )
 
