@@ -9,11 +9,12 @@ import Post from "../../components/Post";
 
 const styles = {
     body: {
-      background: "#FCECD6",
-      color: "black",
-      font: "Arial, Helvetica, sans-serif"
+        background: "#FCECD6",
+        color: "black",
+        font: "Arial, Helvetica, sans-serif",
+        minHeight: "100vh"
     }
-  };
+};
 
 class Home extends Component {
     constructor(props) {
@@ -39,7 +40,7 @@ class Home extends Component {
     // }
 
     componentDidMount() {
-        if(this.state.email) {
+        if (this.state.email) {
             this.loadUser(this.state.email);
         }
     }
@@ -67,28 +68,28 @@ class Home extends Component {
                             (this.state.exists) &&
                             <div style={styles.body}>
 
-                            <Container>
-                                <Row>
-                                    <Col size="md-3 sm-12">
-                                        <Profile
-                                            picture={this.state.user.picture}
-                                            name={this.state.user.name}
-                                            about={this.state.user.about}
-                                            address={this.state.user.address}
-                                            city={this.state.user.city}
-                                            state={this.state.user.state}
-                                            zip={this.state.user.zip}
-                                        />
-                                    </Col>
-                                    <Col size="md-9 sm-12">
-                                        <Post
-                                            posterEmail={this.state.user.email}
-                                            posterName={this.state.user.name}
-                                            posterPicture={this.state.user.picture}
-                                        />
-                                    </Col>
-                                </Row>
-                            </Container>
+                                <Container>
+                                    <Row>
+                                        <Col size="md-3 sm-12">
+                                            <Profile
+                                                picture={this.state.user.picture}
+                                                name={this.state.user.name}
+                                                about={this.state.user.about}
+                                                address={this.state.user.address}
+                                                city={this.state.user.city}
+                                                state={this.state.user.state}
+                                                zip={this.state.user.zip}
+                                            />
+                                        </Col>
+                                        <Col size="md-9 sm-12">
+                                            <Post
+                                                posterEmail={this.state.user.email}
+                                                posterName={this.state.user.name}
+                                                posterPicture={this.state.user.picture}
+                                            />
+                                        </Col>
+                                    </Row>
+                                </Container>
                             </div>
                         }
                         {
