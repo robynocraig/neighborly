@@ -18,7 +18,7 @@ class Posts extends Component {
     loadComments = () => {
         API.getComments()
             .then(res =>
-                this.setState({ posts: res.data, title: "", comment: ""})
+                this.setState({ limit: this.state.limit +5, posts: res.data, title: "", comment: ""})
             )
             .catch(err => console.log(err));
     };
