@@ -7,7 +7,7 @@ const commentSchema = new Schema({
   posterEmail: { type: String, required: true },
   posterName: { type: String, required: true },
   posterPicture: { type: String, requried: true },
-  date: { type: Date, default: Date.now },
+  date: { type: String, required: true },
 });
 
 const Comments = mongoose.model("Comments", commentSchema);

@@ -4,6 +4,7 @@ import { Col, Row, Container } from "../../components/Grid";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import { List } from "../../components/List";
 import { Postcard } from "../../components/Postcard";
+import moment from "moment/moment.js";
 
 class Post extends Component {
     constructor(props) {
@@ -46,13 +47,17 @@ class Post extends Component {
 
   handleFormSubmit = event => {
       event.preventDefault();
+
+      const time = moment().format();
+
       if (this.state.title && this.state.comment) {
           API.saveComment({
               title: this.state.title,
               comment: this.state.comment,
               posterEmail: this.state.posterEmail,
               posterName: this.state.posterName,
-              posterPicture: this.state.posterPicture
+              posterPicture: this.state.posterPicture,
+              date: time
           })
               .then(res => this.loadComments())
               .catch(err => console.log(err));
@@ -113,7 +118,7 @@ class Post extends Component {
                                   <Postcard key={post._id}>
                                   <img src={post.posterPicture} />
                                   <strong>
-                                    <p>{post.title} by {post.posterName} on {post.date}</p> 
+                                    <p>{post.title} by {post.posterName} {moment(post.date).fromNow()}</p> 
                                   </strong>
                                     <p>{post.comment}</p>
                                   </Postcard>
