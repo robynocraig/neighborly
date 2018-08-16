@@ -18,7 +18,6 @@ import './Postcard.css';
 //     );
 // };
 
-
 export class Postcard extends Component {
   constructor(props) {
     super(props)
@@ -29,41 +28,35 @@ export class Postcard extends Component {
 
   render() {
     return (
-      <Container>
-        <Row>
-          <Col size="md-12 sm-12">
-            <div className="card mt-3 border-secondary">
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-md-12">
-                    <Row>
-                    <img src={this.props.posterPicture} alt="avatar" className="profile-img"/>
-                    <div className="post-details">
-                      <strong>
-                        <p className="post-title">{this.props.title}</p>
-                        <p className="post-name">By {this.props.posterName}</p>
-                        <p className="post-date">{this.props.date}</p>
-                      </strong>
-                    </div>
-                    </Row>
-                    <ShowMoreText
-
-                      lines={5}
-                      more='Show more'
-                      less='Show less'
-                      anchorClass=''
-                      onClick={this.executeOnClick}
-                    >
-                     {this.props.comment}
-                    </ShowMoreText>
-
-                  </div>
+      <div className="card mt-3 border-secondary custom-card">
+        <div className="card-body">
+          <div className="row">
+            <div className="col-md-12">
+              <Row>
+                <img src={this.props.posterPicture} alt="avatar" className="profile-img" />
+                <div className="post-details">
+                  <strong>
+                    <p className="post-title">{this.props.title}</p>
+                    <p className="post-name">By {this.props.posterName}</p>
+                    <p className="post-date">{this.props.date}</p>
+                  </strong>
                 </div>
-              </div>
+              </Row>
+              <ShowMoreText
+
+                lines={5}
+                more='Show more'
+                less='Show less'
+                anchorClass=''
+                onClick={this.executeOnClick}
+              >
+                {this.props.comment}
+              </ShowMoreText>
             </div>
-          </Col>
-        </Row>
-      </Container >
+          </div>
+        </div>
+      </div>
+
     )
   }
 }
