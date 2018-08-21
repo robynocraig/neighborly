@@ -4,6 +4,7 @@ import { Input, FormBtn, TextArea, State } from "../../components/Form";
 import { Col, Row, Container } from "../../components/Grid";
 import API from "../../utils/API";
 import axios from 'axios';
+import isAuthenticated from '../../auth/isAuthenticated';
 var CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/neighborlyprofiles/image/upload';
 var CLOUDINARY_UPLOAD_PRESET = 'xztqhhek';
 
@@ -89,80 +90,89 @@ class EditProfile extends Component {
     render() {
         const { referrer } = this.state;
 
-        if (referrer) {
-            console.log(this.state);
+        if (isAuthenticated()) {
+            if (referrer) {
+                console.log(this.state);
 
-            return <Redirect to={{
-                pathname: '/',
-                state: { email: this.state.email }
-            }} />;
-        }
-        else {
-            return (
-                <div style={styles.body}>
-                    <Container style={styles.container}>
-                      <p>Thank you for joining Neighborly! Please fill in the details below and get started connecting with your neighbors.</p>
-                        <i className="fas fa-image" style={styles.img}></i>
-                        <div className="upload" style={styles.upload}>
-                            <input type="file" onChange={this.fileSelectedHandler} />
-                        </div>
-                        <Row>
-                            <Col size="md-8">
-                                <form>
-                                  <i className="fas fa-user-circle" style={styles.img}></i>
-                                    <Input
-                                        value={this.state.name}
-                                        onChange={this.handleInputChange}
-                                        name="name"
-                                        placeholder="First and Last Name(required)"
-                                    />
-                                    <i className="fas fa-home" style={styles.img}></i>
-                                    <Input
-                                        value={this.state.address}
-                                        onChange={this.handleInputChange}
-                                        name="address"
-                                        placeholder="123 Main Street"
-                                    />
-                                    <Input
-                                        value={this.state.city}
-                                        onChange={this.handleInputChange}
-                                        name="city"
-                                        placeholder="City"
-                                    />
-                                    <Input
-                                        value={this.state.zip}
-                                        onChange={this.handleInputChange}
-                                        name="zip"
-                                        placeholder="Zip Code"
+                return <Redirect to={{
+                    pathname: '/',
+                    state: { email: this.state.email }
+                }} />;
+            }
+            else {
+                return (
+                    <div style={styles.body}>
+                        <Container style={styles.container}>
+                            <p>Thank you for joining Neighborly! Please fill in the details below and get started connecting with your neighbors.</p>
+                            <i className="fas fa-image" style={styles.img}></i>
+                            <div className="upload" style={styles.upload}>
+                                <input type="file" onChange={this.fileSelectedHandler} />
+                            </div>
+                            <Row>
+                                <Col size="md-8">
+                                    <form>
+                                        <i className="fas fa-user-circle" style={styles.img}></i>
+                                        <Input
+                                            value={this.state.name}
+                                            onChange={this.handleInputChange}
+                                            name="name"
+                                            placeholder="First and Last Name(required)"
+                                        />
+                                        <i className="fas fa-home" style={styles.img}></i>
+                                        <Input
+                                            value={this.state.address}
+                                            onChange={this.handleInputChange}
+                                            name="address"
+                                            placeholder="123 Main Street"
+                                        />
+                                        <Input
+                                            value={this.state.city}
+                                            onChange={this.handleInputChange}
+                                            name="city"
+                                            placeholder="City"
+                                        />
+                                        <Input
+                                            value={this.state.zip}
+                                            onChange={this.handleInputChange}
+                                            name="zip"
+                                            placeholder="Zip Code"
 
-                                    />
-                                    <State
-                                        value={this.state.state}
-                                        onChange={this.handleInputChange}
-                                        name="state"
-                                    />
-                                    <i className="fas fa-keyboard" style={styles.img}></i>
+                                        />
+                                        <State
+                                            value={this.state.state}
+                                            onChange={this.handleInputChange}
+                                            name="state"
+                                        />
+                                        <i className="fas fa-keyboard" style={styles.img}></i>
 
-                                    <TextArea
-                                        value={this.state.about}
-                                        onChange={this.handleInputChange}
-                                        name="about"
-                                        placeholder="Say a little about yourself"
-                                    />
-                                    <FormBtn
-                                        disabled={!(this.state.name && this.state.zip && this.state.address && this.state.about &&
-                                            //statepicture???
-                                            this.state.state && this.state.city)}
-                                        onClick={this.handleFormSubmit}
-                                    >
-                                        Submit Updated Profile
+                                        <TextArea
+                                            value={this.state.about}
+                                            onChange={this.handleInputChange}
+                                            name="about"
+                                            placeholder="Say a little about yourself"
+                                        />
+                                        <FormBtn
+                                            disabled={!(this.state.name && this.state.zip && this.state.address && this.state.about &&
+                                                //statepicture???
+                                                this.state.state && this.state.city)}
+                                            onClick={this.handleFormSubmit}
+                                        >
+                                            Submit Updated Profile
                                 </FormBtn>
-                                </form>
-                            </Col>
-                        </Row>
-                    </Container>
-                </div>
-            );
+                                    </form>
+                                </Col>
+                            </Row>
+                        </Container>
+                    </div>
+                );
+            }
+        } else {
+            return (
+                <Redirect to={{
+                    pathname: '/login',
+                    state: { from: this.props.location }
+                }} />
+            )
         }
     };
 };
