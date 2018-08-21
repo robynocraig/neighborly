@@ -158,7 +158,7 @@ class EditProfile extends Component {
                                             onClick={this.handleFormSubmit}
                                         >
                                             Submit Updated Profile
-                                </FormBtn>
+                                    </FormBtn>
                                     </form>
                                 </Col>
                             </Row>
