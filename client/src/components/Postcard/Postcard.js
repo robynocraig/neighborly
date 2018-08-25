@@ -2,32 +2,43 @@ import React, { Component } from "react";
 import { Col, Row, Container } from "../../components/Grid";
 import ShowMoreText from 'react-show-more-text';
 import './Postcard.css';
+import Modal from '../../components/Modal';
 
-// export const Postcard = ({ title, comments }) => {
-//     return (
-//     <li className="list-group-item">
-//         <div className="card bg-light border-0">
-//             <div className="card-header">
-//                 {title}
-//             </div>
-//             <div className="card-body">
-//                 {comments}
-//             </div>
-//         </div>
-//     </li>
-//     );
-// };
+// The modal button
+const styles = {
+    button: {
+        marginLeft: "15px",
+        fontSize: "12px",
+        backgroundColor: "#57b2ed",
+        borderColor: "#57b2ed",
+        lineHeight: 1
+    },
+    modalimg: {
+        width: "35%",
+        height: "35%",
+        objectFit: "scale-down",
+        marginBottom: "15px",
+        marginRight: "15px"
+    }
+};
 
 export class Postcard extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = { isOpen: false };
   }
   executeOnClick(isExpanded) {
     console.log(isExpanded);
   }
+  toggleModal = () => {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
 
   render() {
     return (
+      <div>
       <div className="card mt-3 border-secondary custom-card">
         <div className="card-body">
           <div className="row">
@@ -37,7 +48,11 @@ export class Postcard extends Component {
                 <div className="post-details">
                   <strong>
                     <p className="post-title">{this.props.title}</p>
-                    <p className="post-name">By {this.props.posterName}</p>
+                    <p className="post-name">By {this.props.posterName}
+                    <button className="btn btn-info" onClick={this.toggleModal} style={styles.button}>
+                      View Neighbor Details
+                    </button>
+                    </p>
                     <p className="post-date">{this.props.date}</p>
                   </strong>
                 </div>
@@ -57,6 +72,18 @@ export class Postcard extends Component {
         </div>
       </div>
 
+        <Modal show={this.state.isOpen}
+          onClose={this.toggleModal}>
+          <Row>
+            <img src={this.props.posterPicture} alt="avatar" style={styles.modalimg} />
+            <div>
+                <p>{this.props.posterName}</p>
+                <p>{this.props.posterEmail}</p>
+                <p>{this.props.posterAddress}</p>
+            </div>
+          </Row>
+        </Modal>
+      </div>
     )
   }
 }
