@@ -6,7 +6,8 @@ const commentSchema = new Schema({
   comment: { type: String, required: true },
   posterEmail: { type: String, required: true },
   posterName: { type: String, required: true },
-  posterPicture: { type: String, requried: true },
+  posterPicture: { type: String, required: true },
+  posterAddress: { type: String, required: true },
   date: { type: String, required: true },
 });
 

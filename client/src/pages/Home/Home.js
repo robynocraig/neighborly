@@ -86,6 +86,7 @@ class Home extends Component {
                                                 posterEmail={this.state.user.email}
                                                 posterName={this.state.user.name}
                                                 posterPicture={this.state.user.picture}
+                                                posterAddress={this.state.user.address}
                                             />
                                         </Col>
                                     </Row>

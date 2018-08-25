@@ -17,7 +17,8 @@ class Post extends Component {
             comment: "",
             posterEmail: this.props.posterEmail,
             posterName: this.props.posterName,
-            posterPicture: this.props.posterPicture
+            posterPicture: this.props.posterPicture,
+            posterAddress: this.props.posterAddress
         };
     }
 
@@ -58,6 +59,7 @@ class Post extends Component {
                 posterEmail: this.state.posterEmail,
                 posterName: this.state.posterName,
                 posterPicture: this.state.posterPicture,
+                posterAddress: this.state.posterAddress,
                 date: time
             })
                 .then(res => this.loadComments())
@@ -130,6 +132,8 @@ class Post extends Component {
                                             posterName={post.posterName}
                                             posterPicture={post.posterPicture}
                                             date={moment(post.date).fromNow()}
+                                            posterAddress={post.posterAddress}
+                                            posterEmail={post.posterEmail}
                                         />
                                     );
                                 })}
