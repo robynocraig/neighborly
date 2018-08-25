@@ -30,5 +30,8 @@ export default {
   },
   deleteComment: function(id) {
     return axios.delete("api/comments", + id);
+  },
+  saveReply:function(replyData){
+    return axiosWithToken.post("/api/reply", replyData);
   }
 };

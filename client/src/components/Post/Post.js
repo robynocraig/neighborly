@@ -18,7 +18,8 @@ class Post extends Component {
             posterEmail: this.props.posterEmail,
             posterName: this.props.posterName,
             posterPicture: this.props.posterPicture,
-            posterAddress: this.props.posterAddress
+            posterAddress: this.props.posterAddress,
+            reply:this.props.reply
         };
     }
 
@@ -29,7 +30,7 @@ class Post extends Component {
     loadComments = () => {
         API.getComments()
             .then(res =>
-                this.setState({ posts: res.data, title: "", comment: "" })
+                this.setState({ posts: res.data, title: "", comment: "", reply:"" })
             )
             .catch(err => console.log(err));
     };
@@ -67,83 +68,107 @@ class Post extends Component {
         }
     };
 
+    handleReplySubmit = event => {
+        event.preventDefault();
+        API.saveReply({
+            reply:this.state.reply
+        })
+        .then(res=> this.loadComments())
+        .catch(err=>console.log(err));
+    }
+
     render() {
         return (
-                <Row>
-                    <Col size="md-12 sm-12">
-                        <div className="card border-danger">
-                            <div className="card-body">
-                                <div className="row">
-                                    <div className="col-md-1">
-                                        <img src="https://i.imgur.com/brH81MS.png" width="50px" alt="avatar" />
-                                    </div>
-                                    <div className="col-md-10 offset-md-1 originalPostAvatar">
-                                        <h5 className="card-title m-0 p-0">Craig Property Managment Inc.</h5>
-                                        <p className="small">1 day ago</p>
-                                    </div>
+            <Row>
+                <Col size="md-12 sm-12">
+                    <div className="card border-danger">
+                        <div className="card-body">
+                            <div className="row">
+                                <div className="col-md-1">
+                                    <img src="https://i.imgur.com/brH81MS.png" width="50px" alt="avatar" />
                                 </div>
-                                <p className="card-text">***AVOID 5th STREET***
+                                <div className="col-md-10 offset-md-1 originalPostAvatar">
+                                    <h5 className="card-title m-0 p-0">Craig Property Managment Inc.</h5>
+                                    <p className="small">1 day ago</p>
+                                </div>
+                            </div>
+                            <p className="card-text">***AVOID 5th STREET***
                                 <br />
                                 5th Street will be closed off until further notice. We expect that the matter will be
                                 resolved quickly and as many of you will be affeced, we will remain in contact to further
                                 inform you. Please contact us for any other questions. Thank you!
                                 </p>
-                            </div>
                         </div>
-                    </Col>
-                    <Col size="md-12 sm-12">
-                        <div className="card mt-3 border-secondary">
-                            <div className="card-body">
-                                <form>
-                                    <Input
-                                        value={this.state.title}
-                                        onChange={this.handleInputChange}
-                                        name="title"
-                                        placeholder="Title (required)"
-                                        className="form-control bg-light"
-                                    />
-                                    <TextArea
-                                        value={this.state.comment}
-                                        onChange={this.handleInputChange}
-                                        name="comment"
-                                        placeholder="Comment (required)"
-                                        className="form-control bg-light"
-                                    />
-                                    <FormBtn
-                                        disabled={!(this.state.title && this.state.comment)}
-                                        onClick={this.handleFormSubmit}
-                                    >
-                                        Add Post
+                    </div>
+                </Col>
+                <Col size="md-12 sm-12">
+                    <div className="card mt-3 border-secondary">
+                        <div className="card-body">
+                            <form>
+                                <Input
+                                    value={this.state.title}
+                                    onChange={this.handleInputChange}
+                                    name="title"
+                                    placeholder="Title (required)"
+                                    className="form-control bg-light"
+                                />
+                                <TextArea
+                                    value={this.state.comment}
+                                    onChange={this.handleInputChange}
+                                    name="comment"
+                                    placeholder="Comment (required)"
+                                    className="form-control bg-light"
+                                />
+                                <FormBtn
+                                    disabled={!(this.state.title && this.state.comment)}
+                                    onClick={this.handleFormSubmit}
+                                >
+                                    Add Post
                                     </FormBtn>
-                                </form>
-                            </div>
+                            </form>
                         </div>
-                    </Col>
+                    </div>
+                </Col>
 
-                    <Col size="md-12 sm-12" >
-                        {this.state.posts.length ? (
-                            <List>
-                                {this.state.posts.map(post => {
-                                    return (
-                                        <Postcard
-                                            key={post._id}
-                                            title={post.title}
-                                            comment={post.comment}
-                                            posterName={post.posterName}
-                                            posterPicture={post.posterPicture}
-                                            date={moment(post.date).fromNow()}
-                                            posterAddress={post.posterAddress}
-                                            posterEmail={post.posterEmail}
-                                        />
-                                    );
-                                })}
-                            </List>
-                        ) : (
-                                <h3></h3>
-                            )}
-                    </Col>
+                <Col size="md-12 sm-12" >
+                    {this.state.posts.length ? (
+                        <List>
+                            {this.state.posts.map(post => {
+                                return (
+                                    <Postcard
+                                        key={post._id}
+                                        title={post.title}
+                                        comment={post.comment}
+                                        posterName={post.posterName}
+                                        posterPicture={post.posterPicture}
+                                        date={moment(post.date).fromNow()}
+                                        posterAddress={post.posterAddress}
+                                        posterEmail={post.posterEmail}
+                                        reply={post.reply}
 
-                </Row>
+
+                                    />
+
+                                );
+                            
+
+                            })}
+
+                            <TextArea value={this.state.reply}
+                                    onChange={this.handleInputChange}
+                                    name="reply"
+                                    placeholder="Reply to this"
+                                    className="form-control bg-light"/>
+
+                            <FormBtn onClick={this.handleReplySubmit}>Reply</FormBtn>
+t
+                        </List>
+                    ) : (
+                            <h3></h3>
+                        )}
+                </Col>
+
+            </Row>
 
         )
     }
