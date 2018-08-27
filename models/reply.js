@@ -13,10 +13,3 @@ const replySchema = new Schema({
 const Reply = mongoose.model("Reply", replySchema);
 
 module.exports = Reply;
-
-// reply:[
-//   {posterPicture: {type: String, required: true},
-//   posterEmail:{ type: String, required: true },
-//   date: { type: String, required: true },
-//   posterName: { type: String, required: true }
-// }]
