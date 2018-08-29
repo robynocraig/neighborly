@@ -1,5 +1,6 @@
 const db = require("../models");
 
+
 // Defining methods for the commentsController
 module.exports = {
   findAll: function (req, res) {
@@ -34,10 +35,41 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  insert: function (req, res) {
-    db.Comments.insert(req.body)
+
+  getCommentReplies: function (req, res) {
+    db.Reply
+    .find(req.query)
+    .sort({ date: -1 })
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+
+  },
+
+  newCommentReplies: function (req, res) {
+    db.Reply
+    db.Comments.reply.push(db.Reply._id)
+      .create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
-
   }
+
+  
+
+  // aUser.clients.push(client).
+
+  
+  // newCommentReplies: async function (req, res) {
+  //  const reply = new Reply();
+  //  reply.reply=req.body.content;
+  //  reply.comment=comment._id;
+  //  await reply.save();
+
+  //  comment.reply.push(reply._id);
+  //  await comment.save();
+
+  //  res.send(reply);
+  // }
+
+  
+
 };
