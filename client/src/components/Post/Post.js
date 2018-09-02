@@ -106,7 +106,7 @@ class Post extends Component {
                                         value={this.state.comment}
                                         onChange={this.handleInputChange}
                                         name="comment"
-                                        placeholder="Comment (required)"
+                                        placeholder="Comment (requi)"
                                         className="form-control bg-light"
                                     />
                                     <FormBtn

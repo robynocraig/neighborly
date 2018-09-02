@@ -1,10 +1,35 @@
 .profile-img {
+  object-fit: cover;
+  /* object-fit: scale-down; */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+ 
+}
+
+.image{
+  background: #E6E7ED;
+  text-align: center;
+  align-content: center;
+  align-items: center;
   object-fit: scale-down;
   width: 50px;
   height: 50px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border:rgba(250, 218, 40, 0.8) solid 5px;
   margin-left: 10px;
   margin-right: 20px;
 }
+
+a{
+  color:red;
+  
+}
+
 
 .post-details {
   line-height: 0.5;
@@ -12,6 +37,7 @@
 
 p.post-name {
   font-style: italic;
+  color:rgba(255, 99, 71, 0.9);
 }
 
 p.post-date {
@@ -21,4 +47,11 @@ p.post-date {
 .custom-card {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.btn-info{
+  background-color:rgb(250, 218, 40)!important;
+  color:black;
+  border-color:rgb(250, 218, 40)!important;
+  outline: rgb(250, 218, 40)!important;
 }
