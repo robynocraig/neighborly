@@ -2,17 +2,13 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const commentSchema = new Schema({
-  title: { type: String, required: false },
-  comment: { type: String, required: false },
-  posterEmail: { type: String, required: false },
-  posterName: { type: String, required: false },
-  posterPicture: { type: String, required: false },
-  posterAddress: { type: String, required: false },
-  date: { type: String, required: false },
-  reply:[{
-    type: Schema.Types.ObjectId,
-      ref:'Reply'
-  }]
+  title: { type: String, required: true },
+  comment: { type: String, required: true },
+  posterEmail: { type: String, required: true },
+  posterName: { type: String, required: true },
+  posterPicture: { type: String, required: true },
+  posterAddress: { type: String, required: true },
+  date: { type: String, required: true }
 });
 
 const Comments = mongoose.model("Comments", commentSchema);

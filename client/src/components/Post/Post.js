@@ -5,7 +5,8 @@ import { Input, TextArea, FormBtn } from "../../components/Form";
 import { List } from "../../components/List";
 import { Postcard } from "../../components/Postcard";
 import moment from "moment/moment.js";
-import "./Post.css"
+import "./Post.css";
+import {ReplyBox} from "../../components/ReplyBox"
 
 class Post extends Component {
     constructor(props) {
@@ -19,7 +20,6 @@ class Post extends Component {
             posterName: this.props.posterName,
             posterPicture: this.props.posterPicture,
             posterAddress: this.props.posterAddress,
-            reply:this.props.reply
         };
     }
 
@@ -30,7 +30,7 @@ class Post extends Component {
     loadComments = () => {
         API.getComments()
             .then(res =>
-                this.setState({ posts: res.data, title: "", comment: "", reply:"" })
+                this.setState({ posts: res.data, title: "", comment: "" })
             )
             .catch(err => console.log(err));
     };
@@ -73,7 +73,7 @@ class Post extends Component {
         API.saveReply({
             reply:this.state.reply
         })
-        .then(res=> this.loadComments())
+        // .then(res=> this.loadComments())
         .catch(err=>console.log(err));
     }
 
@@ -144,9 +144,8 @@ class Post extends Component {
                                         date={moment(post.date).fromNow()}
                                         posterAddress={post.posterAddress}
                                         posterEmail={post.posterEmail}
-                                        reply={post.reply}
-
-
+                                        replyId={post._id}
+                                        // reply={post.reply}
                                     />
 
                                 );
@@ -154,14 +153,14 @@ class Post extends Component {
 
                             })}
 
-                            <TextArea value={this.state.reply}
+                            {/* <TextArea value={this.state.reply}
                                     onChange={this.handleInputChange}
                                     name="reply"
                                     placeholder="Reply to this"
                                     className="form-control bg-light"/>
 
-                            <FormBtn onClick={this.handleReplySubmit}>Reply</FormBtn>
-t
+                            <FormBtn onClick={this.handleReplySubmit}>Reply</FormBtn> */}
+
                         </List>
                     ) : (
                             <h3></h3>

@@ -33,5 +33,8 @@ export default {
   },
   saveReply:function(replyData){
     return axiosWithToken.post("/api/reply", replyData);
-  }
+  },
+  getReply: function(id) {
+    return axiosWithToken.get("/api/reply", + id);
+}
 };

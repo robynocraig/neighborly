@@ -2,10 +2,13 @@ import React, { Component } from "react";
 import { Col, Row, Container } from "../../components/Grid";
 import ShowMoreText from 'react-show-more-text';
 import './Postcard.css';
+import API from "../../utils/API";
 import Modal from '../../components/Modal';
 import { Input, TextArea, FormBtn } from "../../components/Form";
+import {ReplyBox} from "../../components/ReplyBox"
 
 // The modal button
+
 const styles = {
   button: {
     marginLeft: "15px",
@@ -37,6 +40,7 @@ export class Postcard extends Component {
     });
   }
 
+
   render() {
     return (
       <div>
@@ -56,6 +60,7 @@ export class Postcard extends Component {
                       </p>
                       <p className="post-date">{this.props.date}</p>
                     </strong>
+
                   </div>
                 </Row>
                 <ShowMoreText
@@ -68,6 +73,9 @@ export class Postcard extends Component {
                 >
                   {this.props.comment}
                 </ShowMoreText>
+                <ReplyBox value={this.props.post_id}/>
+          
+
               </div>
             </div>
           </div>
@@ -82,9 +90,6 @@ export class Postcard extends Component {
               <p>{this.props.posterEmail}</p>
               <p>{this.props.posterAddress}</p>
             </div>
-          </Row>
-          <Row>
-            <p>{this.props.reply}</p>
           </Row>
         </Modal>
       </div>

@@ -1,9 +1,9 @@
-// const router = require("express").Router();
-// const replyController = require("../../controllers/replyController");
+const router = require("express").Router();
+const replyController = require("../../controllers/replyController");
 
 
-// router.route("/reply")
-//   .get(replyController.findAll)
-//   .post(replyController.create);
+router.route("/")
+  .get(replyController.findAll)
+  .post(replyController.create);
 
-// module.exports = router;
+module.exports = router;
